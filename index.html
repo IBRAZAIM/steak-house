@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PREMIUM STEAK HOUSE</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Header Container -->
+<div id="header-container"></div>
+
+<!-- Mobile Menu Container -->
+<div id="mobile-menu-container"></div>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-content">
+    <span class="hero-subtitle">Премиальное мясо</span>
+    <h1>PREMIUM <span>STEAK HOUSE</span></h1>
+    <p>Отборная мраморная говядина. Идеальная выдержка. Вкус, достойный лучших ресторанов мира.</p>
+    <a href="catalog.html" class="btn">Перейти в каталог</a>
+  </div>
+</section>
+
+<section class="features">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature" data-aos="fade-up" data-aos-delay="100">
+        <div class="feature-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h3>100% Премиум мясо</h3>
+        <p>Только сертифицированная говядина высших категорий качества.</p>
+      </div>
+      <div class="feature" data-aos="fade-up" data-aos-delay="200">
+        <div class="feature-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <h3>Dry Aged</h3>
+        <p>Профессиональная сухая выдержка для максимального вкуса.</p>
+      </div>
+      <div class="feature" data-aos="fade-up" data-aos-delay="300">
+        <div class="feature-icon">
+          <i class="fas fa-truck"></i>
+        </div>
+        <h3>Доставка 24/7</h3>
+        <p>Охлаждённая доставка в термоупаковке по всей стране.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Steak Types Guide Preview Section -->
+<section class="steaks-guide-preview">
+  <div class="container">
+    <div class="guide-preview-content">
+      <div class="guide-preview-text">
+        <span class="guide-subtitle">Руководство по выбору</span>
+        <h2>Как выбрать идеальный стейк?</h2>
+        <p>Не знаете, какой стейк выбрать? Мы подготовили подробное руководство, которое поможет вам разобраться в видах стейков, их вкусовых характеристиках и понять, из какой части туши они происходят.</p>
+        <ul class="guide-features">
+          <li><i class="fas fa-check"></i> Подробное описание 8 популярных видов стейков</li>
+          <li><i class="fas fa-check"></i> Карта разделки туши — наглядно покажем, откуда каждый стейк</li>
+          <li><i class="fas fa-check"></i> Рекомендации по степени прожарки</li>
+          <li><i class="fas fa-check"></i> Советы по выбору качественного мяса</li>
+        </ul>
+        <a href="steaks-guide.html" class="btn">Читать гид по стейкам</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="products">
+  <div class="container">
+    <h2 class="section-title">Хиты продаж</h2>
+    <div class="products-grid" id="productsGrid">
+      <!-- Products loaded from database -->
+    </div>
+    <div class="center-btn">
+      <a href="catalog.html" class="btn btn-outline">Смотреть весь каталог</a>
+    </div>
+  </div>
+</section>
+
+<section class="about-preview">
+  <div class="container">
+    <div class="about-content">
+      <div class="about-text">
+        <h2>О нас</h2>
+        <p>Мы — команда профессионалов с многолетним опытом в сфере премиального мяса. Наши стейки готовятся только из отборной мраморной говядины, выдержанной по классической технологии Dry Aged.</p>
+        <p>Каждый кусок проходит тщательный отбор и контроль качества. Мы сотрудничаем с лучшими фермами и мясными хозяйствами, чтобы предложить вам продукт высочайшего качества.</p>
+        <a href="about.html" class="btn">Узнать больше</a>
+      </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&h=400&fit=crop" alt="Premium Steak">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2>Оформите заказ сегодня</h2>
+    <p>Получите скидку 10% на первый заказ при регистрации</p>
+    <a href="catalog.html" class="btn btn-white">Заказать стейки</a>
+  </div>
+</section>
+
+<!-- Footer Container -->
+<div id="footer-container"></div>
+
+<!-- Cart Modal Container -->
+<div id="cart-modal-container"></div>
+
+<!-- Notification Container -->
+<div id="notification-container"></div>
+
+<script src="components.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,562 @@
+/* ===================================
+   PAGES - Guide & Other Pages
+   =================================== */
+
+/* ===================================
+   PAGE HEADER
+   =================================== */
+
+.page-header {
+  padding: 180px 0 80px;
+  background: var(--dark-charcoal);
+  position: relative;
+  text-align: center;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(26, 26, 26, 0.8) 100%),
+    url('https://images.unsplash.com/photo-1544025162-d76694265947?w=1920&q=80') center/cover;
+  z-index: 0;
+}
+
+.page-header .container {
+  position: relative;
+  z-index: 1;
+}
+
+.page-header h1 {
+  font-family: var(--font-heading);
+  font-size: 56px;
+  color: var(--text-light);
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.page-header h1 span {
+  color: var(--primary-gold);
+}
+
+.page-subtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto 30px;
+  font-weight: 300;
+}
+
+.breadcrumb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.breadcrumb a {
+  color: var(--primary-gold);
+  transition: var(--transition-smooth);
+}
+
+.breadcrumb a:hover {
+  color: var(--text-light);
+}
+
+.breadcrumb span {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ===================================
+   STEACS GUIDE
+   =================================== */
+
+.steaks-guide {
+  padding: 100px 0;
+  background: var(--cream);
+}
+
+.guide-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.guide-intro p {
+  font-size: 18px;
+  color: var(--medium-gray);
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+/* Cow Diagram */
+.cut-diagram {
+  background: white;
+  padding: 60px;
+  border-radius: 8px;
+  margin-bottom: 80px;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+}
+
+.cut-diagram h2 {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  margin-bottom: 15px;
+  color: var(--dark-charcoal);
+  font-weight: 400;
+}
+
+.cut-diagram > p {
+  color: var(--medium-gray);
+  margin-bottom: 40px;
+}
+
+.cow-sections {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  margin: 0 auto;
+  background: 
+    linear-gradient(to bottom, #f5e6d3 0%, #e8d5c4 50%, #dcc8b5 100%),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><ellipse cx="200" cy="200" rx="150" ry="180" fill="none" stroke="%23c9a961" stroke-width="2" opacity="0.3"/></svg>') center/contain no-repeat;
+  border-radius: 200px;
+}
+
+.cow-section {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(-50%, -50%);
+}
+
+.section-name {
+  background: var(--dark-charcoal);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.section-cut {
+  background: var(--primary-gold);
+  color: var(--dark-charcoal);
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 5px;
+  white-space: nowrap;
+}
+
+/* Steaks Grid */
+.steaks-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  margin-bottom: 80px;
+}
+
+.steak-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-medium);
+  transition: var(--transition-smooth);
+}
+
+.steak-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-strong);
+}
+
+.steak-image {
+  height: 220px;
+  overflow: hidden;
+}
+
+.steak-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+
+.steak-card:hover .steak-image img {
+  transform: scale(1.05);
+}
+
+.steak-content {
+  padding: 35px;
+  position: relative;
+}
+
+.steak-badge {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background: var(--primary-gold);
+  color: var(--dark-charcoal);
+  padding: 6px 16px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 3px;
+}
+
+.steak-badge.premium {
+  background: var(--dark-charcoal);
+  color: var(--primary-gold);
+}
+
+.steak-content h3 {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  margin-bottom: 15px;
+  color: var(--dark-charcoal);
+  font-weight: 500;
+}
+
+.steak-part {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--medium-gray);
+  font-size: 13px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.steak-part i {
+  color: var(--primary-gold);
+}
+
+.steak-part strong {
+  color: var(--dark-charcoal);
+}
+
+.steak-desc {
+  color: var(--medium-gray);
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  font-weight: 300;
+}
+
+.steak-details {
+  margin-bottom: 25px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.detail-label {
+  width: 100px;
+  font-size: 12px;
+  color: var(--medium-gray);
+  font-weight: 500;
+}
+
+.detail-bar {
+  flex: 1;
+  height: 6px;
+  background: #f0f0f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.detail-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-gold), var(--primary-gold-dark));
+  border-radius: 3px;
+}
+
+.steak-cooking {
+  background: var(--cream);
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.steak-cooking h4 {
+  font-size: 13px;
+  color: var(--dark-charcoal);
+  margin-bottom: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.steak-cooking h4 i {
+  color: var(--primary-gold);
+}
+
+.cooking-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cooking-options span {
+  background: white;
+  color: var(--dark-charcoal);
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid rgba(201, 169, 97, 0.3);
+}
+
+/* Cooking Guide */
+.cooking-guide {
+  margin-bottom: 80px;
+}
+
+.cooking-guide h2 {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 50px;
+  color: var(--dark-charcoal);
+  font-weight: 400;
+}
+
+.doneness-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.doneness-card {
+  text-align: center;
+  padding: 30px 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: var(--shadow-soft);
+}
+
+.doneness-visual {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doneness-visual.rare {
+  background: #ff6b6b;
+}
+
+.doneness-visual.medium-rare {
+  background: #ffa07a;
+}
+
+.doneness-visual.medium {
+  background: #ffd700;
+}
+
+.doneness-visual.medium-well {
+  background: #f4a460;
+}
+
+.doneness-visual.well-done {
+  background: #8b4513;
+}
+
+.doneness-visual span {
+  font-size: 9px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.doneness-card h4 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: var(--dark-charcoal);
+  font-weight: 600;
+}
+
+.doneness-card p {
+  font-size: 12px;
+  color: var(--medium-gray);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.doneness-time {
+  display: inline-block;
+  background: var(--cream);
+  color: var(--dark-charcoal);
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* Tips Section */
+.tips-section {
+  margin-bottom: 80px;
+}
+
+.tips-section h2 {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 50px;
+  color: var(--dark-charcoal);
+  font-weight: 400;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.tip-card {
+  background: white;
+  padding: 35px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+}
+
+.tip-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.tip-card i {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 24px;
+  color: var(--dark-charcoal);
+}
+
+.tip-card h4 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: var(--dark-charcoal);
+  font-weight: 600;
+}
+
+.tip-card p {
+  font-size: 13px;
+  color: var(--medium-gray);
+  line-height: 1.7;
+}
+
+/* Guide CTA */
+.guide-cta {
+  text-align: center;
+  background: var(--dark-charcoal);
+  padding: 60px;
+  border-radius: 8px;
+  color: white;
+}
+
+.guide-cta h3 {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  margin-bottom: 15px;
+  font-weight: 400;
+}
+
+.guide-cta p {
+  font-size: 16px;
+  margin-bottom: 30px;
+  opacity: 0.8;
+  font-weight: 300;
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+
+@media (max-width: 1200px) {
+  .doneness-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .doneness-card:last-child {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 992px) {
+  .steaks-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tips-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .doneness-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .doneness-card:last-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: 40px;
+  }
+  
+  .cut-diagram {
+    padding: 30px;
+  }
+  
+  .cow-sections {
+    height: 300px;
+  }
+  
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .doneness-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .doneness-card:last-child {
+    grid-column: span 1;
+  }
+  
+  .guide-cta {
+    padding: 40px 20px;
+  }
+  
+  .guide-cta h3 {
+    font-size: 28px;
+  }
+}

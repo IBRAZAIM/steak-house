@@ -1,0 +1,433 @@
+/* ===================================
+   PREMIUM STEAK HOUSE - HOME PAGE
+   =================================== */
+
+/* ===================================
+   HERO - Luxurious Dark Section
+   =================================== */
+
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  background: var(--dark-charcoal);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(26, 26, 26, 0.7) 50%, rgba(26, 26, 26, 0.9) 100%),
+    url('https://images.unsplash.com/photo-1544025162-d76694265947?w=1920&q=80') center/cover;
+  z-index: 0;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.05));
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  padding-left: 8%;
+  animation: fadeInUp 1s ease;
+}
+
+.hero-subtitle {
+  display: inline-block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  color: var(--primary-gold);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: 72px;
+  line-height: 1.05;
+  margin-bottom: 30px;
+  font-weight: 400;
+  color: var(--text-light);
+}
+
+.hero h1 span {
+  color: var(--primary-gold);
+  font-style: italic;
+  display: block;
+}
+
+.hero p {
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 45px;
+  max-width: 480px;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+/* ===================================
+   FEATURES - Elegant Cards
+   =================================== */
+
+.features {
+  padding: 140px 0;
+  background: var(--cream);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.feature {
+  padding: 60px 45px;
+  background: white;
+  border-radius: 4px;
+  text-align: center;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--primary-gold);
+  transform: scaleX(0);
+  transition: var(--transition-smooth);
+}
+
+.feature:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-medium);
+}
+
+.feature:hover::before {
+  transform: scaleX(1);
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 35px;
+  background: linear-gradient(135deg, var(--dark-charcoal), var(--dark-gray));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.feature:hover .feature-icon {
+  background: var(--primary-gold);
+  transform: scale(1.1);
+}
+
+.feature-icon i {
+  font-size: 30px;
+  color: var(--primary-gold);
+  transition: var(--transition-smooth);
+}
+
+.feature:hover .feature-icon i {
+  color: var(--dark-charcoal);
+}
+
+.feature h3 {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  margin-bottom: 18px;
+  font-weight: 500;
+  color: var(--dark-charcoal);
+}
+
+.feature p {
+  color: var(--medium-gray);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+/* ===================================
+   PRODUCTS - Premium Cards
+   =================================== */
+
+.products {
+  padding: 140px 0;
+  background: var(--dark-charcoal);
+}
+
+.products .section-title {
+  color: var(--text-light);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.product-card {
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: var(--shadow-medium);
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(201, 169, 97, 0.1), transparent);
+  opacity: 0;
+  transition: var(--transition-smooth);
+  z-index: 1;
+}
+
+.product-card:hover {
+  transform: translateY(-15px);
+  box-shadow: var(--shadow-strong);
+}
+
+.product-card:hover::before {
+  opacity: 1;
+}
+
+.product-image {
+  height: 260px;
+  overflow: hidden;
+  position: relative;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.1);
+}
+
+.product-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--primary-gold);
+  color: var(--dark-charcoal);
+  padding: 8px 20px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 2px;
+  z-index: 2;
+}
+
+.product-info {
+  padding: 30px;
+  position: relative;
+  z-index: 2;
+  background: white;
+}
+
+.product-info h3 {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  margin-bottom: 12px;
+  font-weight: 500;
+  color: var(--dark-charcoal);
+}
+
+.product-info .desc {
+  color: var(--medium-gray);
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.product-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--primary-gold-dark);
+  font-family: var(--font-heading);
+}
+
+.center-btn {
+  text-align: center;
+  margin-top: 70px;
+}
+
+/* ===================================
+   ABOUT PREVIEW - Elegant Section
+   =================================== */
+
+.about-preview {
+  padding: 150px 0;
+  background: var(--cream);
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+
+.about-text h2 {
+  font-family: var(--font-heading);
+  font-size: 48px;
+  margin-bottom: 35px;
+  font-weight: 400;
+  color: var(--dark-charcoal);
+  position: relative;
+}
+
+.about-text h2::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: var(--primary-gold);
+}
+
+.about-text p {
+  color: var(--medium-gray);
+  margin-bottom: 25px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.9;
+}
+
+.about-text .btn {
+  margin-top: 30px;
+}
+
+.about-image {
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: var(--shadow-strong);
+  position: relative;
+}
+
+.about-image::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--primary-gold);
+  border-radius: 4px;
+  z-index: -1;
+}
+
+.about-image img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===================================
+   CTA - Luxurious Dark Section
+   =================================== */
+
+.cta {
+  padding: 120px 0;
+  background: linear-gradient(135deg, var(--dark-charcoal) 0%, var(--darker-charcoal) 100%);
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA2MCAwIEwgMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ0cmFuc3BhcmVudCIvPjwvc3ZnPg==');
+  opacity: 0.5;
+}
+
+.cta .container {
+  position: relative;
+  z-index: 2;
+}
+
+.cta h2 {
+  font-family: var(--font-heading);
+  font-size: 52px;
+  margin-bottom: 25px;
+  font-weight: 400;
+}
+
+.cta p {
+  font-size: 18px;
+  margin-bottom: 45px;
+  opacity: 0.8;
+  font-weight: 300;
+}
+
+/* STEAKS GUIDE PREVIEW */
+.steaks-guide-preview { padding: 140px 0; background: var(--cream); }
+.guide-preview-content { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.guide-preview-text .guide-subtitle { display: inline-block; font-size: 12px; text-transform: uppercase; letter-spacing: 4px; color: var(--primary-gold); margin-bottom: 20px; font-weight: 500; }
+.guide-preview-text h2 { font-family: var(--font-heading); font-size: 42px; margin-bottom: 25px; font-weight: 400; color: var(--dark-charcoal); line-height: 1.2; }
+.guide-preview-text > p { color: var(--medium-gray); font-size: 16px; margin-bottom: 30px; line-height: 1.8; font-weight: 300; }
+.guide-features { list-style: none; padding: 0; margin-bottom: 35px; }
+.guide-features li { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; color: var(--dark-charcoal); font-size: 15px; }
+.guide-features li i { color: var(--primary-gold); font-size: 14px; }
+.guide-preview-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.preview-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-soft); transition: var(--transition-smooth); }
+.preview-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-medium); }
+.preview-card img { width: 100%; height: 140px; object-fit: cover; transition: var(--transition-smooth); }
+.preview-card:hover img { transform: scale(1.1); }
+.preview-card-content { padding: 20px; }
+.preview-card-content h4 { font-family: var(--font-heading); font-size: 18px; margin-bottom: 5px; color: var(--dark-charcoal); font-weight: 500; }
+.preview-card-content p { color: var(--medium-gray); font-size: 13px; }
+@media (max-width: 992px) { .guide-preview-content { grid-template-columns: 1fr; gap: 50px; } .guide-preview-text h2 { font-size: 36px; } }
+@media (max-width: 576px) { .guide-preview-grid { grid-template-columns: 1fr; } .guide-preview-text h2 { font-size: 30px; } }

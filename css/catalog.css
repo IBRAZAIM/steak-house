@@ -1,0 +1,47 @@
+/* ===================================
+   PREMIUM STEAK HOUSE - CATALOG PAGE
+   =================================== */
+
+/* ===================================
+   PAGE: CATALOG
+   =================================== */
+
+.page-header {
+  padding: 160px 0 80px;
+  background: var(--dark-charcoal);
+  text-align: center;
+}
+
+.page-header h1 {
+  font-family: var(--font-heading);
+  font-size: 56px;
+  margin-bottom: 20px;
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+.page-header p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.filters {
+  padding: 35px 0;
+  background: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.filters-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.filter-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}

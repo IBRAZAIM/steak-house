@@ -1,0 +1,212 @@
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Доставка - PREMIUM STEAK HOUSE</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="index.html" class="logo">PREMIUM <span>STEAK HOUSE</span></a>
+    <nav class="menu">
+      <a href="catalog.html">Каталог</a>
+      <a href="about.html">О нас</a>
+      <a href="delivery.html">Доставка</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="#" class="cart-link" id="cartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+      </a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="catalog.html">Каталог</a>
+  <a href="about.html">О нас</a>
+  <a href="delivery.html">Доставка</a>
+  <a href="contacts.html">Контакты</a>
+</div>
+
+<section class="delivery-hero">
+  <div class="container">
+    <h1>Доставка и оплата</h1>
+    <p>Быстрая доставка охлаждённого мяса по всей России</p>
+  </div>
+</section>
+
+<section class="delivery-content">
+  <div class="container">
+    <div class="delivery-info">
+      <h2>Как мы доставляем</h2>
+      <p>Мы понимаем, что качественное мясо требует особого подхода к доставке. Именно поэтому мы используем только профессиональные термоконтейнеры и строго соблюдаем холодовую цепь.</p>
+      
+      <div class="delivery-steps">
+        <div class="delivery-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Оформление заказа</h4>
+            <p>Оформите заказ на сайте или по телефону. Наш менеджер свяжется с вами для подтверждения.</p>
+          </div>
+        </div>
+        <div class="delivery-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Сборка заказа</h4>
+            <p>Мы тщательно упаковываем ваш заказ в термоконтейнеры с охлаждающими элементами.</p>
+          </div>
+        </div>
+        <div class="delivery-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Доставка</h4>
+            <p>Доставка осуществляется курьерской службой в удобное для вас время.</p>
+          </div>
+        </div>
+        <div class="delivery-step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Получение</h4>
+            <p>Вы получаете свежий продукт и можете наслаждаться превосходным вкусом.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="delivery-form">
+      <h3>Заказать доставку</h3>
+      <form id="deliveryForm">
+        <div class="form-group">
+          <label>Ваше имя</label>
+          <input type="text" name="name" required placeholder="Введите ваше имя">
+        </div>
+        <div class="form-group">
+          <label>Телефон</label>
+          <input type="tel" name="phone" required placeholder="+7 (___) ___-__-__">
+        </div>
+        <div class="form-group">
+          <label>Адрес доставки</label>
+          <input type="text" name="address" required placeholder="Улица, дом, квартира">
+        </div>
+        <div class="form-group">
+          <label>Дата доставки</label>
+          <input type="date" name="date" required>
+        </div>
+        <div class="form-group">
+          <label>Комментарий</label>
+          <textarea name="comment" rows="3" placeholder="Дополнительные пожелания"></textarea>
+        </div>
+        <button type="submit" class="btn">Оформить заявку</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-icon">
+          <i class="fas fa-truck"></i>
+        </div>
+        <h3>Доставка по Москве</h3>
+        <p>Бесплатно при заказе от 5000 ₽. В пределах МКАД - 300 ₽.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <i class="fas fa-plane"></i>
+        </div>
+        <h3>Доставка по России</h3>
+        <p>От 500 ₽ в зависимости от региона. Доставка до транспортной компании бесплатно.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <i class="fas fa-credit-card"></i>
+        </div>
+        <h3>Способы оплаты</h3>
+        <p>Наличными при получении, банковской картой, онлайн-оплата на сайте.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>PREMIUM STEAK HOUSE</h4>
+        <p>Отборная мраморная говядина с доставкой по всей России.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Навигация</h4>
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html">О нас</a>
+        <a href="delivery.html">Доставка</a>
+        <a href="contacts.html">Контакты</a>
+      </div>
+      <div class="footer-section">
+        <h4>Контакты</h4>
+        <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
+        <p><i class="fas fa-envelope"></i> info@steakhouse.ru</p>
+        <p><i class="fas fa-map-marker-alt"></i> Москва, ул. Примерная 1</p>
+      </div>
+      <div class="footer-section">
+        <h4>Соцсети</h4>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-telegram"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 PREMIUM STEAK HOUSE. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Cart Modal -->
+<div class="cart-modal" id="cartModal">
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-sidebar">
+    <div class="cart-header">
+      <h3>Корзина</h3>
+      <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Итого:</span>
+        <span id="cartTotal">0 ₽</span>
+      </div>
+      <button class="btn checkout-btn" id="checkoutBtn">Оформить заказ</button>
+      <button class="btn-clear" id="clearCart">Очистить корзину</button>
+    </div>
+  </div>
+</div>
+
+<div class="notification" id="notification">
+  <i class="fas fa-check-circle"></i>
+  <span id="notificationText">Товар добавлен в корзину</span>
+</div>
+
+<script src="app.js"></script>
+<script>
+  // Delivery form handler
+  document.getElementById('deliveryForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.');
+    this.reset();
+  });
+</script>
+</body>
+</html>

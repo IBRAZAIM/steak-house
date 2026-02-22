@@ -1,0 +1,24 @@
+/* ===================================
+   PREMIUM STEAK HOUSE - MAIN CSS
+   =================================== */
+
+/* Import all CSS modules */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+/* Base styles */
+@import url('base.css');
+
+/* Components */
+@import url('components.css');
+
+/* Layout */
+@import url('layout.css');
+
+/* Home page */
+@import url('home.css');
+
+/* Catalog page */
+@import url('catalog.css');
+
+/* Other pages */
+@import url('pages.css');
