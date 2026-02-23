@@ -410,7 +410,7 @@ function renderProducts(containerId = 'productsGrid', products = null) {
         <h3>${product.name}</h3>
         <p class="desc">${product.description}</p>
         <div class="product-bottom">
-<span class="price">${product.price.toLocaleString()} ₽</span>
+<span class="price">${product.price.toLocaleString()} тг</span>
           <button class="btn-add" onclick="addToCart(${product.id})">В корзину</button>
         </div>
       </div>
@@ -486,7 +486,7 @@ function renderCartItems() {
         <p>Корзина пуста</p>
       </div>
     `;
-cartTotal.textContent = '0 ₽';
+cartTotal.textContent = '0 тг';
     if (checkoutBtn) checkoutBtn.disabled = true;
     return;
   }
@@ -497,7 +497,7 @@ cartTotal.textContent = '0 ₽';
     <div class="cart-item">
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name}</div>
-<div class="cart-item-price">${item.price.toLocaleString()} ₽ × ${item.quantity}</div>
+<div class="cart-item-price">${item.price.toLocaleString()} тг × ${item.quantity}</div>
       </div>
       <button class="cart-item-remove" onclick="removeFromCart(${item.id})">
         <i class="fas fa-trash"></i>
@@ -505,7 +505,7 @@ cartTotal.textContent = '0 ₽';
     </div>
   `).join('');
 
-cartTotal.textContent = db.getCartTotal().toLocaleString() + ' ₽';
+cartTotal.textContent = db.getCartTotal().toLocaleString() + ' тг';
 }
 
 // Remove from cart

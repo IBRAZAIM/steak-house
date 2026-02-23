@@ -109,7 +109,7 @@ const cartModalComponent = `
     <div class="cart-footer">
       <div class="cart-total">
 <span>Итого:</span>
-        <span id="cartTotal">0 ₽</span>
+        <span id="cartTotal">0 тг</span>
       </div>
       <button class="btn checkout-btn" id="checkoutBtn">Оформить заказ</button>
       <button class="btn-clear" id="clearCart">Очистить корзину</button>
