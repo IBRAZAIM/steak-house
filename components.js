@@ -29,8 +29,16 @@ const headerComponent = (showAdminLink = false) => `
         <span class="cart-count" id="cartCount">0</span>
       </a>
     </nav>
-    <div class="mobile-menu-btn" id="mobileMenuBtn">
-      <i class="fas fa-bars"></i>
+    
+    <!-- Mobile Controls (Cart + Menu) -->
+    <div class="mobile-controls">
+      <a href="#" class="mobile-cart-btn" id="mobileCartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="mobileCartCount">0</span>
+      </a>
+      <div class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </div>
     </div>
   </div>
 </header>
@@ -41,12 +49,28 @@ const headerComponent = (showAdminLink = false) => `
 // ===================================
 
 const mobileMenuComponent = `
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 <div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header" style="padding: 15px; display: flex; justify-content: flex-end;">
+    <button id="closeMobileMenuBtn" style="background: none; border: none; font-size: 24px; cursor: pointer; color: inherit;">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
   <a href="catalog.html">Каталог</a>
   <a href="steaks-guide.html">Гид по стейкам</a>
   <a href="about.html">О нас</a>
   <a href="delivery.html">Доставка</a>
   <a href="contacts.html">Контакты</a>
+  
+  <div class="mobile-menu-footer" style="margin-top: auto; padding: 20px 30px; border-top: 1px solid rgba(255,255,255,0.1);">
+    <div class="social-links" style="justify-content: flex-start; margin-bottom: 15px;">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-telegram"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p style="color: var(--text-muted); font-size: 12px;">+7 (999) 123-45-67</p>
+    <p style="color: var(--text-muted); font-size: 12px;">Москва, ул. Примерная 1</p>
+  </div>
 </div>
 `;
 

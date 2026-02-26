@@ -328,7 +328,7 @@ const db = new Database();
 // DOM Elements (will be initialized in initApp after components are loaded)
 let cartModal, cartOverlay, closeCartBtn, cartBtn, cartCount, cartItems;
 let cartTotal, clearCartBtn, checkoutBtn, notification, notificationText;
-let mobileMenuBtn, mobileMenu;
+let mobileMenuBtn, mobileMenu, closeMobileMenuBtn, mobileMenuOverlay, mobileCartBtn, mobileCartCount;
 
 // Initialize DOM elements
 function initDOMElements() {
@@ -343,8 +343,12 @@ function initDOMElements() {
   checkoutBtn = document.getElementById('checkoutBtn');
   notification = document.getElementById('notification');
   notificationText = document.getElementById('notificationText');
+  mobileCartBtn = document.getElementById('mobileCartBtn');
+  mobileCartCount = document.getElementById('mobileCartCount');
   mobileMenuBtn = document.getElementById('mobileMenuBtn');
   mobileMenu = document.getElementById('mobileMenu');
+  closeMobileMenuBtn = document.getElementById('closeMobileMenuBtn');
+  mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
 }
 
 // Initialize app
@@ -371,7 +375,16 @@ function initApp() {
   if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
   if (clearCartBtn) clearCartBtn.addEventListener('click', clearCart);
   if (checkoutBtn) checkoutBtn.addEventListener('click', checkout);
+  if (mobileCartBtn) mobileCartBtn.addEventListener('click', openCart);
   if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+  if (closeMobileMenuBtn) closeMobileMenuBtn.addEventListener('click', closeMobileMenu);
+  if (mobileMenuOverlay) mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+  // Close menu when clicking on links
+  if (mobileMenu) {
+    const links = mobileMenu.querySelectorAll('a');
+    links.forEach(link => link.addEventListener('click', closeMobileMenu));
+  }
   
   // Header scroll effect
   window.addEventListener('scroll', headerScroll);
@@ -458,6 +471,10 @@ function updateCartCount() {
   if (cartCount) {
     cartCount.textContent = count;
     cartCount.style.display = count > 0 ? 'flex' : 'none';
+  }
+  if (mobileCartCount) {
+    mobileCartCount.textContent = count;
+    mobileCartCount.style.display = count > 0 ? 'flex' : 'none';
   }
 }
 
@@ -569,7 +586,23 @@ function headerScroll() {
 
 // Mobile menu toggle
 function toggleMobileMenu() {
-  mobileMenu.classList.toggle('open');
+  if (mobileMenu.classList.contains('open')) {
+    closeMobileMenu();
+  } else {
+    openMobileMenu();
+  }
+}
+
+function openMobileMenu() {
+  mobileMenu.classList.add('open');
+  if (mobileMenuOverlay) mobileMenuOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileMenu() {
+  mobileMenu.classList.remove('open');
+  if (mobileMenuOverlay) mobileMenuOverlay.classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 // Filter products
