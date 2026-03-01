@@ -24,9 +24,24 @@
         <i class="fas fa-shopping-cart"></i>
         <span class="cart-count" id="cartCount">0</span>
       </a>
+      <a href="account.html" class="cart-link">
+        <i class="fas fa-user-circle"></i>
+      </a>
     </nav>
     <div class="mobile-menu-btn" id="mobileMenuBtn">
       <i class="fas fa-bars"></i>
+    </div>
+    <div class="mobile-controls">
+      <a href="#" class="mobile-cart-btn" id="mobileCartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="mobileCartCount">0</span>
+      </a>
+      <a href="account.html" class="mobile-cart-btn">
+        <i class="fas fa-user-circle"></i>
+      </a>
+      <div class="mobile-menu-btn" id="mobileMenuBtn2">
+        <i class="fas fa-bars"></i>
+      </div>
     </div>
   </div>
 </header>
@@ -40,90 +55,189 @@
 
 <section class="contacts-hero">
   <div class="container">
-    <h1>Контакты</h1>
-    <p>Свяжитесь с нами любым удобным способом</p>
+    <div class="hero-content">
+      <h1>Свяжитесь с нами</h1>
+      <p class="hero-subtitle">Мы находимся в центре Астаны и всегда готовы помочь вам</p>
+      
+      <!-- Quick Contact Buttons -->
+      <div class="quick-contact">
+        <a href="tel:+77172730067" class="quick-btn">
+          <i class="fas fa-phone"></i>
+          <span>Позвонить</span>
+        </a>
+        <a href="mailto:info@steakhouse.kz" class="quick-btn">
+          <i class="fas fa-envelope"></i>
+          <span>Email</span>
+        </a>
+        <a href="https://wa.me/77172730067" target="_blank" class="quick-btn">
+          <i class="fab fa-whatsapp"></i>
+          <span>WhatsApp</span>
+        </a>
+        <a href="https://t.me/premiumsteakhouse_kz" target="_blank" class="quick-btn">
+          <i class="fab fa-telegram"></i>
+          <span>Telegram</span>
+        </a>
+      </div>
+
+      <!-- Status Badge -->
+      <div class="status-info">
+        <i class="fas fa-circle online-indicator"></i>
+        <span>Мы онлайн - ответим в течение 2 часов</span>
+      </div>
+
+      <!-- CTA Button -->
+      <div class="hero-cta">
+        <a href="#contact-form" class="btn btn-outline">Написать сообщение</a>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="contacts-content">
   <div class="container">
-    <div class="contacts-info">
-      <h2>Свяжитесь с нами</h2>
-      
-      <div class="contact-item">
-        <div class="contact-icon">
-          <i class="fas fa-phone"></i>
-        </div>
-        <div class="contact-details">
-          <h4>Телефон</h4>
-          <p>+7 (700) 123-45-67</p>
-          <p>+7 (700) 987-65-43</p>
-        </div>
-      </div>
-      
-      <div class="contact-item">
-        <div class="contact-icon">
-          <i class="fas fa-envelope"></i>
-        </div>
-        <div class="contact-details">
-          <h4>Email</h4>
-          <p>info@steakhouse.com</p>
-          <p>orders@steakhouse.com</p>
-        </div>
-      </div>
-      
-      <div class="contact-item">
+    <div class="contacts-grid">
+      <div class="contact-card">
         <div class="contact-icon">
           <i class="fas fa-map-marker-alt"></i>
         </div>
-        <div class="contact-details">
-          <h4>Адрес</h4>
-          <p>г. Москва, ул. Примерная, д. 1</p>
-          <p>Режим работы: Ежедневно с 10:00 до 22:00</p>
-        </div>
+        <h3>Основной офис</h3>
+        <p class="contact-title">Астана, Есиль р-н</p>
+        <p>ул. Республики, д. 32</p>
+        <p>БЦ "Capital Hub", офис 527</p>
+        <p class="contact-hours">Ежедневно 10:00 - 22:00</p>
+        <a href="https://maps.google.com" target="_blank" class="btn btn-small">Показать на карте</a>
       </div>
-      
-      <div class="contact-item">
+
+      <div class="contact-card">
+        <div class="contact-icon">
+          <i class="fas fa-phone"></i>
+        </div>
+        <h3>Телефон</h3>
+        <p class="contact-phone"><a href="tel:+77172730067">+7 (717) 273-00-67</a></p>
+        <p class="contact-phone"><a href="tel:+77172730068">+7 (717) 273-00-68</a></p>
+        <p class="contact-subtitle">Менеджер по заказам</p>
+        <p class="contact-phone"><a href="tel:+77172730069">+7 (717) 273-00-69</a></p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <h3>Email</h3>
+        <p><a href="mailto:info@steakhouse.kz">info@steakhouse.kz</a></p>
+        <p><a href="mailto:orders@steakhouse.kz">orders@steakhouse.kz</a></p>
+        <p class="contact-subtitle">Время ответа: в течение 2 часов</p>
+      </div>
+
+      <div class="contact-card">
         <div class="contact-icon">
           <i class="fas fa-clock"></i>
         </div>
-        <div class="contact-details">
-          <h4>Время работы</h4>
-          <p>Магазин: Ежедневно с 10:00 до 22:00</p>
-          <p>Доставка: Круглосуточно</p>
-        </div>
+        <h3>Часы работы</h3>
+        <p>Пн-Пт: 10:00 - 22:00</p>
+        <p>Сб-Вс: 12:00 - 23:00</p>
+        <p class="contact-subtitle">Доставка: 8:00 - 00:00</p>
+        <p class="contact-note">Выходной: Нет</p>
       </div>
     </div>
-    
+
     <div class="contacts-map">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2245.241509691463!2d37.6173!3d55.7558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQ1JzE4LjEiTiAzN8KwMzcrMDkuNCJF!5e0!3m2!1sru!2sru!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2730.6688857564015!2d71.46999862346866!3d51.16254999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38a1a6d6d6d6d6d7%3A0x0!2sAstana%2C%20Kazakhstan!5e0!3m2!1sen!2skz!4v1707830400000" allowfullscreen="" loading="lazy"></iframe>
     </div>
   </div>
 </section>
 
-<section class="features">
+<!-- Contact Form Section -->
+<section class="contact-form-section" id="contact-form">
   <div class="container">
-    <div class="features-grid">
-      <div class="feature">
-        <div class="feature-icon">
+    <div class="form-wrapper">
+      <div class="form-info">
+        <h2>Напишите нам</h2>
+        <p>У вас есть вопросы? Мы ответим вам в течение 2 часов</p>
+        <div class="info-item">
+          <i class="fas fa-envelope-circle-check"></i>
+          <div>
+            <h4>Быстрый ответ</h4>
+            <p>Ответ на email в течение 2 часов</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-headset"></i>
+          <div>
+            <h4>Поддержка</h4>
+            <p>Готовы помочь с любым вопросом</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-check-circle"></i>
+          <div>
+            <h4>Конфиденциальность</h4>
+            <p>Ваши данные защищены</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Ваше имя" required />
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Email" required />
+        </div>
+        <div class="form-group">
+          <input type="tel" name="phone" placeholder="Телефон +7 (___) ___-__-__" />
+        </div>
+        <div class="form-group">
+          <select name="subject" required>
+            <option value="">Выберите тему</option>
+            <option value="order">Вопрос о заказе</option>
+            <option value="delivery">Доставка</option>
+            <option value="product">Информация о товаре</option>
+            <option value="partnership">Партнёрство</option>
+            <option value="other">Другое</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <textarea name="message" rows="5" placeholder="Ваше сообщение..." required></textarea>
+        </div>
+        <button type="submit" class="btn">Отправить</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Social Media Section -->
+<section class="social-section">
+  <div class="container">
+    <h2>Мы в соцсетях</h2>
+    <p>Следите за нами для эксклюзивных предложений и новостей</p>
+    <div class="social-grid">
+      <div class="social-card">
+        <div class="social-icon">
           <i class="fab fa-instagram"></i>
         </div>
         <h3>Instagram</h3>
-        <p>@premiumsteakhouse</p>
+        <p>@premiumsteakhouse.astana</p>
+        <p class="social-count">12.5K подписчиков</p>
+        <a href="https://instagram.com/premiumsteakhouse.astana" target="_blank" class="btn btn-small">Перейти</a>
       </div>
-      <div class="feature">
-        <div class="feature-icon">
+      <div class="social-card">
+        <div class="social-icon">
           <i class="fab fa-telegram"></i>
         </div>
         <h3>Telegram</h3>
-        <p>@premiumsteakhouse</p>
+        <p>@premiumsteakhouse_kz</p>
+        <p class="social-count">8.3K подписчиков</p>
+        <a href="https://t.me/premiumsteakhouse_kz" target="_blank" class="btn btn-small">Перейти</a>
       </div>
-      <div class="feature">
-        <div class="feature-icon">
+      <div class="social-card">
+        <div class="social-icon">
           <i class="fab fa-whatsapp"></i>
         </div>
         <h3>WhatsApp</h3>
-        <p>+7 (999) 123-45-67</p>
+        <p>+7 (717) 273-00-67</p>
+        <p class="social-count">Быстрый ответ</p>
+        <a href="https://wa.me/77172730067" target="_blank" class="btn btn-small">Написать</a>
       </div>
     </div>
   </div>
@@ -134,7 +248,7 @@
     <div class="footer-content">
       <div class="footer-section">
         <h4>PREMIUM STEAK HOUSE</h4>
-        <p>Отборная мраморная говядина с доставкой по всей России.</p>
+        <p>Отборная мраморная говядина с доставкой по всему Казахстану. Астана - наша главная база.</p>
       </div>
       <div class="footer-section">
         <h4>Навигация</h4>
@@ -145,21 +259,21 @@
       </div>
       <div class="footer-section">
         <h4>Контакты</h4>
-        <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
-        <p><i class="fas fa-envelope"></i> info@steakhouse.ru</p>
-        <p><i class="fas fa-map-marker-alt"></i> Москва, ул. Примерная 1</p>
+        <p><i class="fas fa-phone"></i> <a href="tel:+77172730067">+7 (717) 273-00-67</a></p>
+        <p><i class="fas fa-envelope"></i> <a href="mailto:info@steakhouse.kz">info@steakhouse.kz</a></p>
+        <p><i class="fas fa-map-marker-alt"></i> Астана, Казахстан</p>
       </div>
       <div class="footer-section">
         <h4>Соцсети</h4>
         <div class="social-links">
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-telegram"></i></a>
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://instagram.com/premiumsteakhouse.astana" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://t.me/premiumsteakhouse_kz" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a href="https://wa.me/77172730067" target="_blank"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 PREMIUM STEAK HOUSE. Все права защищены.</p>
+      <p>© 2026 PREMIUM STEAK HOUSE. Все права защищены. | Астана, Казахстан</p>
     </div>
   </div>
 </footer>
@@ -190,5 +304,14 @@
 </div>
 
 <script src="app.js"></script>
+<script>
+  // Contact form handler
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.querySelector('input[name="name"]').value;
+    alert(`Спасибо, ${name}! Ваше сообщение отправлено. Мы ответим вам в ближайшее время.`);
+    this.reset();
+  });
+</script>
 </body>
 </html>

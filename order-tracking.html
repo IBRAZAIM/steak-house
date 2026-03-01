@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Отслеживание заказа - PREMIUM STEAK HOUSE</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="index.html" class="logo">PREMIUM <span>STEAK HOUSE</span></a>
+    <nav class="menu">
+      <a href="catalog.html">Каталог</a>
+      <a href="about.html">О нас</a>
+      <a href="delivery.html">Доставка</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="#" class="cart-link" id="cartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+      </a>
+      <a href="account.html" class="cart-link">
+        <i class="fas fa-user-circle"></i>
+      </a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="mobile-controls">
+      <a href="#" class="mobile-cart-btn" id="mobileCartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="mobileCartCount">0</span>
+      </a>
+      <a href="account.html" class="mobile-cart-btn">
+        <i class="fas fa-user-circle"></i>
+      </a>
+      <div class="mobile-menu-btn" id="mobileMenuBtn2">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="catalog.html">Каталог</a>
+  <a href="about.html">О нас</a>
+  <a href="delivery.html">Доставка</a>
+  <a href="contacts.html">Контакты</a>
+</div>
+
+<!-- Tracking Header -->
+<section class="tracking-header">
+  <div class="container">
+    <h1>Отслеживание заказа</h1>
+    <p>Следите за статусом вашего заказа в реальном времени</p>
+  </div>
+</section>
+
+<!-- Order Status -->
+<section class="order-tracking">
+  <div class="container">
+    <div class="tracking-content">
+      <!-- Left: Order Details -->
+      <div class="order-details-card">
+        <div class="order-header">
+          <h2>Заказ <span id="orderNumber">#0000</span></h2>
+          <div class="order-status-badge" id="statusBadge">
+            <span id="statusLabel">Обработка</span>
+          </div>
+        </div>
+
+        <!-- Status Timeline -->
+        <div class="status-timeline">
+          <div class="timeline-item" id="status-new">
+            <div class="timeline-marker completed">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="timeline-content">
+              <h4>Заказ принят</h4>
+              <p id="date-new">-</p>
+              <p class="status-text">Благодарим за вашу покупку! Заказ успешно принят в систему.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item" id="status-processing">
+            <div class="timeline-marker active">
+              <i class="fas fa-cog"></i>
+            </div>
+            <div class="timeline-content">
+              <h4>В обработке</h4>
+              <p id="date-processing">-</p>
+              <p class="status-text">Мы готовим ваш заказ. Коровки прогреваются...</p>
+            </div>
+          </div>
+
+          <div class="timeline-item" id="status-shipping">
+            <div class="timeline-marker">
+              <i class="fas fa-truck"></i>
+            </div>
+            <div class="timeline-content">
+              <h4>В пути</h4>
+              <p id="date-shipping">-</p>
+              <p class="status-text">Боксы уже в дороге! Курьер приехал и выезжает к вам.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item" id="status-delivered">
+            <div class="timeline-marker">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="timeline-content">
+              <h4>Доставлено</h4>
+              <p id="date-delivered">-</p>
+              <p class="status-text">Заказ доставлен! Насладитесь премиум-стейком.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Info -->
+        <div class="order-info-section">
+          <h3>Информация о заказе</h3>
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-label">Дата заказа</span>
+              <span class="info-value" id="orderDate">-</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Номер заказа</span>
+              <span class="info-value" id="orderID">#0000</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Сумма</span>
+              <span class="info-value" id="orderTotal">0 ₸</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Способ доставки</span>
+              <span class="info-value" id="deliveryMethod">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Info -->
+        <div class="customer-info-section">
+          <h3>Доставка на адрес</h3>
+          <div class="customer-details">
+            <div class="detail">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>
+                <p class="detail-label">Адрес</p>
+                <p class="detail-value" id="deliveryAddress">-</p>
+              </div>
+            </div>
+            <div class="detail">
+              <i class="fas fa-phone"></i>
+              <div>
+                <p class="detail-label">Телефон</p>
+                <p class="detail-value" id="customerPhone">-</p>
+              </div>
+            </div>
+            <div class="detail">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <p class="detail-label">Email</p>
+                <p class="detail-value" id="customerEmail">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Items -->
+        <div class="order-items-section">
+          <h3>Ваш заказ</h3>
+          <div id="orderItems" class="order-items-list">
+            <!-- Filled by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="order-actions">
+          <button class="btn btn-outline" id="contactSupport">
+            <i class="fas fa-headset"></i> Связаться с поддержкой
+          </button>
+          <button class="btn btn-outline" id="printOrder">
+            <i class="fas fa-print"></i> Распечатать заказ
+          </button>
+          <a href="catalog.html" class="btn btn-full">
+            <i class="fas fa-shopping-bag"></i> Вернуться к каталогу
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Map & Support -->
+      <div class="tracking-sidebar">
+        <!-- Estimated Delivery -->
+        <div class="delivery-card">
+          <h3>Ожидаемая доставка</h3>
+          <div class="delivery-estimate">
+            <div id="deliveryDate" class="date-display">
+              <span class="date-value">-</span>
+              <span class="date-label">Ожидаемая дата</span>
+            </div>
+            <div id="deliveryTime" class="time-display">
+              <span class="time-value">14:00 - 16:00</span>
+              <span class="time-label">Время доставки</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Courier Info -->
+        <div class="courier-card" id="courierCard" style="display: none;">
+          <h3>Курьер</h3>
+          <div class="courier-info">
+            <div class="courier-avatar">
+              <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="courier-details">
+              <p class="courier-name" id="courierName">Иван Сидоров</p>
+              <p class="courier-phone">+7 (717) 999-00-00</p>
+              <button class="btn-small" id="callCourier">
+                <i class="fas fa-phone"></i> Позвонить
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Support -->
+        <div class="support-card">
+          <h3>Нужна помощь?</h3>
+          <p>Если у вас есть вопросы, свяжитесь с нашей поддержкой</p>
+          <div class="support-buttons">
+            <a href="tel:+77172730067" class="support-btn">
+              <i class="fas fa-phone"></i> Позвонить
+            </a>
+            <a href="https://wa.me/77172730067" target="_blank" class="support-btn">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <a href="https://t.me/premiumsteakhouse_kz" target="_blank" class="support-btn">
+              <i class="fab fa-telegram"></i> Telegram
+            </a>
+          </div>
+        </div>
+
+        <!-- Track Multiple Orders -->
+        <div class="track-more-card">
+          <h3>Отследить другой заказ</h3>
+          <form id="trackForm">
+            <input type="number" id="trackOrderId" placeholder="Номер заказа" />
+            <button type="submit" class="btn-small full-width">Найти</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>PREMIUM STEAK HOUSE</h4>
+        <p>Отборная мраморная говядина с доставкой по всему Казахстану. Астана - наша главная база.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Навигация</h4>
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html">О нас</a>
+        <a href="delivery.html">Доставка</a>
+        <a href="contacts.html">Контакты</a>
+      </div>
+      <div class="footer-section">
+        <h4>Контакты</h4>
+        <p><i class="fas fa-phone"></i> <a href="tel:+77172730067">+7 (717) 273-00-67</a></p>
+        <p><i class="fas fa-envelope"></i> <a href="mailto:info@steakhouse.kz">info@steakhouse.kz</a></p>
+        <p><i class="fas fa-map-marker-alt"></i> Астана, Казахстан</p>
+      </div>
+      <div class="footer-section">
+        <h4>Соцсети</h4>
+        <div class="social-links">
+          <a href="https://instagram.com/premiumsteakhouse.astana" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://t.me/premiumsteakhouse_kz" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a href="https://wa.me/77172730067" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 PREMIUM STEAK HOUSE. Все права защищены. | Астана, Казахстан</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Cart Modal -->
+<div class="cart-modal" id="cartModal">
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-sidebar">
+    <div class="cart-header">
+      <h3>Корзина</h3>
+      <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Итого:</span>
+        <span id="cartTotal">0 ₸</span>
+      </div>
+      <button class="btn checkout-btn" id="checkoutBtn">Оформить заказ</button>
+      <button class="btn-clear" id="clearCart">Очистить корзину</button>
+    </div>
+  </div>
+</div>
+
+<div class="notification" id="notification">
+  <i class="fas fa-check-circle"></i>
+  <span id="notificationText">Товар добавлен в корзину</span>
+</div>
+
+<script src="components.js"></script>
+<script src="app.js"></script>
+<script>
+  let currentOrder = null;
+
+  function getOrderIdFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return parseInt(params.get('order')) || localStorage.getItem('lastOrderId');
+  }
+
+  function loadOrder() {
+    const orderId = getOrderIdFromURL();
+    if (!orderId) {
+      document.body.innerHTML = '<div class="container" style="text-align: center; padding: 100px 0;"><h2>Заказ не найден</h2><a href="catalog.html" class="btn">Вернуться к каталогу</a></div>';
+      return;
+    }
+
+    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+    currentOrder = orders.find(o => o.id === orderId);
+
+    if (!currentOrder) {
+      document.body.innerHTML = '<div class="container" style="text-align: center; padding: 100px 0;"><h2>Заказ #' + orderId + ' не найден</h2><a href="catalog.html" class="btn">Вернуться к каталогу</a></div>';
+      return;
+    }
+
+    displayOrder(currentOrder);
+  }
+
+  function displayOrder(order) {
+    // Set order number and status
+    document.getElementById('orderNumber').textContent = '#' + String(order.id).padStart(4, '0');
+    document.getElementById('orderID').textContent = '#' + String(order.id).padStart(4, '0');
+
+    // Set status badge
+    const statusLabels = {
+      'confirmed': 'Обработка',
+      'processing': 'Обработка',
+      'shipped': 'В пути',
+      'delivered': 'Доставлено',
+      'cancelled': 'Отменен'
+    };
+    const statusColors = {
+      'confirmed': 'warning',
+      'processing': 'warning',
+      'shipped': 'info',
+      'delivered': 'success',
+      'cancelled': 'danger'
+    };
+
+    document.getElementById('statusLabel').textContent = statusLabels[order.status] || 'Неизвестно';
+    document.getElementById('statusBadge').className = 'order-status-badge ' + (statusColors[order.status] || '');
+
+    // Update timeline based on status
+    const statusMap = {
+      'confirmed': 'new',
+      'processing': 'processing',
+      'shipped': 'shipping',
+      'delivered': 'delivered',
+      'cancelled': 'cancelled'
+    };
+    
+    const timeline = document.querySelectorAll('.timeline-item');
+    timeline.forEach(item => {
+      item.classList.remove('completed', 'active');
+      const itemStatus = item.id.replace('status-', '');
+      if (itemStatus === statusMap[order.status]) {
+        item.classList.add('active');
+      } else if (['new', 'processing', 'shipping', 'delivered'].indexOf(itemStatus) < 
+                 ['new', 'processing', 'shipping', 'delivered'].indexOf(statusMap[order.status])) {
+        item.classList.add('completed');
+      }
+    });
+
+    // Set order info
+    const orderDate = new Date(order.date);
+    document.getElementById('orderDate').textContent = orderDate.toLocaleDateString('ru-RU', { 
+      year: 'numeric', month: 'long', day: 'numeric' 
+    });
+    document.getElementById('orderTotal').textContent = formatPrice(order.total);
+    
+    const deliveryMethods = {
+      'express': 'Экспресс-доставка (2-3 часа)',
+      'standard': 'Стандартная доставка',
+      'pickup': 'Самовывоз'
+    };
+    document.getElementById('deliveryMethod').textContent = deliveryMethods[order.delivery] || '-';
+
+    // Set customer info
+    document.getElementById('deliveryAddress').textContent = 
+      (order.customer.address ? order.customer.address + ', ' : '') +
+      (order.customer.apartment ? 'офис ' + order.customer.apartment : '');
+    document.getElementById('customerPhone').textContent = order.customer.phone || '-';
+    document.getElementById('customerEmail').textContent = order.customer.email || '-';
+
+    // Set items
+    const itemsList = document.getElementById('orderItems');
+    itemsList.innerHTML = (order.items || []).map(item => `
+      <div class="order-item">
+        <div class="item-image">
+          <img src="${item.image}" alt="${item.name}" />
+        </div>
+        <div class="item-info">
+          <h4>${item.name}</h4>
+          <p class="item-weight">${item.weight}</p>
+          <p class="item-qty">Количество: ${item.quantity}</p>
+        </div>
+        <div class="item-price">
+          <span class="price">${formatPrice(item.price)}</span>
+          <span class="total">${formatPrice(item.price * item.quantity)}</span>
+        </div>
+      </div>
+    `).join('');
+
+    // Set estimated delivery
+    const estimatedDate = new Date(orderDate);
+    if (order.delivery === 'express') {
+      estimatedDate.setHours(estimatedDate.getHours() + 3);
+    } else if (order.delivery === 'standard') {
+      estimatedDate.setDate(estimatedDate.getDate() + 1);
+    }
+    
+    document.getElementById('deliveryDate').innerHTML = `
+      <span class="date-value">${estimatedDate.toLocaleDateString('ru-RU', { month: 'short', day: 'numeric' })}</span>
+      <span class="date-label">Ожидаемая дата</span>
+    `;
+  }
+
+  function formatPrice(price) {
+    return Math.round(price).toLocaleString('ru-RU') + ' ₸';
+  }
+
+  // Event listeners
+  document.getElementById('contactSupport').addEventListener('click', function() {
+    window.open('https://wa.me/77172730067?text=Мне нужна помощь с заказом %23' + currentOrder.id, '_blank');
+  });
+
+  document.getElementById('printOrder').addEventListener('click', function() {
+    window.print();
+  });
+
+  document.getElementById('trackForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const orderId = document.getElementById('trackOrderId').value;
+    if (orderId) {
+      window.location.href = 'order-tracking.html?order=' + orderId;
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', loadOrder);
+</script>
+</body>
+</html>

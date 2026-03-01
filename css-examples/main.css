@@ -1,0 +1,39 @@
+// ===================================
+// STYLES/MAIN.CSS - CSS Entry Point
+// ===================================
+
+/* Import all CSS modules */
+@import url('./variables.css');
+@import url('./base/reset.css');
+@import url('./base/typography.css');
+@import url('./base/layout.css');
+@import url('./components/header.css');
+@import url('./components/footer.css');
+@import url('./components/button.css');
+@import url('./components/card.css');
+@import url('./components/form.css');
+@import url('./components/modal.css');
+@import url('./pages/home.css');
+@import url('./pages/catalog.css');
+@import url('./pages/account.css');
+@import url('./pages/about.css');
+@import url('./utilities/responsive.css');
+@import url('./utilities/animations.css');
+
+/* ===================================
+   ROOT LAYOUT
+   =================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}

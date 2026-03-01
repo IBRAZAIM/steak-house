@@ -23,9 +23,24 @@
         <i class="fas fa-shopping-cart"></i>
         <span class="cart-count" id="cartCount">0</span>
       </a>
+      <a href="account.html" class="cart-link">
+        <i class="fas fa-user-circle"></i>
+      </a>
     </nav>
     <div class="mobile-menu-btn" id="mobileMenuBtn">
       <i class="fas fa-bars"></i>
+    </div>
+    <div class="mobile-controls">
+      <a href="#" class="mobile-cart-btn" id="mobileCartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="mobileCartCount">0</span>
+      </a>
+      <a href="account.html" class="mobile-cart-btn">
+        <i class="fas fa-user-circle"></i>
+      </a>
+      <div class="mobile-menu-btn" id="mobileMenuBtn2">
+        <i class="fas fa-bars"></i>
+      </div>
     </div>
   </div>
 </header>
@@ -40,100 +55,193 @@
 <section class="delivery-hero">
   <div class="container">
     <h1>Доставка и оплата</h1>
-    <p>Быстрая доставка охлаждённого мяса по всей России</p>
+    <p>Быстрая доставка 24/7 по всему Казахстану со специальным охлаждением</p>
   </div>
 </section>
 
 <section class="delivery-content">
   <div class="container">
     <div class="delivery-info">
-      <h2>Как мы доставляем</h2>
-      <p>Мы понимаем, что качественное мясо требует особого подхода к доставке. Именно поэтому мы используем только профессиональные термоконтейнеры и строго соблюдаем холодовую цепь.</p>
+      <h2>Как мы доставляем в Казахстане</h2>
+      <p>Мы понимаем, что качественное мясо требует особого подхода к доставке, особенно в условиях нашего климата. Мы используем только профессиональные термоконтейнеры и строго соблюдаем холодовую цепь при доставке по всей стране.</p>
       
       <div class="delivery-steps">
         <div class="delivery-step">
           <div class="step-number">1</div>
           <div class="step-content">
             <h4>Оформление заказа</h4>
-            <p>Оформите заказ на сайте или по телефону. Наш менеджер свяжется с вами для подтверждения.</p>
+            <p>Оформите заказ на сайте или позвоните нашему менеджеру. Мы подтвердим наличие товара и уточним детали доставки.</p>
           </div>
         </div>
         <div class="delivery-step">
           <div class="step-number">2</div>
           <div class="step-content">
-            <h4>Сборка заказа</h4>
-            <p>Мы тщательно упаковываем ваш заказ в термоконтейнеры с охлаждающими элементами.</p>
+            <h4>Сборка и подготовка</h4>
+            <p>Мы отбираем лучшие куски, взвешиваем их и тщательно упаковываем в термоконтейнер с сухой ледяной подложкой.</p>
           </div>
         </div>
         <div class="delivery-step">
           <div class="step-number">3</div>
           <div class="step-content">
-            <h4>Доставка</h4>
-            <p>Доставка осуществляется курьерской службой в удобное для вас время.</p>
+            <h4>Доставка курьером</h4>
+            <p>Курьер привозит ваш заказ в закрытом автомобиле с кондиционером в удобное для вас время. Отслеживание в реальном времени.</p>
           </div>
         </div>
         <div class="delivery-step">
           <div class="step-number">4</div>
           <div class="step-content">
-            <h4>Получение</h4>
-            <p>Вы получаете свежий продукт и можете наслаждаться превосходным вкусом.</p>
+            <h4>Получение и проверка</h4>
+            <p>Вы получаете идеально охлаждённый продукт, проверяете качество и можете сразу хранить в холодильнике или морозильнике.</p>
           </div>
         </div>
       </div>
     </div>
-    
-    <div class="delivery-form">
-      <h3>Заказать доставку</h3>
-      <form id="deliveryForm">
-        <div class="form-group">
-          <label>Ваше имя</label>
-          <input type="text" name="name" required placeholder="Введите ваше имя">
+  </div>
+</section>
+
+<!-- Delivery Zones Section -->
+<section class="delivery-zones">
+  <div class="container">
+    <h2>Зоны доставки</h2>
+    <p>Мы доставляем по всему Казахстану с разными условиями в зависимости от расстояния</p>
+    <div class="zones-grid">
+      <div class="zone-card">
+        <div class="zone-icon">
+          <i class="fas fa-map-pin"></i>
         </div>
-        <div class="form-group">
-          <label>Телефон</label>
-          <input type="tel" name="phone" required placeholder="+7 (___) ___-__-__">
+        <h3>Астана (город)</h3>
+        <p class="zone-time">Доставка: 2-3 часа</p>
+        <p class="zone-price">Бесплатная доставка от 30,000 ₸</p>
+        <p class="zone-price">или 2,000 ₸</p>
+      </div>
+      <div class="zone-card">
+        <div class="zone-icon">
+          <i class="fas fa-route"></i>
         </div>
-        <div class="form-group">
-          <label>Адрес доставки</label>
-          <input type="text" name="address" required placeholder="Улица, дом, квартира">
+        <h3>Область Акмола</h3>
+        <p class="zone-time">Доставка: 1-2 дня</p>
+        <p class="zone-price">От 5,000 ₸ (до 100 км)</p>
+        <p class="zone-price">От 10,000 ₸ (более 100 км)</p>
+      </div>
+      <div class="zone-card">
+        <div class="zone-icon">
+          <i class="fas fa-truck"></i>
         </div>
-        <div class="form-group">
-          <label>Дата доставки</label>
-          <input type="date" name="date" required>
-        </div>
-        <div class="form-group">
-          <label>Комментарий</label>
-          <textarea name="comment" rows="3" placeholder="Дополнительные пожелания"></textarea>
-        </div>
-        <button type="submit" class="btn">Оформить заявку</button>
-      </form>
+        <h3>Другие области</h3>
+        <p class="zone-time">Доставка: 2-5 дней</p>
+        <p class="zone-price">По договорённости</p>
+        <p class="zone-price">Транспортные компании</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="features">
+<!-- Payment Methods Section -->
+<section class="payment-methods">
   <div class="container">
-    <div class="features-grid">
-      <div class="feature">
-        <div class="feature-icon">
-          <i class="fas fa-truck"></i>
-        </div>
-        <h3>Доставка по Москве</h3>
-        <p>Бесплатно при заказе от 5000 ₽. В пределах МКАД - 300 ₽.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">
-          <i class="fas fa-plane"></i>
-        </div>
-        <h3>Доставка по России</h3>
-        <p>От 500 ₽ в зависимости от региона. Доставка до транспортной компании бесплатно.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">
+    <h2>Способы оплаты</h2>
+    <div class="methods-grid">
+      <div class="method-card">
+        <div class="method-icon">
           <i class="fas fa-credit-card"></i>
         </div>
-        <h3>Способы оплаты</h3>
-        <p>Наличными при получении, банковской картой, онлайн-оплата на сайте.</p>
+        <h3>Банковская карта</h3>
+        <p>Visa, Mastercard, KNET</p>
+        <p class="method-subtitle">Безопасная оплата прямо на сайте</p>
+      </div>
+      <div class="method-card">
+        <div class="method-icon">
+          <i class="fas fa-wallet"></i>
+        </div>
+        <h3>Мобильные платежи</h3>
+        <p>Kaspi.kz, Jusan, Apple Pay</p>
+        <p class="method-subtitle">Быстрая оплата из приложения</p>
+      </div>
+      <div class="method-card">
+        <div class="method-icon">
+          <i class="fas fa-money-bills"></i>
+        </div>
+        <h3>При получении</h3>
+        <p>Наличные или карта у курьера</p>
+        <p class="method-subtitle">Оплата при доставке товара</p>
+      </div>
+      <div class="method-card">
+        <div class="method-icon">
+          <i class="fas fa-university"></i>
+        </div>
+        <h3>Банковский транспорт</h3>
+        <p>Инвойс, р/с для компаний</p>
+        <p class="method-subtitle">Для оптовых и корпоративных заказов</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Delivery Advantages Section -->
+<section class="delivery-advantages">
+  <div class="container">
+    <h2>Почему выбирают нас</h2>
+    <div class="advantages-grid">
+      <div class="advantage-card">
+        <div class="advantage-icon">
+          <i class="fas fa-snowflake"></i>
+        </div>
+        <h3>Сухой лёд</h3>
+        <p>Используем только сухой лёд при доставке для первозного охлаждения. Мясо не контактирует с влагой.</p>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <h3>Быстрые сроки</h3>
+        <p>В Астане доставляем за 2-3 часа. По стране - в течение 1-5 дней в зависимости от региона.</p>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon">
+          <i class="fas fa-eye"></i>
+        </div>
+        <h3>Отслеживание</h3>
+        <p>Отслеживайте ваш заказ в реальном времени. Узнавайте, когда курьер будет доставлен.</p>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3>Гарантия качества</h3>
+        <p>Если мясо повреждено или испорчено, мы вернём деньги или отправим новый заказ.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="delivery-faq">
+  <div class="container">
+    <h2>Часто задаваемые вопросы</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4>Как долго доставляется заказ в Астану?</h4>
+        <p>В городе Астана доставка занимает 2-3 часа с момента подтверждения заказа. Вы можете выбрать удобное время доставки.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Какая температура при доставке?</h4>
+        <p>Мясо доставляется при температуре -18°C и ниже. Сухой лёд поддерживает эту температуру на протяжении всей доставки.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Могу ли я оставить заказ на несколько таких?</h4>
+        <p>Да, у вас есть 2-3 часа для получения после доставки. Мясо можно хранить в холодильнике до 5 дней или в морозильнике месяцы.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Есть ли скидка при оптовых заказах?</h4>
+        <p>Да, при заказе от 50,000 ₸ мы предоставляем скидку 10%. Свяжитесь с нами для обсуждения условий больших заказов.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Какие города обслуживает?</h4>
+        <p>Основной офис - в Астане. Доставляем по всему Казахстану: Алматы, Кокшетау, Аркалык, Щучинск и другие города. Расчёт доставки индивидуален.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Что делать если в доставке повреждён товар?</h4>
+        <p>Немедленно свяжитесь с нами и отправьте фото повреждённого товара. Мы вернём деньги или отправим замену, как вы предпочитаете.</p>
       </div>
     </div>
   </div>
@@ -144,7 +252,7 @@
     <div class="footer-content">
       <div class="footer-section">
         <h4>PREMIUM STEAK HOUSE</h4>
-        <p>Отборная мраморная говядина с доставкой по всей России.</p>
+        <p>Отборная мраморная говядина с доставкой по всему Казахстану. Астана - наша главная база.</p>
       </div>
       <div class="footer-section">
         <h4>Навигация</h4>
@@ -155,21 +263,21 @@
       </div>
       <div class="footer-section">
         <h4>Контакты</h4>
-        <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
-        <p><i class="fas fa-envelope"></i> info@steakhouse.ru</p>
-        <p><i class="fas fa-map-marker-alt"></i> Москва, ул. Примерная 1</p>
+        <p><i class="fas fa-phone"></i> <a href="tel:+77172730067">+7 (717) 273-00-67</a></p>
+        <p><i class="fas fa-envelope"></i> <a href="mailto:info@steakhouse.kz">info@steakhouse.kz</a></p>
+        <p><i class="fas fa-map-marker-alt"></i> Астана, Казахстан</p>
       </div>
       <div class="footer-section">
         <h4>Соцсети</h4>
         <div class="social-links">
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-telegram"></i></a>
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://instagram.com/premiumsteakhouse.astana" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://t.me/premiumsteakhouse_kz" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a href="https://wa.me/77172730067" target="_blank"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 PREMIUM STEAK HOUSE. Все права защищены.</p>
+      <p>© 2026 PREMIUM STEAK HOUSE. Все права защищены. | Астана, Казахстан</p>
     </div>
   </div>
 </footer>

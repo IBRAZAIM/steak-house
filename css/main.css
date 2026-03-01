@@ -20,5 +20,26 @@
 /* Catalog page */
 @import url('catalog.css');
 
-/* Other pages */
-@import url('pages.css');
+/* Checkout page */
+@import url('checkout.css');
+
+/* About page */
+@import url('about.css');
+
+/* Contacts page */
+@import url('contacts.css');
+
+/* Delivery page */
+@import url('delivery.css');
+
+/* Account page */
+@import url('account.css');
+
+/* Steaks Guide page */
+@import url('steaks-guide.css');
+
+/* Order Tracking page */
+@import url('order-tracking.css');
+
+/* Admin page */
+@import url('admin.css');

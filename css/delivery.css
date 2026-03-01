@@ -1,0 +1,454 @@
+/* ===================================
+   PREMIUM STEAK HOUSE - DELIVERY PAGE
+   =================================== */
+
+/* ===================================
+   PAGE HEADER
+   =================================== */
+
+.page-header {
+  padding: 160px 0 80px;
+  background: var(--dark-charcoal);
+  text-align: center;
+}
+
+.page-header h1 {
+  font-family: var(--font-heading);
+  font-size: 56px;
+  margin-bottom: 20px;
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+.page-header p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  font-weight: 300;
+}
+
+/* ===================================
+   DELIVERY CONTENT
+   =================================== */
+
+.delivery-content {
+  padding: 80px 0;
+  background: var(--cream);
+}
+
+.delivery-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+
+.delivery-info h2 {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  margin-bottom: 30px;
+  font-weight: 400;
+  color: var(--text-dark);
+}
+
+.delivery-info > p {
+  color: var(--medium-gray);
+  margin-bottom: 25px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.9;
+}
+
+/* Delivery Steps */
+.delivery-steps {
+  margin-top: 40px;
+}
+
+.delivery-step {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 35px;
+}
+
+.step-number {
+  width: 55px;
+  height: 55px;
+  background: var(--primary-gold);
+  color: var(--dark-charcoal);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 20px;
+  flex-shrink: 0;
+  font-family: var(--font-heading);
+}
+
+.step-content h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.step-content p {
+  color: var(--medium-gray);
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Delivery Form */
+.delivery-form {
+  background: white;
+  padding: 45px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-medium);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.delivery-form h3 {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  margin-bottom: 30px;
+  font-weight: 400;
+  color: var(--text-dark);
+}
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--dark-charcoal);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  font-size: 14px;
+  transition: var(--transition-smooth);
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background: var(--off-white);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-gold);
+  background: white;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* ===================================
+   DELIVERY ZONES
+   =================================== */
+
+.delivery-zones {
+  background: #1a1a1a;
+  padding: 80px 0;
+}
+
+.delivery-zones h2 {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  margin-bottom: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.delivery-zones > .container > p {
+  text-align: center;
+  color: #d1d1d1;
+  margin-bottom: 50px;
+  font-size: 16px;
+}
+
+.zones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.zone-card {
+  background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  border-top: 4px solid #c5a66d;
+  transition: transform 0.3s ease;
+}
+
+.zone-card:hover {
+  transform: translateY(-8px);
+}
+
+.zone-icon {
+  font-size: 48px;
+  color: #c5a66d;
+  margin-bottom: 20px;
+}
+
+.zone-card h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: var(--font-heading);
+}
+
+.zone-time {
+  color: #d1d1d1;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.zone-price {
+  color: #c5a66d;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+/* ===================================
+   PAYMENT METHODS
+   =================================== */
+
+.payment-methods {
+  background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+  padding: 80px 0;
+  margin-top: 0;
+}
+
+.payment-methods h2 {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  margin-bottom: 50px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.methods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.method-card {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 40px;
+  text-align: center;
+  border-radius: 12px;
+  border: 1px solid rgba(197, 166, 109, 0.2);
+  transition: all 0.3s ease;
+}
+
+.method-card:hover {
+  border-color: #c5a66d;
+  background: rgba(197, 166, 109, 0.08);
+  transform: translateY(-5px);
+}
+
+.method-icon {
+  font-size: 48px;
+  color: #c5a66d;
+  margin-bottom: 20px;
+}
+
+.method-card h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: var(--font-heading);
+}
+
+.method-card p {
+  color: #d1d1d1;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.method-subtitle {
+  color: #999;
+  font-size: 13px;
+  font-style: italic;
+  margin-top: 12px;
+}
+
+/* ===================================
+   DELIVERY ADVANTAGES
+   =================================== */
+
+.delivery-advantages {
+  background: #1a1a1a;
+  padding: 80px 0;
+}
+
+.delivery-advantages h2 {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  margin-bottom: 50px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.advantage-card {
+  background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+  padding: 35px;
+  text-align: center;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.advantage-card:hover {
+  transform: translateY(-8px);
+}
+
+.advantage-icon {
+  font-size: 44px;
+  color: #c5a66d;
+  margin-bottom: 20px;
+}
+
+.advantage-card h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: var(--font-heading);
+}
+
+.advantage-card p {
+  color: #d1d1d1;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ===================================
+   DELIVERY FAQ
+   =================================== */
+
+.delivery-faq {
+  background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+  padding: 80px 0;
+  margin-top: 0;
+}
+
+.delivery-faq h2 {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  margin-bottom: 50px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.faq-item {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 30px;
+  border-radius: 12px;
+  border-left: 4px solid #c5a66d;
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  background: rgba(197, 166, 109, 0.1);
+}
+
+.faq-item h4 {
+  color: #c5a66d;
+  font-size: 16px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.faq-item p {
+  color: #d1d1d1;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ===================================
+   RESPONSIVE DELIVERY PAGE
+   =================================== */
+
+@media (max-width: 992px) {
+  .delivery-content-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .delivery-info h2,
+  .delivery-zones h2,
+  .payment-methods h2,
+  .delivery-advantages h2,
+  .delivery-faq h2 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: 40px;
+  }
+
+  .page-header p {
+    font-size: 16px;
+  }
+
+  .delivery-info h2,
+  .delivery-zones h2,
+  .payment-methods h2,
+  .delivery-advantages h2,
+  .delivery-faq h2 {
+    font-size: 28px;
+  }
+
+  .delivery-form {
+    padding: 30px 20px;
+  }
+
+  .zones-grid,
+  .methods-grid,
+  .advantages-grid,
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+}

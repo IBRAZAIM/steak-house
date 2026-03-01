@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Оформление заказа - PREMIUM STEAK HOUSE</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="checkout.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="index.html" class="logo">PREMIUM <span>STEAK HOUSE</span></a>
+    <nav class="menu">
+      <a href="catalog.html">Каталог</a>
+      <a href="about.html">О нас</a>
+      <a href="delivery.html">Доставка</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="#" class="cart-link" id="cartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+      </a>
+      <a href="account.html" class="cart-link">
+        <i class="fas fa-user-circle"></i>
+      </a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="mobile-controls">
+      <a href="#" class="mobile-cart-btn" id="mobileCartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="mobileCartCount">0</span>
+      </a>
+      <a href="account.html" class="mobile-cart-btn">
+        <i class="fas fa-user-circle"></i>
+      </a>
+      <div class="mobile-menu-btn" id="mobileMenuBtn2">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="catalog.html">Каталог</a>
+  <a href="about.html">О нас</a>
+  <a href="delivery.html">Доставка</a>
+  <a href="contacts.html">Контакты</a>
+</div>
+
+<!-- Checkout Header -->
+<section class="checkout-header">
+  <div class="container">
+    <h1>Оформление заказа</h1>
+    <div class="breadcrumb">
+      <a href="catalog.html">Каталог</a>
+      <span>/</span>
+      <a href="#" id="cartBtn2">Корзина</a>
+      <span>/</span>
+      <span class="active">Оформление</span>
+    </div>
+  </div>
+</section>
+
+<!-- Progress Steps -->
+<section class="checkout-progress">
+  <div class="container">
+    <div class="progress-steps">
+      <div class="step active">
+        <div class="step-number">1</div>
+        <div class="step-label">Данные доставки</div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-label">Способ доставки</div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-label">Способ оплаты</div>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-label">Подтверждение</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Checkout Content -->
+<section class="checkout-content">
+  <div class="container">
+    <div class="checkout-grid">
+      <!-- Left: Form -->
+      <div class="checkout-form-wrapper">
+        <form id="checkoutForm" class="checkout-form">
+          <!-- Step 1: Delivery Info -->
+          <div class="form-step active" id="step1">
+            <h2>Данные для доставки</h2>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label>Имя *</label>
+                <input type="text" name="firstName" required placeholder="Имя" />
+              </div>
+              <div class="form-group">
+                <label>Фамилия *</label>
+                <input type="text" name="lastName" required placeholder="Фамилия" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Телефон *</label>
+                <input type="tel" name="phone" required placeholder="+7 (___) ___-__-__" />
+              </div>
+              <div class="form-group">
+                <label>Email *</label>
+                <input type="email" name="email" required placeholder="your@email.com" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Город *</label>
+              <select name="city" required>
+                <option value="">Выберите город</option>
+                <option value="astana">Астана</option>
+                <option value="almaty">Алматы</option>
+                <option value="karaganda">Карагандинск</option>
+                <option value="kokshetau">Кокшетау</option>
+                <option value="other">Другой город</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Улица и номер дома *</label>
+              <input type="text" name="address" required placeholder="ул. Республики, д. 32" />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Помещение / Офис</label>
+                <input type="text" name="apartment" placeholder="Офис 527 (опционально)" />
+              </div>
+              <div class="form-group">
+                <label>Индекс</label>
+                <input type="text" name="zipCode" placeholder="Индекс (опционально)" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Комментарий к заказу</label>
+              <textarea name="comment" rows="3" placeholder="Скажите нам, что-то о вашем заказе..."></textarea>
+            </div>
+
+            <button type="button" class="btn btn-full" onclick="nextStep()">
+              Далее: Доставка <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+
+          <!-- Step 2: Delivery Method -->
+          <div class="form-step" id="step2">
+            <h2>Способ доставки</h2>
+
+            <div class="delivery-options">
+              <label class="delivery-option">
+                <input type="radio" name="deliveryMethod" value="express" required />
+                <div class="option-content">
+                  <div class="option-icon">
+                    <i class="fas fa-rocket"></i>
+                  </div>
+                  <div class="option-header">
+                    <span class="option-title">Экспресс-доставка</span>
+                    <span class="option-price">2,000 ₸</span>
+                  </div>
+                  <p class="option-desc">Доставка в течение 2-3 часов в Астане</p>
+                </div>
+              </label>
+
+              <label class="delivery-option">
+                <input type="radio" name="deliveryMethod" value="standard" />
+                <div class="option-content">
+                  <div class="option-icon">
+                    <i class="fas fa-truck"></i>
+                  </div>
+                  <div class="option-header">
+                    <span class="option-title">Стандартная доставка</span>
+                    <span class="option-price">Бесплатно</span>
+                  </div>
+                  <p class="option-desc">Доставка на следующий день при заказе до 18:00</p>
+                </div>
+              </label>
+
+              <label class="delivery-option">
+                <input type="radio" name="deliveryMethod" value="pickup" />
+                <div class="option-content">
+                  <div class="option-icon">
+                    <i class="fas fa-store"></i>
+                  </div>
+                  <div class="option-header">
+                    <span class="option-title">Самовывоз</span>
+                    <span class="option-price">Бесплатно</span>
+                  </div>
+                  <p class="option-desc">Заказ готов за 1 час после оплаты</p>
+                </div>
+              </label>
+            </div>
+
+            <div class="form-buttons">
+              <button type="button" class="btn btn-outline" onclick="prevStep()">
+                <i class="fas fa-arrow-left"></i> Назад
+              </button>
+              <button type="button" class="btn btn-full" onclick="nextStep()">
+                Далее: Оплата <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Payment Method -->
+          <div class="form-step" id="step3">
+            <h2>Способ оплаты</h2>
+
+            <div class="payment-options">
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="card" required />
+                <div class="option-content">
+                  <div class="option-icon">
+                    <i class="fas fa-credit-card"></i>
+                  </div>
+                  <div class="option-header">
+                    <span class="option-title">Банковская карта</span>
+                  </div>
+                  <p class="option-desc">Visa, Mastercard, KNET</p>
+                </div>
+              </label>
+
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="kaspi" />
+                <div class="option-content">
+                  <div class="option-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                  </div>
+                  <div class="option-header">
+                    <span class="option-title">Kaspi.kz</span>
+                  </div>
+                  <p class="option-desc">QR код от Kaspi</p>
+                </div>
+              </label>
+
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="cash" />
+                <div class="option-content">
+                  <div class="option-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                  </div>
+                  <div class="option-header">
+                    <span class="option-title">При получении</span>
+                  </div>
+                  <p class="option-desc">Наличные или карта у курьера</p>
+                </div>
+              </label>
+            </div>
+
+            <div class="form-buttons">
+              <button type="button" class="btn btn-outline" onclick="prevStep()">
+                <i class="fas fa-arrow-left"></i> Назад
+              </button>
+              <button type="button" class="btn btn-full" onclick="nextStep()">
+                Далее: Подтверждение <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 4: Confirmation -->
+          <div class="form-step" id="step4">
+            <h2>Подтверждение заказа</h2>
+
+            <div class="order-summary">
+              <h3>Сводка заказа</h3>
+              <div id="orderSummary" class="summary-content">
+                <!-- Filled by JavaScript -->
+              </div>
+
+              <div class="summary-totals">
+                <div class="total-row">
+                  <span>Сумма товаров:</span>
+                  <span id="subtotal">0 ₸</span>
+                </div>
+                <div class="total-row">
+                  <span>Доставка:</span>
+                  <span id="shippingCost">0 ₸</span>
+                </div>
+                <div class="total-row total">
+                  <span>Итого:</span>
+                  <span id="totalAmount">0 ₸</span>
+                </div>
+              </div>
+
+              <div class="order-info">
+                <div class="info-block">
+                  <h4>Доставка</h4>
+                  <p id="deliveryInfo">-</p>
+                </div>
+                <div class="info-block">
+                  <h4>Оплата</h4>
+                  <p id="paymentInfo">-</p>
+                </div>
+              </div>
+
+              <label class="checkbox-agree">
+                <input type="checkbox" name="agree" required />
+                <span>Я согласен(-на) с <a href="#">условиями доставки</a> и <a href="#">политикой конфиденциальности</a></span>
+              </label>
+            </div>
+
+            <div class="form-buttons full-width">
+              <button type="button" class="btn btn-outline" onclick="prevStep()">
+                <i class="fas fa-arrow-left"></i> Назад
+              </button>
+              <button type="submit" class="btn btn-full btn-primary" id="submitBtn">
+                Подтвердить заказ <i class="fas fa-check-circle"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Right: Order Summary -->
+      <div class="checkout-summary">
+        <div class="summary-card">
+          <h3>Заказ</h3>
+          
+          <div id="cartItemsList" class="cart-items-list">
+            <!-- Filled by JavaScript -->
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-totals">
+            <div class="summary-row compact">
+              <span>Товары:</span>
+              <span id="cartSubtotal">0 ₸</span>
+            </div>
+            <div class="summary-row compact">
+              <span>Доставка:</span>
+              <span id="cartShipping">2,000 ₸</span>
+            </div>
+            <div class="summary-row total">
+              <span>Итого:</span>
+              <span id="cartTotal">0 ₸</span>
+            </div>
+          </div>
+
+          <div class="promo-section">
+            <input type="text" id="promoCode" placeholder="Промо" />
+            <button type="button" id="applyPromo" class="btn-small">Код</button>
+          </div>
+
+          <div class="trust-badges-compact">
+            <div class="badge-mini">
+              <i class="fas fa-lock"></i>
+              <span>SSL</span>
+            </div>
+            <div class="badge-mini">
+              <i class="fas fa-undo"></i>
+              <span>Возврат</span>
+            </div>
+            <div class="badge-mini">
+              <i class="fas fa-headset"></i>
+              <span>24/7</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>PREMIUM STEAK HOUSE</h4>
+        <p>Отборная мраморная говядина с доставкой по всему Казахстану. Астана - наша главная база.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Навигация</h4>
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html">О нас</a>
+        <a href="delivery.html">Доставка</a>
+        <a href="contacts.html">Контакты</a>
+      </div>
+      <div class="footer-section">
+        <h4>Контакты</h4>
+        <p><i class="fas fa-phone"></i> <a href="tel:+77172730067">+7 (717) 273-00-67</a></p>
+        <p><i class="fas fa-envelope"></i> <a href="mailto:info@steakhouse.kz">info@steakhouse.kz</a></p>
+        <p><i class="fas fa-map-marker-alt"></i> Астана, Казахстан</p>
+      </div>
+      <div class="footer-section">
+        <h4>Соцсети</h4>
+        <div class="social-links">
+          <a href="https://instagram.com/premiumsteakhouse.astana" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://t.me/premiumsteakhouse_kz" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a href="https://wa.me/77172730067" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 PREMIUM STEAK HOUSE. Все права защищены. | Астана, Казахстан</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Cart Modal -->
+<div class="cart-modal" id="cartModal">
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-sidebar">
+    <div class="cart-header">
+      <h3>Корзина</h3>
+      <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Итого:</span>
+        <span id="cartTotal">0 ₸</span>
+      </div>
+      <button class="btn checkout-btn" id="checkoutBtn">Оформить заказ</button>
+      <button class="btn-clear" id="clearCart">Очистить корзину</button>
+    </div>
+  </div>
+</div>
+
+<div class="notification" id="notification">
+  <i class="fas fa-check-circle"></i>
+  <span id="notificationText">Товар добавлен в корзину</span>
+</div>
+
+<script src="components.js"></script>
+<script src="app.js"></script>
+<script>
+  // Checkout form logic
+  let currentStep = 1;
+  const totalSteps = 4;
+
+  function nextStep() {
+    if (validateStep(currentStep)) {
+      currentStep++;
+      if (currentStep > totalSteps) currentStep = totalSteps;
+      updateSteps();
+      updateSummary();
+      window.scrollTo(0, 0);
+    }
+  }
+
+  function prevStep() {
+    currentStep--;
+    if (currentStep < 1) currentStep = 1;
+    updateSteps();
+    updateSummary();
+    window.scrollTo(0, 0);
+  }
+
+  function validateStep(step) {
+    const form = document.getElementById('checkoutForm');
+    const inputs = form.querySelectorAll(`#step${step} input[required], #step${step} select[required], #step${step} textarea[required]`);
+    let valid = true;
+    inputs.forEach(input => {
+      if (!input.checkValidity()) {
+        input.classList.add('error');
+        valid = false;
+      } else {
+        input.classList.remove('error');
+      }
+    });
+    if (!valid) alert('Пожалуйста заполните все обязательные поля');
+    return valid;
+  }
+
+  function updateSteps() {
+    document.querySelectorAll('.form-step').forEach((step, idx) => {
+      step.classList.toggle('active', idx + 1 === currentStep);
+    });
+    document.querySelectorAll('.progress-steps .step').forEach((step, idx) => {
+      step.classList.toggle('active', idx + 1 <= currentStep);
+    });
+  }
+
+  function updateSummary() {
+    const form = document.getElementById('checkoutForm');
+    const deliveryMethod = form.elements['deliveryMethod']?.value || '';
+    const paymentMethod = form.elements['paymentMethod']?.value || '';
+    
+    const deliveryLabels = {
+      'express': 'Экспресс-доставка (2-3 часа)',
+      'standard': 'Стандартная доставка (следующий день)',
+      'pickup': 'Самовывоз (1 час)'
+    };
+
+    const paymentLabels = {
+      'card': 'Банковская карта',
+      'kaspi': 'Kaspi.kz',
+      'cash': 'При получении'
+    };
+
+    document.getElementById('deliveryInfo').textContent = deliveryLabels[deliveryMethod] || '-';
+    document.getElementById('paymentInfo').textContent = paymentLabels[paymentMethod] || '-';
+  }
+
+  // Event listeners
+  document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    if (!validateStep(currentStep)) return;
+
+    const formData = new FormData(this);
+    const orderData = {
+      customer: {
+        firstName: formData.get('firstName'),
+        lastName: formData.get('lastName'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        city: formData.get('city'),
+        address: formData.get('address'),
+        apartment: formData.get('apartment'),
+        comment: formData.get('comment')
+      },
+      delivery: formData.get('deliveryMethod'),
+      payment: formData.get('paymentMethod'),
+      items: JSON.parse(localStorage.getItem('cart') || '[]'),
+      timestamp: new Date().toISOString()
+    };
+
+    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+    const newOrder = {
+      id: orders.length + 1,
+      ...orderData,
+      status: 'confirmed',
+      date: new Date().toISOString(),
+      userEmail: formData.get('email'),
+      total: calculateTotal()
+    };
+
+    orders.push(newOrder);
+    localStorage.setItem('orders', JSON.stringify(orders));
+    localStorage.setItem('lastOrderId', newOrder.id);
+    localStorage.removeItem('cart');
+
+    alert(`Заказ #${newOrder.id} успешно оформлен!\nПроверьте email для трекинга заказа.`);
+    window.location.href = `order-tracking.html?order=${newOrder.id}`;
+  });
+
+  // Listen for delivery method changes to update shipping cost
+  document.addEventListener('DOMContentLoaded', function() {
+    const deliveryRadios = document.querySelectorAll('input[name="deliveryMethod"]');
+    const shippingLabels = {
+      'express': '2,000',
+      'standard': 'Бесплатно',
+      'pickup': 'Бесплатно'
+    };
+    
+    deliveryRadios.forEach(radio => {
+      radio.addEventListener('change', function() {
+        // Update displayed shipping cost
+        const option = this.closest('.delivery-option');
+        if (option) {
+          const priceSpan = option.querySelector('.option-price');
+          if (priceSpan && shippingLabels[this.value]) {
+            priceSpan.textContent = this.value === 'express' ? '2,000 ₸' : 'Бесплатно';
+          }
+        }
+        updateSummary();
+      });
+    });
+  });
+
+  function calculateTotal() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const form = document.getElementById('checkoutForm');
+    const deliveryMethod = form.elements['deliveryMethod']?.value || 'standard';
+    
+    let shippingCost = 0;
+    if (deliveryMethod === 'express') {
+      shippingCost = 2000;
+    } else if (deliveryMethod === 'standard') {
+      shippingCost = 0;
+    } else if (deliveryMethod === 'pickup') {
+      shippingCost = 0;
+    }
+    
+    return subtotal + shippingCost;
+  }
+
+  // Load cart on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cartItemsList = document.getElementById('cartItemsList');
+    
+    if (cart.length === 0) {
+      window.location.href = 'catalog.html';
+      return;
+    }
+
+    let subtotal = 0;
+    const shippingCost = 2000; // Default shipping cost for express delivery
+    
+    cartItemsList.innerHTML = cart.map(item => {
+      subtotal += item.price * item.quantity;
+      return `
+        <div class="cart-item">
+          <div class="item-details">
+            <span class="item-name">${item.name}</span>
+            <span class="item-qty">${item.quantity}x</span>
+          </div>
+          <span class="item-price">${(item.price * item.quantity).toLocaleString('ru-RU')} ₸</span>
+        </div>
+      `;
+    }).join('');
+
+    const total = subtotal + shippingCost;
+
+    document.getElementById('cartSubtotal').textContent = subtotal.toLocaleString('ru-RU') + ' ₸';
+    document.getElementById('cartShipping').textContent = shippingCost.toLocaleString('ru-RU') + ' ₸';
+    document.getElementById('cartTotal').textContent = total.toLocaleString('ru-RU') + ' ₸';
+
+    // Set initial form values from localStorage if user is logged in
+    const currentUserEmail = localStorage.getItem('currentUserEmail');
+    if (currentUserEmail) {
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const user = users.find(u => u.email === currentUserEmail);
+      if (user) {
+        document.querySelector('input[name="firstName"]').value = user.firstName || '';
+        document.querySelector('input[name="lastName"]').value = user.lastName || '';
+        document.querySelector('input[name="email"]').value = user.email || '';
+        document.querySelector('input[name="phone"]').value = user.phone || '';
+      }
+    }
+  });
+</script>
+</body>
+</html>

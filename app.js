@@ -22,7 +22,7 @@ const defaultProducts = [
     id: 1,
     name: 'Ribeye Prime',
     description: 'Мраморная говядина высшей категории. Максимальная мраморность и насыщенный вкус.',
-    price: 4900,
+    price: 8900,
     image: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=400&h=300&fit=crop',
     category: 'ribeye',
     badge: 'Хит',
@@ -31,9 +31,9 @@ const defaultProducts = [
   {
     id: 2,
     name: 'Striploin Premium',
-    description: 'Идеальный баланс сочности и текстуры. Классический стейк.',
-    price: 4300,
-    image: 'https://images.unsplash.com/photo-1558030006-450675393462?w=400&h=300&fit=crop',
+    description: 'Идеальный баланс сочности и текстуры. Классический стейк для гурманов.',
+    price: 7500,
+    image: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=400&h=300&fit=crop',
     category: 'striploin',
     badge: null,
     weight: '300 г'
@@ -41,9 +41,9 @@ const defaultProducts = [
   {
     id: 3,
     name: 'T-Bone Classic',
-    description: 'Два вкуса в одном легендарном стейке. Филейная часть и стейк.',
-    price: 5600,
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop',
+    description: 'Два вкуса в одном легендарном стейке. Филейная часть и стейк на кости.',
+    price: 9500,
+    image: 'https://images.unsplash.com/photo-1430139593276-c3f7bff29cbb?w=400&h=300&fit=crop',
     category: 'tbone',
     badge: 'Премиум',
     weight: '450 г'
@@ -51,9 +51,9 @@ const defaultProducts = [
   {
     id: 4,
     name: 'Filet Mignon',
-    description: 'Нежнейшая вырезка. Самая мягкая часть говядины.',
-    price: 6200,
-    image: 'https://images.unsplash.com/photo-1551248429-40975aa4de74?w=400&h=300&fit=crop',
+    description: 'Нежнейшая вырезка из Аргентины. Самая мягкая и деликатная часть.',
+    price: 10500,
+    image: 'https://images.unsplash.com/photo-1595521624410-5e77e1b6aed3?w=400&h=300&fit=crop',
     category: 'filet',
     badge: 'Эксклюзив',
     weight: '280 г'
@@ -61,9 +61,9 @@ const defaultProducts = [
   {
     id: 5,
     name: 'Tomahawk',
-    description: 'Впечатляющий стейк на кости. Для настоящих ценителей.',
-    price: 7800,
-    image: 'https://images.unsplash.com/photo-1615937657715-bc7b4b7962c1?w=400&h=300&fit=crop',
+    description: 'Впечатляющий стейк на кости. Для настоящих ценителей экстра-класса.',
+    price: 13900,
+    image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop',
     category: 'tomahawk',
     badge: 'Хит',
     weight: '800 г'
@@ -71,9 +71,9 @@ const defaultProducts = [
   {
     id: 6,
     name: 'Porterhouse',
-    description: 'Большая версия T-Bone. Максимум вкуса.',
-    price: 6400,
-    image: 'https://images.unsplash.com/photo-1606850780554-b55ea4dd0b70?w=400&h=300&fit=crop',
+    description: 'Большая версия T-Bone. Максимум вкуса и мраморности из набора премиум.',
+    price: 10500,
+    image: 'https://images.unsplash.com/photo-1543187776-ca038cad3260?w=400&h=300&fit=crop',
     category: 'porterhouse',
     badge: null,
     weight: '600 г'
@@ -81,9 +81,9 @@ const defaultProducts = [
   {
     id: 7,
     name: 'Ribeye Dry Aged 45 дней',
-    description: 'Говядина выдержанная 45 дней. Интенсивный вкус.',
-    price: 8900,
-    image: 'https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=400&h=300&fit=crop',
+    description: 'Говядина выдержанная 45 дней. Интенсивный, глубокий вкус неповторимый.',
+    price: 15900,
+    image: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=400&h=300&fit=crop',
     category: 'ribeye',
     badge: 'Dry Aged',
     weight: '350 г'
@@ -91,9 +91,9 @@ const defaultProducts = [
   {
     id: 8,
     name: 'Chateaubriand',
-    description: 'Центральная часть вырезки. Блюдо для особых случаев.',
-    price: 9500,
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop',
+    description: 'Центральная часть вырезки из лучших поставок. Блюдо для особых случаев.',
+    price: 16900,
+    image: 'https://images.unsplash.com/photo-1599888657139-87e8624f31ad?w=400&h=300&fit=crop',
     category: 'filet',
     badge: 'Премиум',
     weight: '400 г'
@@ -294,7 +294,8 @@ class Database {
       total: this.getCartTotal(),
       status: 'Новый',
       date: new Date().toISOString(),
-      customer: orderData
+      customer: orderData,
+      userEmail: orderData.email || null
     };
 
     orders.push(order);
@@ -549,19 +550,8 @@ function checkout() {
     return;
   }
 
-  // Simple checkout - create order and show success
-  const order = db.createOrder({
-    name: 'Клиент',
-    phone: '',
-    address: ''
-  });
-
-  if (order) {
-    updateCartCount();
-    renderCartItems();
-    closeCart();
-    showNotification('Заказ успешно оформлен!');
-  }
+  // Redirect to checkout page
+  window.location.href = 'checkout.html';
 }
 
 // Show notification
@@ -643,14 +633,40 @@ function sortProducts(sortBy, containerId = 'productsGrid') {
   renderProducts(containerId, products);
 }
 
+// Newsletter subscription handler
+function initNewsletterForm() {
+  const form = document.getElementById('newsletterForm');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = form.querySelector('input[type="email"]').value;
+      
+      // Save newsletter subscription
+      let subscribers = JSON.parse(localStorage.getItem('newsletter_subscribers') || '[]');
+      if (!subscribers.includes(email)) {
+        subscribers.push(email);
+        localStorage.setItem('newsletter_subscribers', JSON.stringify(subscribers));
+      }
+      
+      // Show success message
+      showNotification('Спасибо за подписку! Проверьте ваш email.');
+      form.reset();
+    });
+  }
+}
+
 // ===================================
 // INITIALIZE ON DOM READY
 // ===================================
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initApp);
+  document.addEventListener('DOMContentLoaded', () => {
+    initApp();
+    initNewsletterForm();
+  });
 } else {
   initApp();
+  initNewsletterForm();
 }
 
 // Export functions for global use

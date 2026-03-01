@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>О нас - PREMIUM STEAK HOUSE</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="index.html" class="logo">PREMIUM <span>STEAK HOUSE</span></a>
+    <nav class="menu">
+      <a href="catalog.html">Каталог</a>
+      <a href="about.html" class="active">О нас</a>
+      <a href="delivery.html">Доставка</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="#" class="cart-link" id="cartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+      </a>
+      <a href="account.html" class="cart-link">
+        <i class="fas fa-user-circle"></i>
+      </a>
+    </nav>
+    <!-- Mobile Controls (Cart + Menu) -->
+    <div class="mobile-controls">
+      <a href="#" class="mobile-cart-btn" id="mobileCartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="mobileCartCount">0</span>
+      </a>
+      <a href="account.html" class="mobile-cart-btn">
+        <i class="fas fa-user-circle"></i>
+      </a>
+      <div class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="catalog.html">Каталог</a>
+  <a href="about.html">О нас</a>
+  <a href="delivery.html">Доставка</a>
+  <a href="contacts.html">Контакты</a>
+</div>
+
+<!-- Hero Section -->
+<section class="page-header">
+  <div class="container">
+    <h1>О PREMIUM STEAK HOUSE</h1>
+    <p>12 лет служения вкусу и качеству</p>
+  </div>
+</section>
+
+<!-- Story Section -->
+<section class="about-story">
+  <div class="container">
+    <div class="story-content">
+      <div class="story-text">
+        <h2>Наша история</h2>
+        <p>Компания PREMIUM STEAK HOUSE началась в 2014 году с простой идеи: привнести подлинное качество премиум-мяса в дома гурманов. Что началось как небольшой проект трех друзей, выросло в лидирующую платформу по доставке экзотических стейков.</p>
+        <p>День за днем, мы совершенствуем наши процессы отбора и доставки, чтобы каждый клиент получал именно то, что он ожидает: мясо высочайшего качества, выдержанное по лучшим мировым технологиям.</p>
+        <p>Сегодня мы гордимся тем, что обслуживаем более 50 000 постоянных клиентов по всему Казахстану, и это число растет каждый день. Наша база находится в Астане.</p>
+      </div>
+      <div class="story-image">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop" alt="Наша история">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Values Section -->
+<section class="about-values">
+  <div class="container">
+    <h2>Наши ценности</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-gem"></i>
+        </div>
+        <h3>Качество выше всего</h3>
+        <p>Мы используем только говядину высшей категории с идеальной мраморностью. Каждый кусок проходит строгий отбор.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-leaf"></i>
+        </div>
+        <h3>Натуральность</h3>
+        <p>Без консервантов, красителей и добавок. Естественное откормленное мясо от проверенных ферм и хозяйств.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-handshake"></i>
+        </div>
+        <h3>Честность</h3>
+        <p>Открытые цены, прозрачные условия доставки и честное описание каждого продукта без вводящей в заблуждение информации.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-rocket"></i>
+        </div>
+        <h3>Инновация</h3>
+        <p>Постоянно совершенствуем технологии хранения и доставки, чтобы мясо прибывало в идеальном состоянии.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <h3>Служение клиентам</h3>
+        <p>Каждый клиент — наша гордость. Мы работаем 24/7, чтобы ответить на вопросы и решить любые проблемы.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-globe"></i>
+        </div>
+        <h3>Глобальный стандарт</h3>
+        <p>Следуем мировым стандартам качества и санитарии. Наши процессы аккредитованы международными сертификационными органами.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="about-team">
+  <div class="container">
+    <h2>Наша команда</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="member-image">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop" alt="Иван Петров">
+        </div>
+        <h3>Иван Петров</h3>
+        <p class="member-role">Основатель и CEO</p>
+        <p class="member-bio">Профессионал с 15-летним опытом в мясной индустрии. Изучал процессы сухой выдержки в Австралии и Аргентине.</p>
+      </div>
+      <div class="team-member">
+        <div class="member-image">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop" alt="Мария Сидорова">
+        </div>
+        <h3>Мария Сидорова</h3>
+        <p class="member-role">Шеф-специалист по качеству</p>
+        <p class="member-bio">Сертифицированный эксперт по мясной продукции. Гарантирует соответствие каждого продукта наивысшим стандартам.</p>
+      </div>
+      <div class="team-member">
+        <div class="member-image">
+          <img src="https://images.unsplash.com/photo-1507842721343-583f20270319?w=300&h=300&fit=crop" alt="Алексей Волков">
+        </div>
+        <h3>Алексей Волков</h3>
+        <p class="member-role">Директор по логистике</p>
+        <p class="member-bio">Опытный логист, курирует доставку по всему Казахстану. Обеспечивает сохранность продукта на каждом этапе пути от Астаны до края страны.</p>
+      </div>
+      <div class="team-member">
+        <div class="member-image">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop" alt="Екатерина Морозова">
+        </div>
+        <h3>Екатерина Морозова</h3>
+        <p class="member-role">Руководитель отдела клиентского сервиса</p>
+        <p class="member-bio">Создает исключительный опыт для каждого клиента. Известна своей внимательностью и решением любых вопросов.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="about-stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-number">12</div>
+        <div class="stat-label">Лет на рынке</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">50K+</div>
+        <div class="stat-label">Постоянных клиентов</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Доля повторных заказов</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">85</div>
+        <div class="stat-label">Городов доставки</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Certifications Section -->
+<section class="about-certifications">
+  <div class="container">
+    <h2>Наши сертификации и признания</h2>
+    <div class="certifications-list">
+      <div class="certification">
+        <i class="fas fa-certificate"></i>
+        <h4>ГОСТ 54392-2011</h4>
+        <p>Сертификация качества мяса и мясопродуктов</p>
+      </div>
+      <div class="certification">
+        <i class="fas fa-medal"></i>
+        <h4>ISO 9001:2015</h4>
+        <p>Система управления качеством</p>
+      </div>
+      <div class="certification">
+        <i class="fas fa-shield"></i>
+        <h4>HACCP</h4>
+        <p>Система анализа опасностей</p>
+      </div>
+      <div class="certification">
+        <i class="fas fa-check"></i>
+        <h4>Рейтинг 4.9/5.0</h4>
+        <p>На основе 50 000+ отзывов клиентов</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Partnership Section -->
+<section class="about-partnerships">
+  <div class="container">
+    <h2>Наши партнеры</h2>
+    <p class="partnerships-intro">Мы сотрудничаем с лучшими поставщиками из Казахстана, России и мира</p>
+    <div class="partnerships-grid">
+      <div class="partner">
+        <h4>Аргентинские фермы</h4>
+        <p>Поставляем лучшую мраморную говядину Angus и Herefore</p>
+      </div>
+      <div class="partner">
+        <h4>Австралийские хозяйства</h4>
+        <p>Экспортируем premium говядину Wagyu и Grass-Fed</p>
+      </div>
+      <div class="partner">
+        <h4>Российские производители</h4>
+        <p>Сотрудничаем с лучшими русскими фермами на основе договоров долгосрочного сотрудничества</p>
+      </div>
+      <div class="partner">
+        <h4>Логистические компании</h4>
+        <p>Работаем с транспортниками, обеспечивающими холодную цепь доставки</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="about-cta">
+  <div class="container">
+    <h2>Попробуйте наши стейки</h2>
+    <p>Присоединяйтесь к 50 000+ улыбающихся клиентов в Казахстане</p>
+    <div class="cta-buttons">
+      <a href="catalog.html" class="btn">Перейти в каталог</a>
+      <a href="contacts.html" class="btn btn-outline">Связаться с нами</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>PREMIUM STEAK HOUSE</h4>
+        <p>Отборная мраморная говядина с доставкой по всему Казахстану. Астана - наша главная база.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Навигация</h4>
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html">О нас</a>
+        <a href="delivery.html">Доставка</a>
+        <a href="contacts.html">Контакты</a>
+      </div>
+      <div class="footer-section">
+        <h4>Служба поддержки</h4>
+        <a href="contacts.html">Контакты</a>
+        <a href="#">FAQ</a>
+        <a href="#">Условия использования</a>
+      </div>
+      <div class="footer-section">
+        <h4>Контакты</h4>
+        <p>Телефон: <a href="tel:+77172730067">+7 (717) 273-00-67</a></p>
+        <p>Email: <a href="mailto:info@steakhouse.kz">info@steakhouse.kz</a></p>
+        <p>Астана, Казахстан</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 PREMIUM STEAK HOUSE. Все права защищены. | Астана, Казахстан</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Cart Modal Container -->
+<div id="cart-modal-container"></div>
+
+<!-- Notification Container -->
+<div id="notification-container"></div>
+
+<script src="components.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

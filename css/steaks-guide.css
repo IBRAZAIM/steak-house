@@ -1,0 +1,535 @@
+/* ===================================
+   PREMIUM STEAK HOUSE - STEAKS GUIDE PAGE
+   =================================== */
+
+/* ===================================
+   PAGE HEADER
+   =================================== */
+
+.page-header {
+  padding: 160px 0 80px;
+  background: var(--dark-charcoal);
+  text-align: center;
+}
+
+.page-header h1 {
+  font-family: var(--font-heading);
+  font-size: 52px;
+  margin-bottom: 20px;
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+.page-header .page-subtitle {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.breadcrumb a {
+  color: var(--primary-gold);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.breadcrumb a:hover {
+  color: var(--primary-gold-light);
+  text-decoration: underline;
+}
+
+.breadcrumb span {
+  color: var(--text-muted);
+}
+
+/* ===================================
+   STEAKS GUIDE SECTION
+   =================================== */
+
+.steaks-guide {
+  padding: 80px 0;
+  background: var(--cream);
+}
+
+.guide-intro {
+  max-width: 800px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.guide-intro p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--medium-gray);
+}
+
+/* Cut Diagram */
+.cut-diagram {
+  text-align: center;
+  padding: 60px 40px;
+  background: white;
+  margin-bottom: 80px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+}
+
+.cut-diagram h2 {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  margin-bottom: 15px;
+  color: var(--text-dark);
+}
+
+.cut-diagram > p {
+  color: var(--medium-gray);
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.cow-sections img {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+}
+
+/* Steaks Grid */
+.steaks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 40px;
+  margin-bottom: 80px;
+}
+
+/* Steak Card */
+.steak-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-medium);
+  transition: var(--transition-smooth);
+}
+
+.steak-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-strong);
+}
+
+.steak-image {
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+}
+
+.steak-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+
+.steak-card:hover .steak-image img {
+  transform: scale(1.08);
+}
+
+.steak-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: var(--primary-gold);
+  color: var(--dark-charcoal);
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.steak-badge.premium {
+  background: linear-gradient(135deg, #c5a66d 0%, #e0c192 100%);
+}
+
+.steak-content {
+  padding: 30px;
+  position: relative;
+}
+
+.steak-content h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.steak-part {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  color: var(--medium-gray);
+}
+
+.steak-part i {
+  color: var(--primary-gold);
+}
+
+.steak-part strong {
+  color: var(--text-dark);
+}
+
+.steak-desc {
+  color: var(--medium-gray);
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+/* Steak Details */
+.steak-details {
+  margin-bottom: 22px;
+  padding: 20px;
+  background: var(--off-white);
+  border-radius: 8px;
+}
+
+.detail-item {
+  margin-bottom: 14px;
+}
+
+.detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--medium-gray);
+  margin-bottom: 8px;
+}
+
+.detail-bar {
+  height: 8px;
+  background: var(--dark-gray);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.detail-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+/* Steak Cooking */
+.steak-cooking {
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.steak-cooking h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.steak-cooking h4 i {
+  color: var(--primary-gold);
+}
+
+.cooking-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cooking-options span {
+  padding: 6px 14px;
+  background: var(--dark-charcoal);
+  color: var(--primary-gold);
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 20px;
+}
+
+/* ===================================
+   COOKING GUIDE
+   =================================== */
+
+.cooking-guide {
+  margin-bottom: 80px;
+}
+
+.cooking-guide h2 {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  text-align: center;
+  margin-bottom: 50px;
+  color: var(--text-dark);
+}
+
+.doneness-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+}
+
+.doneness-card {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+}
+
+.doneness-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.doneness-visual {
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.doneness-visual.rare {
+  background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+}
+
+.doneness-visual.medium-rare {
+  background: linear-gradient(135deg, #ff6666 0%, #cc3333 100%);
+}
+
+.doneness-visual.medium {
+  background: linear-gradient(135deg, #ff9966 0%, #cc6633 100%);
+}
+
+.doneness-visual.medium-well {
+  background: linear-gradient(135deg, #ffcccc 0%, #cc9999 100%);
+}
+
+.doneness-visual.well-done {
+  background: linear-gradient(135deg, #eeeeee 0%, #cccccc 100%);
+}
+
+.doneness-visual span {
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.doneness-visual.well-done span {
+  color: #666;
+}
+
+.doneness-card h4 {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: var(--text-dark);
+}
+
+.doneness-card p {
+  font-size: 13px;
+  color: var(--medium-gray);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.doneness-time {
+  display: inline-block;
+  padding: 5px 12px;
+  background: var(--primary-gold);
+  color: var(--dark-charcoal);
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 20px;
+}
+
+/* ===================================
+   TIPS SECTION
+   =================================== */
+
+.tips-section {
+  margin-bottom: 80px;
+}
+
+.tips-section h2 {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  text-align: center;
+  margin-bottom: 50px;
+  color: var(--text-dark);
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.tip-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+}
+
+.tip-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.tip-card i {
+  font-size: 32px;
+  color: var(--primary-gold);
+  margin-bottom: 18px;
+}
+
+.tip-card h4 {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: var(--text-dark);
+}
+
+.tip-card p {
+  font-size: 14px;
+  color: var(--medium-gray);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ===================================
+   GUIDE CTA
+   =================================== */
+
+.guide-cta {
+  text-align: center;
+  padding: 60px;
+  background: linear-gradient(135deg, var(--dark-charcoal) 0%, var(--darker-charcoal) 100%);
+  border-radius: 16px;
+}
+
+.guide-cta h3 {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  margin-bottom: 15px;
+  color: var(--text-light);
+}
+
+.guide-cta p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 30px;
+}
+
+/* ===================================
+   RESPONSIVE STEAKS GUIDE PAGE
+   =================================== */
+
+@media (max-width: 992px) {
+  .steaks-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+  }
+
+  .cut-diagram {
+    padding: 40px 25px;
+  }
+
+  .cut-diagram h2,
+  .cooking-guide h2,
+  .tips-section h2 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: 38px;
+  }
+
+  .page-header .page-subtitle {
+    font-size: 16px;
+  }
+
+  .steaks-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .steak-image {
+    height: 200px;
+  }
+
+  .steak-content {
+    padding: 25px 20px;
+  }
+
+  .steak-content h3 {
+    font-size: 20px;
+  }
+
+  .cut-diagram h2,
+  .cooking-guide h2,
+  .tips-section h2 {
+    font-size: 28px;
+    margin-bottom: 35px;
+  }
+
+  .doneness-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .doneness-card {
+    padding: 20px 15px;
+  }
+
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-cta {
+    padding: 40px 25px;
+  }
+
+  .guide-cta h3 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .doneness-grid {
+    grid-template-columns: 1fr;
+  }
+}

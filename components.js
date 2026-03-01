@@ -12,8 +12,8 @@ const headerComponent = (showAdminLink = false) => `
   <div class="container nav">
     <a href="index.html" class="logo">PREMIUM <span>STEAK HOUSE</span></a>
     <nav class="menu">
-<a href="catalog.html">Каталог</a>
-      <a href="steaks-guide.html">Гид по стейкам</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="about.html">О нас</a>
       <a href="delivery.html">Доставка</a>
       <a href="contacts.html">Контакты</a>
       ${showAdminLink ? `
@@ -21,8 +21,8 @@ const headerComponent = (showAdminLink = false) => `
         <i class="fas fa-cog"></i>
       </a>
       ` : ''}
-      <a href="#" class="user-link" id="userBtn" title="Личный кабинет">
-        <i class="fas fa-user"></i>
+      <a href="account.html" class="cart-link" title="Личный кабинет">
+        <i class="fas fa-user-circle"></i>
       </a>
       <a href="#" class="cart-link" id="cartBtn">
         <i class="fas fa-shopping-cart"></i>
@@ -32,6 +32,9 @@ const headerComponent = (showAdminLink = false) => `
     
     <!-- Mobile Controls (Cart + Menu) -->
     <div class="mobile-controls">
+      <a href="account.html" class="mobile-cart-btn" title="Личный кабинет">
+        <i class="fas fa-user-circle"></i>
+      </a>
       <a href="#" class="mobile-cart-btn" id="mobileCartBtn">
         <i class="fas fa-shopping-cart"></i>
         <span class="cart-count" id="mobileCartCount">0</span>
@@ -57,10 +60,10 @@ const mobileMenuComponent = `
     </button>
   </div>
   <a href="catalog.html">Каталог</a>
-  <a href="steaks-guide.html">Гид по стейкам</a>
   <a href="about.html">О нас</a>
   <a href="delivery.html">Доставка</a>
   <a href="contacts.html">Контакты</a>
+  <a href="account.html">Мой аккаунт</a>
   
   <div class="mobile-menu-footer" style="margin-top: auto; padding: 20px 30px; border-top: 1px solid rgba(255,255,255,0.1);">
     <div class="social-links" style="justify-content: flex-start; margin-bottom: 15px;">
@@ -89,6 +92,7 @@ const footerComponent = `
       <div class="footer-section">
         <h4>Навигация</h4>
         <a href="catalog.html">Каталог</a>
+        <a href="about.html">О нас</a>
         <a href="delivery.html">Доставка</a>
         <a href="contacts.html">Контакты</a>
       </div>

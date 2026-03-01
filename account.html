@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Каталог - PREMIUM STEAK HOUSE</title>
+  <title>Мой аккаунт - PREMIUM STEAK HOUSE</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +24,7 @@
         <i class="fas fa-shopping-cart"></i>
         <span class="cart-count" id="cartCount">0</span>
       </a>
-      <a href="account.html" class="cart-link">
+      <a href="account.html" class="cart-link active">
         <i class="fas fa-user-circle"></i>
       </a>
     </nav>
@@ -55,36 +56,15 @@
 
 <section class="page-header">
   <div class="container">
-    <h1>Каталог стейков</h1>
-    <p>Отборная мраморная говядина высшего качества</p>
+    <h1>Мой аккаунт</h1>
+    <p>Управление профилем и заказами</p>
   </div>
 </section>
 
-<section class="filters">
+<section class="account-section">
   <div class="container">
-    <div class="filters-content">
-      <div class="filter-group">
-        <button class="filter-btn active" onclick="filterProducts('all')">Все</button>
-        <button class="filter-btn" onclick="filterProducts('ribeye')">Ribeye</button>
-        <button class="filter-btn" onclick="filterProducts('striploin')">Striploin</button>
-        <button class="filter-btn" onclick="filterProducts('tbone')">T-Bone</button>
-        <button class="filter-btn" onclick="filterProducts('filet')">Filet</button>
-        <button class="filter-btn" onclick="filterProducts('tomahawk')">Tomahawk</button>
-      </div>
-      <select class="sort-select" onchange="sortProducts(this.value)">
-        <option value="all">Сортировка</option>
-        <option value="price-asc">Цена: по возрастанию</option>
-        <option value="price-desc">Цена: по убыванию</option>
-        <option value="name">По названию</option>
-      </select>
-    </div>
-  </div>
-</section>
-
-<section class="products">
-  <div class="container">
-    <div class="products-grid" id="productsGrid">
-      <!-- Products loaded from database -->
+    <div class="account-container" id="accountContainer">
+      <!-- Will be filled with components.js -->
     </div>
   </div>
 </section>
@@ -104,54 +84,32 @@
         <a href="contacts.html">Контакты</a>
       </div>
       <div class="footer-section">
+        <h4>Служба поддержки</h4>
+        <a href="contacts.html">Контакты</a>
+        <a href="#">FAQ</a>
+        <a href="#">Условия использования</a>
+      </div>
+      <div class="footer-section">
         <h4>Контакты</h4>
         <p><i class="fas fa-phone"></i> <a href="tel:+77172730067">+7 (717) 273-00-67</a></p>
         <p><i class="fas fa-envelope"></i> <a href="mailto:info@steakhouse.kz">info@steakhouse.kz</a></p>
         <p><i class="fas fa-map-marker-alt"></i> Астана, Казахстан</p>
       </div>
-      <div class="footer-section">
-        <h4>Соцсети</h4>
-        <div class="social-links">
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-telegram"></i></a>
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 PREMIUM STEAK HOUSE. Все права защищены.</p>
+      <p>© 2026 PREMIUM STEAK HOUSE. Все права защищены. | Астана, Казахстан</p>
     </div>
   </div>
 </footer>
 
-<!-- Cart Modal -->
-<div class="cart-modal" id="cartModal">
-  <div class="cart-overlay" id="cartOverlay"></div>
-  <div class="cart-sidebar">
-    <div class="cart-header">
-      <h3>Корзина</h3>
-      <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="cart-items" id="cartItems">
-      <!-- Cart items loaded from database -->
-    </div>
-    <div class="cart-footer">
-      <div class="cart-total">
-        <span>Итого:</span>
-        <span id="cartTotal">0 ₽</span>
-      </div>
-      <button class="btn checkout-btn" id="checkoutBtn">Оформить заказ</button>
-      <button class="btn-clear" id="clearCart">Очистить корзину</button>
-    </div>
-  </div>
-</div>
+<!-- Cart Modal Container -->
+<div id="cart-modal-container"></div>
 
-<!-- Notification -->
-<div class="notification" id="notification">
-  <i class="fas fa-check-circle"></i>
-  <span id="notificationText">Товар добавлен в корзину</span>
-</div>
+<!-- Notification Container -->
+<div id="notification-container"></div>
 
+<script src="components.js"></script>
 <script src="app.js"></script>
+<script src="account.js"></script>
 </body>
 </html>
