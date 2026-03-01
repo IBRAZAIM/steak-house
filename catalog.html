@@ -24,11 +24,21 @@
         <span class="cart-count" id="cartCount">0</span>
       </a>
     </nav>
-    <div class="mobile-menu-btn" id="mobileMenuBtn">
-      <i class="fas fa-bars"></i>
+    <!-- Mobile Controls (Cart + Menu) -->
+    <div class="mobile-controls">
+      <a href="#" class="mobile-cart-btn" id="mobileCartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="mobileCartCount">0</span>
+      </a>
+      <div class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </div>
     </div>
   </div>
 </header>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
 <div class="mobile-menu" id="mobileMenu">
   <a href="catalog.html">Каталог</a>

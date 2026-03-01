@@ -585,7 +585,8 @@ function headerScroll() {
 }
 
 // Mobile menu toggle
-function toggleMobileMenu() {
+function toggleMobileMenu(e) {
+  if (e) e.preventDefault();
   if (mobileMenu.classList.contains('open')) {
     closeMobileMenu();
   } else {
@@ -604,6 +605,11 @@ function closeMobileMenu() {
   if (mobileMenuOverlay) mobileMenuOverlay.classList.remove('open');
   document.body.style.overflow = '';
 }
+
+// Export mobile menu functions for global use
+window.toggleMobileMenu = toggleMobileMenu;
+window.openMobileMenu = openMobileMenu;
+window.closeMobileMenu = closeMobileMenu;
 
 // Filter products
 function filterProducts(category, containerId = 'productsGrid') {

@@ -130,11 +130,30 @@ header .container {
   top: 90px;
   left: 0;
   width: 100%;
+  max-width: 400px;
+  height: calc(100vh - 90px);
   background: var(--dark-charcoal);
   padding: 30px;
   flex-direction: column;
   gap: 20px;
   box-shadow: var(--shadow-strong);
+  z-index: 1001;
+  overflow-y: auto;
+}
+
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  top: 90px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 90px);
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.mobile-menu-overlay.open {
+  display: block;
 }
 
 .mobile-menu a {
