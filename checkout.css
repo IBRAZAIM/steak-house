@@ -374,20 +374,6 @@
   transform: translateY(-3px);
 }
 
-/* Error state for delivery and payment options */
-.delivery-option.error .option-content,
-.payment-option.error .option-content {
-  border-color: #e74c3c;
-  background: linear-gradient(135deg, rgba(231, 76, 60, 0.08) 0%, rgba(231, 76, 60, 0.04) 100%);
-  box-shadow: 0 4px 16px rgba(231, 76, 60, 0.15);
-}
-
-.delivery-option.error .option-icon,
-.payment-option.error .option-icon {
-  background: linear-gradient(135deg, rgba(231, 76, 60, 0.2) 0%, rgba(231, 76, 60, 0.15) 100%);
-  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
-}
-
 .option-icon {
   width: 56px;
   height: 56px;

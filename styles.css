@@ -184,14 +184,28 @@ header .container {
 .mobile-controls {
   display: none; /* Hidden on desktop */
   align-items: center;
-  gap: 20px;
+  gap: 12px;
 }
 
 .mobile-cart-btn {
   position: relative;
   font-size: 20px;
   color: var(--text-light);
-  transition: var(--transition-smooth);
+  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
+
+.mobile-cart-btn:active {
+  background: rgba(201, 169, 97, 0.15);
+  color: var(--primary-gold);
 }
 
 .mobile-cart-btn:hover {
@@ -212,6 +226,19 @@ header .container {
   font-size: 24px;
   cursor: pointer;
   color: var(--text-light);
+  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.mobile-menu-btn:active {
+  background: rgba(201, 169, 97, 0.1);
+}
+
+/* Hide first menu button when mobile-controls is active */
+.mobile-controls ~ header .menu .mobile-menu-btn,
+header .menu .mobile-menu-btn {
+  display: none;
 }
 
 .mobile-menu {
@@ -1381,12 +1408,20 @@ footer {
 .form-group textarea,
 .form-group select {
   width: 100%;
-  padding: 15px 20px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 2px;
+  padding: 15px 18px;
+  border: 2px solid rgba(201, 169, 97, 0.2);
+  border-radius: 6px;
   font-size: 14px;
-  transition: var(--transition-smooth);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: var(--font-body);
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--dark-charcoal);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder,
+.form-group select::placeholder {
+  color: var(--text-muted);
 }
 
 .form-group input:focus,
@@ -1394,6 +1429,9 @@ footer {
 .form-group select:focus {
   outline: none;
   border-color: var(--primary-gold);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1);
+  transform: translateY(-2px);
 }
 
 /* ===================================
@@ -1695,12 +1733,14 @@ footer {
     display: none;
   }
   
-  .mobile-menu-btn {
+  .mobile-controls .mobile-menu-btn {
     display: block;
   }
   
   .mobile-controls {
     display: flex;
+    gap: 8px;
+    align-items: center;
   }
   
   .mobile-menu.open {
@@ -1817,6 +1857,21 @@ footer {
   .filter-group {
     justify-content: center;
   }
+
+  /* Form improvements for tablets */
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 14px 16px;
+    font-size: 15px;
+    min-height: 44px;
+    border-radius: 6px;
+  }
+
+  .btn {
+    min-height: 44px;
+    padding: 12px 28px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1875,6 +1930,41 @@ footer {
   
   .contact-icon {
     margin: 0 auto;
+  }
+
+  /* Mobile form improvements */
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 16px 14px;
+    font-size: 16px;
+    min-height: 48px;
+    border-radius: 8px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .form-group label {
+    margin-bottom: 12px;
+    font-size: 12px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  /* Touch-friendly button sizing */
+  .btn {
+    min-height: 48px;
+    padding: 14px 24px;
+    font-size: 12px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn-small {
+    min-height: 44px;
+    padding: 12px 16px;
   }
 }
 
@@ -4722,11 +4812,11 @@ html {
   background: #1a1a1a;
   border: 1px solid rgba(201, 169, 97, 0.3);
   border-radius: 6px;
-  color: #f5f5f5;
+  color: #000;
   font-family: var(--font-body);
   font-size: 14px;
   transition: var(--transition-smooth);
-  -webkit-text-fill-color: #f5f5f5;
+  -webkit-text-fill-color: #000;
 }
 
 .form-group input:hover,
@@ -4743,9 +4833,9 @@ html {
   outline: none;
   border-color: var(--primary-gold);
   background: #1a1a1a;
-  color: #f5f5f5;
+  color: #000;
   box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
-  -webkit-text-fill-color: #f5f5f5;
+  -webkit-text-fill-color: #000;
 }
 
 .form-group input::placeholder,

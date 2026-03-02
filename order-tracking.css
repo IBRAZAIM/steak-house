@@ -522,31 +522,43 @@
 }
 
 .track-more-card input {
-  padding: 12px 16px;
-  background: #0f0f0f;
-  border: 1px solid rgba(201, 169, 97, 0.3);
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(201, 169, 97, 0.2);
   border-radius: 6px;
   color: #f5f5f5;
   font-size: 14px;
-  transition: var(--transition-smooth);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: var(--font-body);
+}\n\n.track-more-card input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .track-more-card input:hover {
   border-color: var(--primary-gold);
-}
-
-.track-more-card input:focus {
+  background: rgba(255, 255, 255, 0.08);
+}\n\n.track-more-card input:focus {
   outline: none;
   border-color: var(--primary-gold);
-  box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.15);
+  transform: translateY(-2px);
+}
+.track-more-card .btn-small {
+  padding: 14px 20px;  
+  font-weight: 600;
+   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 12px;
 }
 
-.track-more-card input::placeholder {
-  color: #999;
-}
-
+.track-more-card .btn-small:hover {
+    transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(201, 169, 97, 0.3);
+    }
 .full-width {
-  width: 100%;
+        width: 100%;
 }
 
 /* ===================================
@@ -640,5 +652,52 @@
 
   .order-actions .btn {
     width: 100%;
+  }
+
+  /* Mobile improvements for sidebar */
+  .tracking-sidebar {
+    gap: 16px;
+    margin-top: 30px;
+  }
+
+  .delivery-card,
+  .support-card,
+  .courier-card,
+  .track-more-card {
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .delivery-card h3,
+  .support-card h3,
+  .courier-card h3,
+  .track-more-card h3 {
+    font-size: 15px;
+    margin-bottom: 15px;
+  }
+
+  .track-more-card form {
+    gap: 10px;
+  }
+
+  .track-more-card input {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+
+  .track-more-card .btn-small {
+    padding: 12px 16px;
+    font-size: 11px;
+  }
+
+  .support-btn {
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+
+  .delivery-estimate {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
   }
 }

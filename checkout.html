@@ -29,9 +29,6 @@
         <i class="fas fa-user-circle"></i>
       </a>
     </nav>
-    <div class="mobile-menu-btn" id="mobileMenuBtn">
-      <i class="fas fa-bars"></i>
-    </div>
     <div class="mobile-controls">
       <a href="#" class="mobile-cart-btn" id="mobileCartBtn">
         <i class="fas fa-shopping-cart"></i>
@@ -70,6 +67,7 @@
 
 <!-- Progress Steps -->
 <section class="checkout-progress">
+  <div class="progress-bar-fill" id="progressBar"></div>
   <div class="container">
     <div class="progress-steps">
       <div class="step active">
@@ -183,7 +181,7 @@
               </label>
 
               <label class="delivery-option">
-                <input type="radio" name="deliveryMethod" value="standard" />
+                <input type="radio" name="deliveryMethod" value="standard" required />
                 <div class="option-content">
                   <div class="option-icon">
                     <i class="fas fa-truck"></i>
@@ -197,7 +195,7 @@
               </label>
 
               <label class="delivery-option">
-                <input type="radio" name="deliveryMethod" value="pickup" />
+                <input type="radio" name="deliveryMethod" value="pickup" required />
                 <div class="option-content">
                   <div class="option-icon">
                     <i class="fas fa-store"></i>
@@ -240,7 +238,7 @@
               </label>
 
               <label class="payment-option">
-                <input type="radio" name="paymentMethod" value="kaspi" />
+                <input type="radio" name="paymentMethod" value="kaspi" required />
                 <div class="option-content">
                   <div class="option-icon">
                     <i class="fas fa-mobile-alt"></i>
@@ -253,7 +251,7 @@
               </label>
 
               <label class="payment-option">
-                <input type="radio" name="paymentMethod" value="cash" />
+                <input type="radio" name="paymentMethod" value="cash" required />
                 <div class="option-content">
                   <div class="option-icon">
                     <i class="fas fa-money-bill-wave"></i>
@@ -352,7 +350,7 @@
             </div>
             <div class="summary-row total">
               <span>Итого:</span>
-              <span id="cartTotal">0 ₸</span>
+              <span id="summaryTotal">0 ₸</span>
             </div>
           </div>
 
@@ -468,28 +466,58 @@
 
   function validateStep(step) {
     const form = document.getElementById('checkoutForm');
-    const inputs = form.querySelectorAll(`#step${step} input[required], #step${step} select[required], #step${step} textarea[required]`);
+    const stepElement = document.getElementById(`step${step}`);
+    const inputs = stepElement.querySelectorAll('[required]');
     let valid = true;
+    let firstInvalid = null;
+
     inputs.forEach(input => {
-      if (!input.checkValidity()) {
-        input.classList.add('error');
-        valid = false;
-      } else {
-        input.classList.remove('error');
+      const group = input.closest('.form-group');
+      // For radio/checkbox inputs in delivery-option or payment-option, we check if at least one is selected
+      if (input.type === 'radio' || input.type === 'checkbox') {
+        const fieldName = input.name;
+        const isChecked = form.querySelector(`[name="${fieldName}"]:checked`);
+        if (!isChecked) {
+          // Highlight the parent container
+          const parentLabel = input.closest('label');
+          if (parentLabel) parentLabel.classList.add('error');
+          valid = false;
+          if (!firstInvalid) firstInvalid = input;
+        } else {
+          const parentLabel = input.closest('label');
+          if (parentLabel) parentLabel.classList.remove('error');
+        }
+      } else if (group) {
+        if (!input.checkValidity()) {
+          group.classList.add('error');
+          valid = false;
+          if (!firstInvalid) firstInvalid = input;
+        } else {
+          group.classList.remove('error');
+        }
       }
     });
-    if (!valid) alert('Пожалуйста заполните все обязательные поля');
+
+    if (!valid && firstInvalid) {
+      firstInvalid.focus();
+    }
+
     return valid;
   }
 
-  function updateSteps() {
-    document.querySelectorAll('.form-step').forEach((step, idx) => {
-      step.classList.toggle('active', idx + 1 === currentStep);
-    });
-    document.querySelectorAll('.progress-steps .step').forEach((step, idx) => {
-      step.classList.toggle('active', idx + 1 <= currentStep);
-    });
-  }
+function updateSteps() {
+  document.querySelectorAll('.form-step').forEach((step, idx) => {
+    step.classList.toggle('active', idx + 1 === currentStep);
+  });
+
+  document.querySelectorAll('.progress-steps .step').forEach((step, idx) => {
+    step.classList.toggle('active', idx + 1 <= currentStep);
+    step.classList.toggle('completed', idx + 1 < currentStep);
+  });
+
+  const percent = (currentStep / totalSteps) * 100;
+  document.getElementById('progressBar').style.width = percent + '%';
+}
 
   function updateSummary() {
     const form = document.getElementById('checkoutForm');
@@ -555,29 +583,42 @@
     window.location.href = `order-tracking.html?order=${newOrder.id}`;
   });
 
-  // Listen for delivery method changes to update shipping cost
-  document.addEventListener('DOMContentLoaded', function() {
+  // Listen for delivery method changes to update shipping cost and summary
+  function setupDeliveryListener() {
     const deliveryRadios = document.querySelectorAll('input[name="deliveryMethod"]');
     const shippingLabels = {
-      'express': '2,000',
-      'standard': 'Бесплатно',
-      'pickup': 'Бесплатно'
+      'express': 2000,
+      'standard': 0,
+      'pickup': 0
     };
     
     deliveryRadios.forEach(radio => {
       radio.addEventListener('change', function() {
-        // Update displayed shipping cost
+        // Update displayed shipping cost in options
         const option = this.closest('.delivery-option');
         if (option) {
           const priceSpan = option.querySelector('.option-price');
-          if (priceSpan && shippingLabels[this.value]) {
+          if (priceSpan) {
             priceSpan.textContent = this.value === 'express' ? '2,000 ₸' : 'Бесплатно';
           }
         }
+        
+        // Update right sidebar with new shipping cost
+        const shippingCost = shippingLabels[this.value];
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const newTotal = subtotal + shippingCost;
+        
+        document.getElementById('cartShipping').textContent = shippingCost.toLocaleString('ru-RU') + ' ₸';
+        document.getElementById('summaryTotal').textContent = newTotal.toLocaleString('ru-RU') + ' ₸';
+        document.getElementById('cartTotal').textContent = newTotal.toLocaleString('ru-RU') + ' ₸';
+        
         updateSummary();
       });
     });
-  });
+  }
+  
+  document.addEventListener('DOMContentLoaded', setupDeliveryListener);
 
   function calculateTotal() {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -627,6 +668,7 @@
 
     document.getElementById('cartSubtotal').textContent = subtotal.toLocaleString('ru-RU') + ' ₸';
     document.getElementById('cartShipping').textContent = shippingCost.toLocaleString('ru-RU') + ' ₸';
+    document.getElementById('summaryTotal').textContent = total.toLocaleString('ru-RU') + ' ₸';
     document.getElementById('cartTotal').textContent = total.toLocaleString('ru-RU') + ' ₸';
 
     // Set initial form values from localStorage if user is logged in
