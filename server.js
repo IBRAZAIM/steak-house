@@ -3,6 +3,7 @@
 // Node.js + Express + MongoDB
 // ===================================
 
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -407,8 +408,3 @@ mongoose.connect(MONGODB_URI)
   });
 
 module.exports = app;
-
-
-import { neon } from '@netlify/neon';
-const sql = neon(); // automatically uses env NETLIFY_DATABASE_URL
-const [post] = await sql`SELECT * FROM posts WHERE id = ${postId}`;
