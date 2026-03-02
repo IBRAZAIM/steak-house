@@ -4823,7 +4823,6 @@ html {
 .form-group select:hover,
 .form-group textarea:hover {
   border-color: var(--primary-gold);
-  background: #1a1a1a;
   color: #f5f5f5;
 }
 

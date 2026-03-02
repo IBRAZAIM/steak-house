@@ -139,9 +139,9 @@ class AccountManager {
                 </div>
               </div>
               <div class="stat">
-                <i class="fas fa-ruble-sign"></i>
+                <i class="fas fa-tenge-sign"></i>
                 <div class="stat-info">
-                  <span class="stat-number">${totalSpent.toLocaleString('ru-RU')}</span>
+                  <span class="stat-number">${totalSpent.toLocaleString('kz-KZ')}</span>
                   <span class="stat-label">Потрачено</span>
                 </div>
               </div>
