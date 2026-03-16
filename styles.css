@@ -52,7 +52,7 @@ body {
   line-height: 1.7;
   overflow-x: hidden;
   font-weight: 400;
-  padding-top: 100px;
+  padding-top: 90px;
 }
 
 a {
@@ -200,7 +200,7 @@ header .container {
   align-items: center;
   justify-content: center;
   -webkit-touch-callout: none;
-  -webkit-user-select: none;
+  user-select: none;
 }
 
 .mobile-cart-btn:active {
