@@ -1,9 +1,11 @@
-# TODO - Fix Input Fields and Reviews
+# TODO: Убрать белую полоску под навбаром
 
-## In Progress
-- [ ] 1. Fix input fields in authorization (account.css)
-- [ ] 2. Fix input fields in checkout (checkout.css)
-- [ ] 3. Fix testimonials/reviews section (home.css)
+## ✅ План (site-wide):
+- [x] 1. layout.css: убрать `border-bottom` с header
+- [ ] 2. base.css: `body { padding-top: 90px; }`
+- [ ] 3. styles.css: `body { padding-top: 90px; }`
+- [ ] 4. Проверить index.html/checkout.html в браузере
 
-## Completed
-- [ ] None yet
+## Тестирование:
+- Обновить live server
+- Проверить все страницы
