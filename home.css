@@ -14,6 +14,8 @@
   align-items: center;
   background: var(--dark-charcoal);
   overflow: hidden;
+  visibility: visible;
+  opacity: 1;
 }
 
 .hero::before {
@@ -89,6 +91,9 @@
 .features {
   padding: 140px 0;
   background: var(--cream);
+  visibility: visible;
+  opacity: 1;
+  display: block;
 }
 
 .features-grid {
@@ -178,6 +183,9 @@
 .products {
   padding: 140px 0;
   background: var(--dark-charcoal);
+  visibility: visible;
+  opacity: 1;
+  display: block;
 }
 
 .products .section-title {
@@ -303,6 +311,9 @@
 .about-preview {
   padding: 150px 0;
   background: var(--cream);
+  visibility: visible;
+  opacity: 1;
+  display: block;
 }
 
 .about-content {
@@ -380,6 +391,9 @@
   color: white;
   position: relative;
   overflow: hidden;
+  visibility: visible;
+  opacity: 1;
+  display: block;
 }
 
 .cta::before {
@@ -413,7 +427,7 @@
 }
 
 /* STEAKS GUIDE PREVIEW */
-.steaks-guide-preview { padding: 140px 0; background: var(--cream); }
+.steaks-guide-preview { padding: 140px 0; background: var(--cream); visibility: visible; opacity: 1; display: block; }
 .guide-preview-content { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
 .guide-preview-text .guide-subtitle { display: inline-block; font-size: 12px; text-transform: uppercase; letter-spacing: 4px; color: var(--primary-gold); margin-bottom: 20px; font-weight: 500; }
 .guide-preview-text h2 { font-family: var(--font-heading); font-size: 42px; margin-bottom: 25px; font-weight: 400; color: var(--dark-charcoal); line-height: 1.2; }

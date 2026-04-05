@@ -48,11 +48,19 @@ html {
 body {
   font-family: var(--font-body);
   background-color: var(--cream);
+  visibility: visible;
+  opacity: 1;
   color: var(--text-dark);
   line-height: 1.7;
   overflow-x: hidden;
   font-weight: 400;
   padding-top: 90px;
+}
+
+/* Ensure all sections are visible on load */
+section {
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 a {
@@ -567,6 +575,8 @@ header .menu .mobile-menu-btn {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
+  visibility: visible;
+  opacity: 1;
 }
 
 .product-card {
@@ -2471,9 +2481,7 @@ footer {
   margin-bottom: 10px;
 }
 
-.product-image .image-error span {
-  font-size: 12px;
-}
+.product-image .image-error span {\n  font-size: 12px;\n}\n\n/* Image fallback for broken images */\n.image-fallback {\n  opacity: 0.7;\n  filter: grayscale(30%) brightness(1.1);\n  border: 2px solid var(--primary-gold);\n  object-fit: cover;\n}
 
 /* ===================================
    FOCUS STATES FOR ACCESSIBILITY
@@ -2658,23 +2666,23 @@ select:focus-visible {
 
 /* Staggered animations for product grid */
 .product-card {
-  opacity: 0;
+  opacity: 1;
   animation: fadeInUp 0.5s ease forwards;
 }
 
-.product-card:nth-child(1) { animation-delay: 0.1s; }
-.product-card:nth-child(2) { animation-delay: 0.2s; }
-.product-card:nth-child(3) { animation-delay: 0.3s; }
-.product-card:nth-child(4) { animation-delay: 0.4s; }
-.product-card:nth-child(5) { animation-delay: 0.5s; }
-.product-card:nth-child(6) { animation-delay: 0.6s; }
-.product-card:nth-child(7) { animation-delay: 0.7s; }
-.product-card:nth-child(8) { animation-delay: 0.8s; }
+.product-card:nth-child(1) { animation-delay: 0.05s; }
+.product-card:nth-child(2) { animation-delay: 0.1s; }
+.product-card:nth-child(3) { animation-delay: 0.15s; }
+.product-card:nth-child(4) { animation-delay: 0.2s; }
+.product-card:nth-child(5) { animation-delay: 0.25s; }
+.product-card:nth-child(6) { animation-delay: 0.3s; }
+.product-card:nth-child(7) { animation-delay: 0.35s; }
+.product-card:nth-child(8) { animation-delay: 0.4s; }
 
 @keyframes fadeInUp {
   from {
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 1;
+    transform: translateY(0);
   }
   to {
     opacity: 1;
@@ -4303,6 +4311,9 @@ html {
 .testimonials {
   padding: 80px 0;
   background: white;
+  visibility: visible;
+  opacity: 1;
+  display: block;
 }
 
 .testimonials .section-title {
@@ -4359,6 +4370,9 @@ html {
   padding: 80px 0;
   background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(15, 15, 15, 1));
   color: white;
+  visibility: visible;
+  opacity: 1;
+  display: block;
 }
 
 .loyalty-content {
@@ -4423,6 +4437,9 @@ html {
 .limited-edition {
   padding: 80px 0;
   background: white;
+  visibility: visible;
+  opacity: 1;
+  display: block;
 }
 
 .section-title {
@@ -4542,6 +4559,9 @@ html {
   padding: 80px 0;
   background: linear-gradient(135deg, var(--dark-charcoal) 0%, var(--darker-charcoal) 100%);
   color: white;
+  visibility: visible;
+  opacity: 1;
+  display: block;
 }
 
 .newsletter-content {

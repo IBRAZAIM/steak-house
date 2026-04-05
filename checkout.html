@@ -181,7 +181,7 @@
               </label>
 
               <label class="delivery-option">
-                <input type="radio" name="deliveryMethod" value="standard" required />
+                <input type="radio" name="deliveryMethod" value="standard" required checked />
                 <div class="option-content">
                   <div class="option-icon">
                     <i class="fas fa-truck"></i>
@@ -276,45 +276,29 @@
 
           <!-- Step 4: Confirmation -->
           <div class="form-step" id="step4">
-            <h2>Подтверждение заказа</h2>
+            <h2>Проверьте ваш заказ</h2>
 
-            <div class="order-summary">
-              <h3>Сводка заказа</h3>
-              <div id="orderSummary" class="summary-content">
-                <!-- Filled by JavaScript -->
+            <div class="confirmation-sections">
+              <div class="confirmation-block">
+                <h3>Адрес доставки</h3>
+                <p id="confirmAddress" class="confirm-text">-</p>
               </div>
 
-              <div class="summary-totals">
-                <div class="total-row">
-                  <span>Сумма товаров:</span>
-                  <span id="subtotal">0 ₸</span>
-                </div>
-                <div class="total-row">
-                  <span>Доставка:</span>
-                  <span id="shippingCost">0 ₸</span>
-                </div>
-                <div class="total-row total">
-                  <span>Итого:</span>
-                  <span id="totalAmount">0 ₸</span>
-                </div>
+              <div class="confirmation-block">
+                <h3>Способ доставки</h3>
+                <p id="confirmDelivery" class="confirm-text">-</p>
               </div>
 
-              <div class="order-info">
-                <div class="info-block">
-                  <h4>Доставка</h4>
-                  <p id="deliveryInfo">-</p>
-                </div>
-                <div class="info-block">
-                  <h4>Оплата</h4>
-                  <p id="paymentInfo">-</p>
-                </div>
+              <div class="confirmation-block">
+                <h3>Способ оплаты</h3>
+                <p id="confirmPayment" class="confirm-text">-</p>
               </div>
-
-              <label class="checkbox-agree">
-                <input type="checkbox" name="agree" required />
-                <span>Я согласен(-на) с <a href="#">условиями доставки</a> и <a href="#">политикой конфиденциальности</a></span>
-              </label>
             </div>
+
+            <label class="checkbox-agree">
+              <input type="checkbox" name="agree" required />
+              <span>Я согласен(-на) с <a href="#">условиями доставки</a> и <a href="#">политикой конфиденциальности</a></span>
+            </label>
 
             <div class="form-buttons full-width">
               <button type="button" class="btn btn-outline" onclick="prevStep()">
@@ -426,7 +410,7 @@
     <div class="cart-footer">
       <div class="cart-total">
         <span>Итого:</span>
-        <span id="cartTotal">0 ₸</span>
+        <span id="cartModalTotal">0 ₸</span>
       </div>
       <button class="btn checkout-btn" id="checkoutBtn">Оформить заказ</button>
       <button class="btn-clear" id="clearCart">Очистить корзину</button>
@@ -445,22 +429,37 @@
   // Checkout form logic
   let currentStep = 1;
   const totalSteps = 4;
+  const shippingRates = {
+    express: 2000,
+    standard: 0,
+    pickup: 0
+  };
+
+  const deliveryLabels = {
+    express: 'Экспресс-доставка (2-3 часа)',
+    standard: 'Стандартная доставка (следующий день)',
+    pickup: 'Самовывоз (1 час)'
+  };
+
+  const paymentLabels = {
+    card: 'Банковская карта',
+    kaspi: 'Kaspi.kz',
+    cash: 'При получении'
+  };
 
   function nextStep() {
     if (validateStep(currentStep)) {
-      currentStep++;
-      if (currentStep > totalSteps) currentStep = totalSteps;
+      currentStep = Math.min(totalSteps, currentStep + 1);
       updateSteps();
-      updateSummary();
+      updateUnifiedSummary();
       window.scrollTo(0, 0);
     }
   }
 
   function prevStep() {
-    currentStep--;
-    if (currentStep < 1) currentStep = 1;
+    currentStep = Math.max(1, currentStep - 1);
     updateSteps();
-    updateSummary();
+    updateUnifiedSummary();
     window.scrollTo(0, 0);
   }
 
@@ -473,19 +472,16 @@
 
     inputs.forEach(input => {
       const group = input.closest('.form-group');
-      // For radio/checkbox inputs in delivery-option or payment-option, we check if at least one is selected
       if (input.type === 'radio' || input.type === 'checkbox') {
         const fieldName = input.name;
         const isChecked = form.querySelector(`[name="${fieldName}"]:checked`);
+        const label = input.closest('label');
         if (!isChecked) {
-          // Highlight the parent container
-          const parentLabel = input.closest('label');
-          if (parentLabel) parentLabel.classList.add('error');
+          if (label) label.classList.add('error');
           valid = false;
           if (!firstInvalid) firstInvalid = input;
-        } else {
-          const parentLabel = input.closest('label');
-          if (parentLabel) parentLabel.classList.remove('error');
+        } else if (label) {
+          label.classList.remove('error');
         }
       } else if (group) {
         if (!input.checkValidity()) {
@@ -501,53 +497,113 @@
     if (!valid && firstInvalid) {
       firstInvalid.focus();
     }
-
     return valid;
   }
 
-function updateSteps() {
-  document.querySelectorAll('.form-step').forEach((step, idx) => {
-    step.classList.toggle('active', idx + 1 === currentStep);
-  });
+  function updateSteps() {
+    document.querySelectorAll('.form-step').forEach((step, idx) => {
+      step.classList.toggle('active', idx + 1 === currentStep);
+    });
 
-  document.querySelectorAll('.progress-steps .step').forEach((step, idx) => {
-    step.classList.toggle('active', idx + 1 <= currentStep);
-    step.classList.toggle('completed', idx + 1 < currentStep);
-  });
+    document.querySelectorAll('.progress-steps .step').forEach((step, idx) => {
+      step.classList.toggle('active', idx + 1 <= currentStep);
+      step.classList.toggle('completed', idx + 1 < currentStep);
+    });
 
-  const percent = (currentStep / totalSteps) * 100;
-  document.getElementById('progressBar').style.width = percent + '%';
-}
+    const percent = (currentStep / totalSteps) * 100;
+    document.getElementById('progressBar').style.width = `${percent}%`;
 
-  function updateSummary() {
-    const form = document.getElementById('checkoutForm');
-    const deliveryMethod = form.elements['deliveryMethod']?.value || '';
-    const paymentMethod = form.elements['paymentMethod']?.value || '';
-    
-    const deliveryLabels = {
-      'express': 'Экспресс-доставка (2-3 часа)',
-      'standard': 'Стандартная доставка (следующий день)',
-      'pickup': 'Самовывоз (1 час)'
-    };
-
-    const paymentLabels = {
-      'card': 'Банковская карта',
-      'kaspi': 'Kaspi.kz',
-      'cash': 'При получении'
-    };
-
-    document.getElementById('deliveryInfo').textContent = deliveryLabels[deliveryMethod] || '-';
-    document.getElementById('paymentInfo').textContent = paymentLabels[paymentMethod] || '-';
+    // Update confirmation on step 4
+    if (currentStep === 4) {
+      updateConfirmation();
+    }
   }
 
-  // Event listeners
-  document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+  function getSelectedDelivery() {
+    return document.querySelector('input[name="deliveryMethod"]:checked')?.value || 'standard';
+  }
+
+  function getSelectedPayment() {
+    return document.querySelector('input[name="paymentMethod"]:checked')?.value || 'card';
+  }
+
+  function getShippingCost(method) {
+    return shippingRates[method] ?? 0;
+  }
+
+  function getSummaryAddress() {
+    const form = document.getElementById('checkoutForm');
+    const city = form.querySelector('input[name="city"]')?.value || form.querySelector('select[name="city"]')?.value || '';
+    const address = form.querySelector('input[name="address"]')?.value || '';
+    const apartment = form.querySelector('input[name="apartment"]')?.value || '';
+    return `${city}, ${address}${apartment ? ', ' + apartment : ''}`.replace(/^,\s+/, '');
+  }
+
+  function updateConfirmation() {
+    const deliveryMethod = getSelectedDelivery();
+    const paymentMethod = getSelectedPayment();
+    const address = getSummaryAddress();
+
+    document.getElementById('confirmAddress').textContent = address || 'Не указан адрес';
+    document.getElementById('confirmDelivery').textContent = deliveryLabels[deliveryMethod] || '-';
+    document.getElementById('confirmPayment').textContent = paymentLabels[paymentMethod] || '-';
+  }
+
+  function updateTotals() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const shippingCost = getShippingCost(getSelectedDelivery());
+    const total = subtotal + shippingCost;
+
+    document.getElementById('cartSubtotal').textContent = subtotal.toLocaleString('ru-RU') + ' ₸';
+    document.getElementById('cartShipping').textContent = shippingCost.toLocaleString('ru-RU') + ' ₸';
+    document.getElementById('summaryTotal').textContent = total.toLocaleString('ru-RU') + ' ₸';
+    document.getElementById('cartTotal').textContent = total.toLocaleString('ru-RU') + ' ₸';
+  }
+
+  function updateUnifiedSummary() {
+    updateTotals();
+  }
+
+  function getSessionId() {
+    let sessionId = localStorage.getItem('sessionId');
+    if (!sessionId) {
+      sessionId = `session_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
+      localStorage.setItem('sessionId', sessionId);
+    }
+    return sessionId;
+  }
+
+  async function sendOrderToServer(orderPayload) {
+    const response = await fetch('/api/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orderPayload)
+    });
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.error || 'Серверная ошибка при оформлении заказа');
+    }
+    return await response.json();
+  }
+
+  document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    
     if (!validateStep(currentStep)) return;
 
-    const formData = new FormData(this);
-    const orderData = {
+    const form = document.getElementById('checkoutForm');
+    const formData = new FormData(form);
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    if (cart.length === 0) {
+      alert('Ваша корзина пуста. Добавьте товары перед оформлением.');
+      return;
+    }
+
+    const orderPayload = {
+      items: cart,
       customer: {
         firstName: formData.get('firstName'),
         lastName: formData.get('lastName'),
@@ -558,99 +614,59 @@ function updateSteps() {
         apartment: formData.get('apartment'),
         comment: formData.get('comment')
       },
-      delivery: formData.get('deliveryMethod'),
-      payment: formData.get('paymentMethod'),
-      items: JSON.parse(localStorage.getItem('cart') || '[]'),
-      timestamp: new Date().toISOString()
-    };
-
-    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
-    const newOrder = {
-      id: orders.length + 1,
-      ...orderData,
-      status: 'confirmed',
-      date: new Date().toISOString(),
-      userEmail: formData.get('email'),
+      deliveryMethod: getSelectedDelivery(),
+      paymentMethod: getSelectedPayment(),
+      sessionId: getSessionId(),
       total: calculateTotal()
     };
 
-    orders.push(newOrder);
-    localStorage.setItem('orders', JSON.stringify(orders));
-    localStorage.setItem('lastOrderId', newOrder.id);
-    localStorage.removeItem('cart');
-
-    alert(`Заказ #${newOrder.id} успешно оформлен!\nПроверьте email для трекинга заказа.`);
-    window.location.href = `order-tracking.html?order=${newOrder.id}`;
+    try {
+      const createdOrder = await sendOrderToServer(orderPayload);
+      localStorage.removeItem('cart');
+      alert(`Заказ №${createdOrder.id} успешно оформлен!`);
+      window.location.href = `order-tracking.html?order=${createdOrder.id}`;
+    } catch (error) {
+      console.error('Server order failed:', error.message);
+      alert(`Ошибка оформления заказа: ${error.message}`);
+    }
   });
 
-  // Listen for delivery method changes to update shipping cost and summary
   function setupDeliveryListener() {
     const deliveryRadios = document.querySelectorAll('input[name="deliveryMethod"]');
-    const shippingLabels = {
-      'express': 2000,
-      'standard': 0,
-      'pickup': 0
-    };
-    
     deliveryRadios.forEach(radio => {
-      radio.addEventListener('change', function() {
-        // Update displayed shipping cost in options
-        const option = this.closest('.delivery-option');
-        if (option) {
-          const priceSpan = option.querySelector('.option-price');
-          if (priceSpan) {
-            priceSpan.textContent = this.value === 'express' ? '2,000 ₸' : 'Бесплатно';
-          }
-        }
-        
-        // Update right sidebar with new shipping cost
-        const shippingCost = shippingLabels[this.value];
-        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const newTotal = subtotal + shippingCost;
-        
-        document.getElementById('cartShipping').textContent = shippingCost.toLocaleString('ru-RU') + ' ₸';
-        document.getElementById('summaryTotal').textContent = newTotal.toLocaleString('ru-RU') + ' ₸';
-        document.getElementById('cartTotal').textContent = newTotal.toLocaleString('ru-RU') + ' ₸';
-        
-        updateSummary();
+      radio.addEventListener('change', () => {
+        updateUnifiedSummary();
       });
     });
   }
-  
-  document.addEventListener('DOMContentLoaded', setupDeliveryListener);
+
+  function setupPaymentListener() {
+    const paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
+    paymentRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        updateUnifiedSummary();
+      });
+    });
+  }
 
   function calculateTotal() {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const form = document.getElementById('checkoutForm');
-    const deliveryMethod = form.elements['deliveryMethod']?.value || 'standard';
-    
-    let shippingCost = 0;
-    if (deliveryMethod === 'express') {
-      shippingCost = 2000;
-    } else if (deliveryMethod === 'standard') {
-      shippingCost = 0;
-    } else if (deliveryMethod === 'pickup') {
-      shippingCost = 0;
-    }
-    
+    const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const shippingCost = getShippingCost(getSelectedDelivery());
     return subtotal + shippingCost;
   }
 
-  // Load cart on page load
-  document.addEventListener('DOMContentLoaded', function() {
+  function renderCartSummary() {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     const cartItemsList = document.getElementById('cartItemsList');
-    
+    if (!cartItemsList) return;
+
     if (cart.length === 0) {
       window.location.href = 'catalog.html';
       return;
     }
 
     let subtotal = 0;
-    const shippingCost = 2000; // Default shipping cost for express delivery
-    
     cartItemsList.innerHTML = cart.map(item => {
       subtotal += item.price * item.quantity;
       return `
@@ -664,14 +680,18 @@ function updateSteps() {
       `;
     }).join('');
 
-    const total = subtotal + shippingCost;
-
     document.getElementById('cartSubtotal').textContent = subtotal.toLocaleString('ru-RU') + ' ₸';
-    document.getElementById('cartShipping').textContent = shippingCost.toLocaleString('ru-RU') + ' ₸';
-    document.getElementById('summaryTotal').textContent = total.toLocaleString('ru-RU') + ' ₸';
-    document.getElementById('cartTotal').textContent = total.toLocaleString('ru-RU') + ' ₸';
+    document.getElementById('cartShipping').textContent = getShippingCost(getSelectedDelivery()).toLocaleString('ru-RU') + ' ₸';
+    document.getElementById('summaryTotal').textContent = calculateTotal().toLocaleString('ru-RU') + ' ₸';
+    document.getElementById('cartTotal').textContent = calculateTotal().toLocaleString('ru-RU') + ' ₸';
+  }
 
-    // Set initial form values from localStorage if user is logged in
+  document.addEventListener('DOMContentLoaded', function() {
+    renderCartSummary();
+    setupDeliveryListener();
+    setupPaymentListener();
+    updateUnifiedSummary();
+
     const currentUserEmail = localStorage.getItem('currentUserEmail');
     if (currentUserEmail) {
       const users = JSON.parse(localStorage.getItem('users') || '[]');

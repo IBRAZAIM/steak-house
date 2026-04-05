@@ -1,108 +1,9 @@
 // ===================================
 // PREMIUM STEAK HOUSE - APP.JS
-// Database simulation using localStorage
+// Server-based + Local Cart Storage
 // ===================================
 
-// ===================================
-// DATABASE CONFIGURATION
-// ===================================
-
-const DB_NAME = 'SteakHouseDB';
-const PRODUCTS_KEY = 'products';
 const CART_KEY = 'cart';
-const ORDERS_KEY = 'orders';
-
-// ===================================
-// INITIAL DATABASE SEED
-// ===================================
-
-const defaultProducts = [
-
-  {
-    id: 1,
-    name: 'Ribeye Prime',
-    description: 'Мраморная говядина высшей категории. Максимальная мраморность и насыщенный вкус.',
-    price: 8900,
-    image: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=400&h=300&fit=crop',
-    category: 'ribeye',
-    badge: 'Хит',
-    weight: '350 г'
-  },
-  {
-    id: 2,
-    name: 'Striploin Premium',
-    description: 'Идеальный баланс сочности и текстуры. Классический стейк для гурманов.',
-    price: 7500,
-    image: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=400&h=300&fit=crop',
-    category: 'striploin',
-    badge: null,
-    weight: '300 г'
-  },
-  {
-    id: 3,
-    name: 'T-Bone Classic',
-    description: 'Два вкуса в одном легендарном стейке. Филейная часть и стейк на кости.',
-    price: 9500,
-    image: 'https://images.unsplash.com/photo-1430139593276-c3f7bff29cbb?w=400&h=300&fit=crop',
-    category: 'tbone',
-    badge: 'Премиум',
-    weight: '450 г'
-  },
-  {
-    id: 4,
-    name: 'Filet Mignon',
-    description: 'Нежнейшая вырезка из Аргентины. Самая мягкая и деликатная часть.',
-    price: 10500,
-    image: 'https://images.unsplash.com/photo-1595521624410-5e77e1b6aed3?w=400&h=300&fit=crop',
-    category: 'filet',
-    badge: 'Эксклюзив',
-    weight: '280 г'
-  },
-  {
-    id: 5,
-    name: 'Tomahawk',
-    description: 'Впечатляющий стейк на кости. Для настоящих ценителей экстра-класса.',
-    price: 13900,
-    image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop',
-    category: 'tomahawk',
-    badge: 'Хит',
-    weight: '800 г'
-  },
-  {
-    id: 6,
-    name: 'Porterhouse',
-    description: 'Большая версия T-Bone. Максимум вкуса и мраморности из набора премиум.',
-    price: 10500,
-    image: 'https://images.unsplash.com/photo-1543187776-ca038cad3260?w=400&h=300&fit=crop',
-    category: 'porterhouse',
-    badge: null,
-    weight: '600 г'
-  },
-  {
-    id: 7,
-    name: 'Ribeye Dry Aged 45 дней',
-    description: 'Говядина выдержанная 45 дней. Интенсивный, глубокий вкус неповторимый.',
-    price: 15900,
-    image: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=400&h=300&fit=crop',
-    category: 'ribeye',
-    badge: 'Dry Aged',
-    weight: '350 г'
-  },
-  {
-    id: 8,
-    name: 'Chateaubriand',
-    description: 'Центральная часть вырезки из лучших поставок. Блюдо для особых случаев.',
-    price: 16900,
-    image: 'https://images.unsplash.com/photo-1599888657139-87e8624f31ad?w=400&h=300&fit=crop',
-    category: 'filet',
-    badge: 'Премиум',
-    weight: '400 г'
-  }
-];
-
-// ===================================
-// DATABASE FUNCTIONS
-// ===================================
 
 class Database {
   constructor() {
@@ -111,113 +12,65 @@ class Database {
 
   // Initialize database
   init() {
-    // Initialize products if not exists
-    if (!localStorage.getItem(PRODUCTS_KEY)) {
-      localStorage.setItem(PRODUCTS_KEY, JSON.stringify(defaultProducts));
-    }
-
-    // Initialize cart if not exists
     if (!localStorage.getItem(CART_KEY)) {
       localStorage.setItem(CART_KEY, JSON.stringify([]));
     }
+  }
 
-    // Initialize orders if not exists
-    if (!localStorage.getItem(ORDERS_KEY)) {
-      localStorage.setItem(ORDERS_KEY, JSON.stringify([]));
+  // === PRODUCTS - SERVER ONLY ===
+
+  async getProducts() {
+    try {
+      const response = await fetch('/api/products');
+      if (!response.ok) throw new Error('Failed to fetch products');
+      return await response.json();
+    } catch (error) {
+      console.error('Error loading products:', error);
+      alert('Не удалось загрузить каталог. Проверьте соединение с сервером.');
+      return [];
     }
   }
 
-  // Get all products
-  getProducts() {
-    return JSON.parse(localStorage.getItem(PRODUCTS_KEY));
+  async getProductById(id) {
+    try {
+      const response = await fetch(`/api/products/${id}`);
+      if (!response.ok) throw new Error('Product not found');
+      return await response.json();
+    } catch (error) {
+      console.error('Error loading product:', error);
+      return null;
+    }
   }
 
-  // Get product by ID
-  getProductById(id) {
-    const products = this.getProducts();
-    return products.find(p => p.id === id);
+  async filterByCategory(category) {
+    try {
+      const response = await fetch(`/api/products/category/${encodeURIComponent(category)}`);
+      if (!response.ok) throw new Error('Category not found');
+      return await response.json();
+    } catch (error) {
+      console.error('Error filtering products:', error);
+      return [];
+    }
   }
 
-  // Get products by category
-  getProductsByCategory(category) {
-    const products = this.getProducts();
-    return products.filter(p => p.category === category);
+  async searchProducts(query, products) {
+    if (!query) return products;
+    const q = query.toLowerCase();
+    return products.filter(p => 
+      p.name.toLowerCase().includes(q) || 
+      p.description.toLowerCase().includes(q)
+    );
   }
 
-  // Add new product (admin function)
-  addProduct(product) {
-    const products = this.getProducts();
-    const maxId = products.reduce((max, p) => p.id > max ? p.id : max, 0);
-    const newProduct = {
-      ...product,
-      id: maxId + 1
-    };
-    products.push(newProduct);
-    localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
-    return newProduct;
-  }
+  // === CART - LOCAL STORAGE ===
 
-  // Update product (admin function)
-  updateProduct(id, productData) {
-    const products = this.getProducts();
-    const index = products.findIndex(p => p.id === id);
-    
-    if (index === -1) return null;
-    
-    products[index] = { ...products[index], ...productData, id };
-    localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
-    return products[index];
-  }
-
-  // Delete product (admin function)
-  deleteProduct(id) {
-    const products = this.getProducts();
-    const filteredProducts = products.filter(p => p.id !== id);
-    
-    if (filteredProducts.length === products.length) return false;
-    
-    localStorage.setItem(PRODUCTS_KEY, JSON.stringify(filteredProducts));
-    return true;
-  }
-
-  // Get order by ID
-  getOrderById(id) {
-    const orders = this.getOrders();
-    return orders.find(o => o.id === id);
-  }
-
-  // Update order status (admin function)
-  updateOrderStatus(id, status) {
-    const orders = this.getOrders();
-    const index = orders.findIndex(o => o.id === id);
-    
-    if (index === -1) return null;
-    
-    orders[index].status = status;
-    localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
-    return orders[index];
-  }
-
-  // Delete order (admin function)
-  deleteOrder(id) {
-    const orders = this.getOrders();
-    const filteredOrders = orders.filter(o => o.id !== id);
-    
-    if (filteredOrders.length === orders.length) return false;
-    
-    localStorage.setItem(ORDERS_KEY, JSON.stringify(filteredOrders));
-    return true;
-  }
-
-  // Get cart
   getCart() {
-    return JSON.parse(localStorage.getItem(CART_KEY));
+    return JSON.parse(localStorage.getItem(CART_KEY) || '[]');
   }
 
-  // Add to cart
-  addToCart(productId) {
+  async addToCart(productId) {
     const cart = this.getCart();
-    const product = this.getProductById(productId);
+    const product = await this.getProductById(productId);
     
     if (!product) return null;
 
@@ -239,7 +92,6 @@ class Database {
     return cart;
   }
 
-  // Remove from cart
   removeFromCart(productId) {
     let cart = this.getCart();
     cart = cart.filter(item => item.id !== productId);
@@ -247,7 +99,6 @@ class Database {
     return cart;
   }
 
-  // Update cart item quantity
   updateCartQuantity(productId, quantity) {
     const cart = this.getCart();
     const item = cart.find(item => item.id === productId);
@@ -263,60 +114,19 @@ class Database {
     return cart;
   }
 
-  // Clear cart
   clearCart() {
     localStorage.setItem(CART_KEY, JSON.stringify([]));
     return [];
   }
 
-  // Get cart total
   getCartTotal() {
     const cart = this.getCart();
     return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
   }
 
-  // Get cart count
   getCartCount() {
     const cart = this.getCart();
     return cart.reduce((count, item) => count + item.quantity, 0);
-  }
-
-  // Create order
-  createOrder(orderData) {
-    const cart = this.getCart();
-    if (cart.length === 0) return null;
-
-    const orders = JSON.parse(localStorage.getItem(ORDERS_KEY));
-    
-    const order = {
-      id: orders.length + 1,
-      items: [...cart],
-      total: this.getCartTotal(),
-      status: 'Новый',
-      date: new Date().toISOString(),
-      customer: orderData,
-      userEmail: orderData.email || null
-    };
-
-    orders.push(order);
-    localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
-    
-    // Clear cart after order
-    this.clearCart();
-    
-    return order;
-  }
-
-  // Get orders
-  getOrders() {
-    return JSON.parse(localStorage.getItem(ORDERS_KEY));
-  }
-
-  // Reset database (for testing)
-  resetDatabase() {
-    localStorage.setItem(PRODUCTS_KEY, JSON.stringify(defaultProducts));
-    localStorage.setItem(CART_KEY, JSON.stringify([]));
-    localStorage.setItem(ORDERS_KEY, JSON.stringify([]));
   }
 }
 
@@ -326,12 +136,10 @@ class Database {
 
 const db = new Database();
 
-// DOM Elements (will be initialized in initApp after components are loaded)
 let cartModal, cartOverlay, closeCartBtn, cartBtn, cartCount, cartItems;
-let cartTotal, clearCartBtn, checkoutBtn, notification, notificationText;
+let cartTotal, cartModalTotal, clearCartBtn, checkoutBtn, notification, notificationText;
 let mobileMenuBtn, mobileMenu, closeMobileMenuBtn, mobileMenuOverlay, mobileCartBtn, mobileCartCount;
 
-// Initialize DOM elements
 function initDOMElements() {
   cartModal = document.getElementById('cartModal');
   cartOverlay = document.getElementById('cartOverlay');
@@ -340,6 +148,7 @@ function initDOMElements() {
   cartCount = document.getElementById('cartCount');
   cartItems = document.getElementById('cartItems');
   cartTotal = document.getElementById('cartTotal');
+  cartModalTotal = document.getElementById('cartModalTotal');
   clearCartBtn = document.getElementById('clearCart');
   checkoutBtn = document.getElementById('checkoutBtn');
   notification = document.getElementById('notification');
@@ -352,25 +161,18 @@ function initDOMElements() {
   mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
 }
 
-// Initialize app
-function initApp() {
-  // Load components first (for pages that use dynamic components like index.html)
-  // This ensures all required DOM elements exist before we try to access them
+async function initApp() {
   if (typeof loadComponents === 'function') {
-    // Check if we're on a page with container elements (index.html uses components)
     const headerContainer = document.getElementById('header-container');
     if (headerContainer) {
       loadComponents({ showAdminLink: true });
     }
   }
-  
-  // Initialize DOM elements first
+
   initDOMElements();
-  
   updateCartCount();
-  renderProducts();
-  
-  // Event listeners
+  await renderProducts();
+
   if (cartBtn) cartBtn.addEventListener('click', openCart);
   if (closeCartBtn) closeCartBtn.addEventListener('click', closeCart);
   if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
@@ -381,25 +183,21 @@ function initApp() {
   if (closeMobileMenuBtn) closeMobileMenuBtn.addEventListener('click', closeMobileMenu);
   if (mobileMenuOverlay) mobileMenuOverlay.addEventListener('click', closeMobileMenu);
 
-  // Close menu when clicking on links
   if (mobileMenu) {
     const links = mobileMenu.querySelectorAll('a');
     links.forEach(link => link.addEventListener('click', closeMobileMenu));
   }
-  
-  // Header scroll effect
+
   window.addEventListener('scroll', headerScroll);
 }
 
-// Export initApp for use in components.js
 window.initApp = initApp;
 
-// Render products
-function renderProducts(containerId = 'productsGrid', products = null) {
+async function renderProducts(containerId = 'productsGrid', products = null) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  const productsToRender = products || db.getProducts();
+  const productsToRender = products || await db.getProducts();
   
   container.innerHTML = productsToRender.map(product => `
     <div class="product-card" data-id="${product.id}">
@@ -424,7 +222,7 @@ function renderProducts(containerId = 'productsGrid', products = null) {
         <h3>${product.name}</h3>
         <p class="desc">${product.description}</p>
         <div class="product-bottom">
-<span class="price">${product.price.toLocaleString()} тг</span>
+          <span class="price">${product.price.toLocaleString()} ₸</span>
           <button class="btn-add" onclick="addToCart(${product.id})">В корзину</button>
         </div>
       </div>
@@ -432,41 +230,29 @@ function renderProducts(containerId = 'productsGrid', products = null) {
   `).join('');
 }
 
-// Handle image load success
 function handleImageLoad(img) {
   img.classList.add('loaded');
   const placeholder = img.parentElement.querySelector('.image-placeholder');
-  if (placeholder) {
-    placeholder.classList.add('hidden');
-  }
+  if (placeholder) placeholder.classList.add('hidden');
   const errorDiv = img.parentElement.querySelector('.image-error');
-  if (errorDiv) {
-    errorDiv.style.display = 'none';
-  }
+  if (errorDiv) errorDiv.style.display = 'none';
 }
 
-// Handle image load error
 function handleImageError(img) {
   img.classList.add('error');
   img.style.display = 'none';
   const placeholder = img.parentElement.querySelector('.image-placeholder');
-  if (placeholder) {
-    placeholder.classList.add('hidden');
-  }
+  if (placeholder) placeholder.classList.add('hidden');
   const errorDiv = img.parentElement.querySelector('.image-error');
-  if (errorDiv) {
-    errorDiv.style.display = 'flex';
-  }
+  if (errorDiv) errorDiv.style.display = 'flex';
 }
 
-// Add to cart
 function addToCart(productId) {
   db.addToCart(productId);
   updateCartCount();
   showNotification('Товар добавлен в корзину');
 }
 
-// Update cart count
 function updateCartCount() {
   const count = db.getCartCount();
   if (cartCount) {
@@ -479,7 +265,6 @@ function updateCartCount() {
   }
 }
 
-// Open cart
 function openCart(e) {
   e.preventDefault();
   renderCartItems();
@@ -487,13 +272,11 @@ function openCart(e) {
   document.body.style.overflow = 'hidden';
 }
 
-// Close cart
 function closeCart() {
   cartModal.classList.remove('open');
   document.body.style.overflow = '';
 }
 
-// Render cart items
 function renderCartItems() {
   const cart = db.getCart();
   
@@ -504,7 +287,7 @@ function renderCartItems() {
         <p>Корзина пуста</p>
       </div>
     `;
-cartTotal.textContent = '0 тг';
+    if (cartTotal) cartTotal.textContent = '0 ₸';
     if (checkoutBtn) checkoutBtn.disabled = true;
     return;
   }
@@ -515,7 +298,7 @@ cartTotal.textContent = '0 тг';
     <div class="cart-item">
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name}</div>
-<div class="cart-item-price">${item.price.toLocaleString()} тг × ${item.quantity}</div>
+        <div class="cart-item-price">${item.price.toLocaleString()} ₸ × ${item.quantity}</div>
       </div>
       <button class="cart-item-remove" onclick="removeFromCart(${item.id})">
         <i class="fas fa-trash"></i>
@@ -523,17 +306,18 @@ cartTotal.textContent = '0 тг';
     </div>
   `).join('');
 
-cartTotal.textContent = db.getCartTotal().toLocaleString() + ' тг';
+  const cartTotalElement = cartModalTotal || cartTotal;
+  if (cartTotalElement) {
+    cartTotalElement.textContent = db.getCartTotal().toLocaleString() + ' ₸';
+  }
 }
 
-// Remove from cart
 function removeFromCart(productId) {
   db.removeFromCart(productId);
   updateCartCount();
   renderCartItems();
 }
 
-// Clear cart
 function clearCart() {
   db.clearCart();
   updateCartCount();
@@ -541,30 +325,24 @@ function clearCart() {
   showNotification('Корзина очищена');
 }
 
-// Checkout
 function checkout() {
   const cart = db.getCart();
-  
   if (cart.length === 0) {
     showNotification('Корзина пуста');
     return;
   }
-
-  // Redirect to checkout page
   window.location.href = 'checkout.html';
 }
 
-// Show notification
 function showNotification(message) {
+  if (!notification) return;
   notificationText.textContent = message;
   notification.classList.add('show');
-  
   setTimeout(() => {
     notification.classList.remove('show');
   }, 3000);
 }
 
-// Header scroll effect
 function headerScroll() {
   const header = document.querySelector('header');
   if (window.scrollY > 50) {
@@ -574,7 +352,6 @@ function headerScroll() {
   }
 }
 
-// Mobile menu toggle
 function toggleMobileMenu(e) {
   if (e) e.preventDefault();
   if (mobileMenu.classList.contains('open')) {
@@ -596,27 +373,28 @@ function closeMobileMenu() {
   document.body.style.overflow = '';
 }
 
-// Export mobile menu functions for global use
 window.toggleMobileMenu = toggleMobileMenu;
 window.openMobileMenu = openMobileMenu;
 window.closeMobileMenu = closeMobileMenu;
 
-// Filter products
-function filterProducts(category, containerId = 'productsGrid') {
+async function filterProducts(category, containerId = 'productsGrid') {
   let products;
-  
   if (category === 'all') {
-    products = db.getProducts();
+    products = await db.getProducts();
   } else {
-    products = db.getProductsByCategory(category);
+    products = await db.filterByCategory(category);
   }
   
   renderProducts(containerId, products);
+
+  const filterButtons = document.querySelectorAll('.filter-btn[data-category]');
+  filterButtons.forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.category === category);
+  });
 }
 
-// Sort products
-function sortProducts(sortBy, containerId = 'productsGrid') {
-  let products = db.getProducts();
+async function sortProducts(sortBy, containerId = 'productsGrid') {
+  let products = await db.getProducts();
   
   switch(sortBy) {
     case 'price-asc':
@@ -633,7 +411,6 @@ function sortProducts(sortBy, containerId = 'productsGrid') {
   renderProducts(containerId, products);
 }
 
-// Newsletter subscription handler
 function initNewsletterForm() {
   const form = document.getElementById('newsletterForm');
   if (form) {
@@ -641,35 +418,27 @@ function initNewsletterForm() {
       e.preventDefault();
       const email = form.querySelector('input[type="email"]').value;
       
-      // Save newsletter subscription
       let subscribers = JSON.parse(localStorage.getItem('newsletter_subscribers') || '[]');
       if (!subscribers.includes(email)) {
         subscribers.push(email);
         localStorage.setItem('newsletter_subscribers', JSON.stringify(subscribers));
       }
       
-      // Show success message
       showNotification('Спасибо за подписку! Проверьте ваш email.');
       form.reset();
     });
   }
 }
 
-// ===================================
-// INITIALIZE ON DOM READY
-// ===================================
-
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    initApp();
+  document.addEventListener('DOMContentLoaded', async () => {
+    await initApp();
     initNewsletterForm();
   });
 } else {
-  initApp();
-  initNewsletterForm();
+  initApp().then(initNewsletterForm).catch(console.error);
 }
 
-// Export functions for global use
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
 window.filterProducts = filterProducts;

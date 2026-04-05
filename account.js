@@ -28,6 +28,7 @@ class AccountManager {
       // Show account profile
       container.innerHTML = this.getProfileHTML();
       this.bindProfileEvents();
+      this.loadServerOrders();
     }
   }
 
@@ -115,7 +116,7 @@ class AccountManager {
               <i class="fas fa-user"></i> Профиль
             </button>
             <button class="menu-item" data-section="orders">
-              <i class="fas fa-file-invoice"></i> Заказы (${userOrders.length})
+              <i class="fas fa-file-invoice"></i> Заказы (<span id="ordersCount">${userOrders.length}</span>)
             </button>
             <button class="menu-item" data-section="addresses">
               <i class="fas fa-map-marker-alt"></i> Адреса
@@ -134,14 +135,14 @@ class AccountManager {
               <div class="stat">
                 <i class="fas fa-shopping-bag"></i>
                 <div class="stat-info">
-                  <span class="stat-number">${userOrders.length}</span>
+                  <span class="stat-number" id="statOrders">${userOrders.length}</span>
                   <span class="stat-label">Заказов</span>
                 </div>
               </div>
               <div class="stat">
                 <i class="fas fa-tenge-sign"></i>
                 <div class="stat-info">
-                  <span class="stat-number">${totalSpent.toLocaleString('kz-KZ')}</span>
+                  <span class="stat-number" id="statTotalSpent">${totalSpent.toLocaleString('ru-RU')} ₸</span>
                   <span class="stat-label">Потрачено</span>
                 </div>
               </div>
@@ -180,7 +181,7 @@ class AccountManager {
           <div class="profile-section" id="orders">
             <h2>История заказов</h2>
             ${userOrders.length > 0 ? `
-              <div class="orders-list">
+              <div class="orders-list" id="ordersList">
                 ${userOrders.map(order => `
                   <div class="order-card">
                     <div class="order-header">
@@ -277,11 +278,68 @@ class AccountManager {
     const labels = {
       'pending': 'Ожидание',
       'confirmed': 'Подтверждено',
+      'processing': 'В процессе',
       'shipped': 'Отправлено',
       'delivered': 'Доставлено',
       'cancelled': 'Отменено'
     };
     return labels[status] || status;
+  }
+
+  async loadServerOrders() {
+    if (!this.currentUser || !this.currentUser.email) return;
+    try {
+      const response = await fetch(`/api/orders?email=${encodeURIComponent(this.currentUser.email)}`);
+      if (!response.ok) return;
+      const orders = await response.json();
+      if (!Array.isArray(orders) || orders.length === 0) return;
+      this.updateOrderUI(orders);
+    } catch (error) {
+      console.warn('Server orders unavailable:', error.message);
+    }
+  }
+
+  updateOrderUI(orders) {
+    const count = orders.length;
+    const totalSpent = orders.reduce((sum, order) => sum + (order.total || 0), 0);
+
+    const ordersCountElement = document.getElementById('ordersCount');
+    const statOrdersElement = document.getElementById('statOrders');
+    const statTotalSpentElement = document.getElementById('statTotalSpent');
+    if (ordersCountElement) ordersCountElement.textContent = count;
+    if (statOrdersElement) statOrdersElement.textContent = count;
+    if (statTotalSpentElement) statTotalSpentElement.textContent = totalSpent.toLocaleString('ru-RU') + ' ₸';
+
+    const ordersList = document.getElementById('ordersList');
+    if (!ordersList) return;
+
+    ordersList.innerHTML = orders.map(order => `
+      <div class="order-card">
+        <div class="order-header">
+          <div class="order-info">
+            <h4>Заказ #${order.id}</h4>
+            <p class="order-date">${new Date(order.createdAt).toLocaleDateString('ru-RU')}</p>
+          </div>
+          <div class="order-status status-${order.status}">
+            ${this.getStatusLabel(order.status)}
+          </div>
+        </div>
+        <div class="order-items">
+          ${(order.items || []).map(item => `
+            <div class="order-item">
+              <span>${item.name}</span>
+              <span>${item.quantity}x ${item.price.toLocaleString('ru-RU')} ₸</span>
+            </div>
+          `).join('')}
+        </div>
+        <div class="order-footer">
+          <span class="order-total">Итого: ${order.total.toLocaleString('ru-RU')} ₸</span>
+          <button class="btn btn-small" onclick="window.location.href='order-tracking.html?order=${order.id}'">
+            <i class="fas fa-tracking"></i> Отследить
+          </button>
+        </div>
+      </div>
+    `).join('');
   }
 
   bindLoginEvents() {

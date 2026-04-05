@@ -325,15 +325,30 @@
     return parseInt(params.get('order')) || localStorage.getItem('lastOrderId');
   }
 
-  function loadOrder() {
+  async function fetchOrderFromServer(orderId) {
+    try {
+      const response = await fetch('/api/orders/' + orderId);
+      if (!response.ok) {
+        return null;
+      }
+      return await response.json();
+    } catch (error) {
+      return null;
+    }
+  }
+
+  async function loadOrder() {
     const orderId = getOrderIdFromURL();
     if (!orderId) {
       document.body.innerHTML = '<div class="container" style="text-align: center; padding: 100px 0;"><h2>Заказ не найден</h2><a href="catalog.html" class="btn">Вернуться к каталогу</a></div>';
       return;
     }
 
-    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
-    currentOrder = orders.find(o => o.id === orderId);
+    currentOrder = await fetchOrderFromServer(orderId);
+    if (!currentOrder) {
+      const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+      currentOrder = orders.find(o => o.id === orderId);
+    }
 
     if (!currentOrder) {
       document.body.innerHTML = '<div class="container" style="text-align: center; padding: 100px 0;"><h2>Заказ #' + orderId + ' не найден</h2><a href="catalog.html" class="btn">Вернуться к каталогу</a></div>';
@@ -463,7 +478,9 @@
     }
   });
 
-  document.addEventListener('DOMContentLoaded', loadOrder);
+  document.addEventListener('DOMContentLoaded', function() {
+    loadOrder();
+  });
 </script>
 </body>
 </html>

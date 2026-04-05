@@ -64,12 +64,12 @@
   <div class="container">
     <div class="filters-content">
       <div class="filter-group">
-        <button class="filter-btn active" onclick="filterProducts('all')">Все</button>
-        <button class="filter-btn" onclick="filterProducts('ribeye')">Ribeye</button>
-        <button class="filter-btn" onclick="filterProducts('striploin')">Striploin</button>
-        <button class="filter-btn" onclick="filterProducts('tbone')">T-Bone</button>
-        <button class="filter-btn" onclick="filterProducts('filet')">Filet</button>
-        <button class="filter-btn" onclick="filterProducts('tomahawk')">Tomahawk</button>
+        <button class="filter-btn active" data-category="all" onclick="filterProducts('all')">Все</button>
+        <button class="filter-btn" data-category="ribeye" onclick="filterProducts('ribeye')">Ribeye</button>
+        <button class="filter-btn" data-category="striploin" onclick="filterProducts('striploin')">Striploin</button>
+        <button class="filter-btn" data-category="tbone" onclick="filterProducts('tbone')">T-Bone</button>
+        <button class="filter-btn" data-category="filet" onclick="filterProducts('filet')">Filet</button>
+        <button class="filter-btn" data-category="tomahawk" onclick="filterProducts('tomahawk')">Tomahawk</button>
       </div>
       <select class="sort-select" onchange="sortProducts(this.value)">
         <option value="all">Сортировка</option>
