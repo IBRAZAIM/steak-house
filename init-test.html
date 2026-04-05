@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test</title>
+</head>
+<body>
+  <div id="header-container"></div>
+  <div id="productsGrid"></div>
+  <script src="components-fixed.js"></script>
+  <script src="app.js"></script>
+
+  <script>
+    console.log('Scripts loaded');
+    setTimeout(() => {
+      console.log('db:', window.db);
+      console.log('loadComponents:', typeof window.loadComponents);
+      console.log('Header:', document.getElementById('header-container').innerHTML.substring(0,100));
+    }, 1000);
+  </script>
+</body>
+</html>
+

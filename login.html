@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Вход в аккаунт - PREMIUM STEAK HOUSE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #d4af37;
+      --primary-dark: #c49a27;
+      --primary-light: #f4e6c1;
+      --dark: #1a1a1a;
+      --darker: #0d0d0d;
+      --text: #333;
+      --text-light: #666;
+      --light: #f8f9fa;
+      --white: #ffffff;
+      --success: #4caf50;
+      --error: #f44336;
+      --warning: #ff9800;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+      --border: #e1e5e9;
+      --border-light: #f1f3f4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background: var(--light);
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      pointer-events: none;
+    }
+
+    .auth-container {
+      width: 100%;
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      margin: 20px;
+      min-height: 600px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 968px) {
+      .auth-container {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 10px;
+      }
+    }
+
+    /* Left Side - Branding */
+    .auth-branding {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 60px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .auth-branding::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+      50% { transform: translate(-50%, -50%) rotate(180deg); }
+    }
+
+    .brand-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-tagline {
+      font-size: 18px;
+      opacity: 0.9;
+      margin-bottom: 40px;
+      text-align: center;
+      line-height: 1.6;
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-features {
+      list-style: none;
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-features li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .brand-features i {
+      margin-right: 12px;
+      color: var(--primary-light);
+      font-size: 16px;
+    }
+
+    @media (max-width: 968px) {
+      .auth-branding {
+        display: none;
+      }
+    }
+
+    /* Right Side - Forms */
+    .auth-forms {
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    @media (max-width: 968px) {
+      .auth-forms {
+        padding: 40px 30px;
+      }
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .auth-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .auth-subtitle {
+      color: var(--text-light);
+      font-size: 14px;
+    }
+
+    /* Tab Navigation */
+    .auth-tabs {
+      display: flex;
+      background: var(--border-light);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .tab-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--text-light);
+      position: relative;
+      z-index: 2;
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      background: var(--white);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Form Container */
+    .form-container {
+      display: none;
+    }
+
+    .form-container.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: 'Montserrat', sans-serif;
+      transition: all 0.3s ease;
+      background: var(--white);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+    }
+
+    .form-input.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1);
+    }
+
+    .input-icon {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      font-size: 16px;
+    }
+
+    .form-input:focus + .input-icon {
+      color: var(--primary);
+    }
+
+    .error-message {
+      color: var(--error);
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    /* Checkbox */
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .checkbox-input {
+      width: 18px;
+      height: 18px;
+      margin-right: 10px;
+      accent-color: var(--primary);
+    }
+
+    .checkbox-label {
+      font-size: 14px;
+      color: var(--text-light);
+      cursor: pointer;
+    }
+
+    /* Submit Button */
+    .auth-submit {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .auth-submit::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .auth-submit:hover::before {
+      left: 100%;
+    }
+
+    .auth-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    }
+
+    .auth-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .auth-submit.loading {
+      pointer-events: none;
+    }
+
+    .auth-submit.loading::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    @keyframes spin {
+      0% { transform: translateY(-50%) rotate(0deg); }
+      100% { transform: translateY(-50%) rotate(360deg); }
+    }
+
+    /* Links */
+    .auth-links {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .auth-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .auth-link:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    /* Success Message */
+    .success-message {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--success);
+      color: white;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      animation: slideInRight 0.3s ease;
+      display: none;
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Password Strength */
+    .password-strength {
+      margin-top: 8px;
+      display: none;
+    }
+
+    .strength-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+
+    .strength-fill {
+      height: 100%;
+      width: 0%;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .strength-fill.weak { background: var(--error); width: 33%; }
+    .strength-fill.medium { background: var(--warning); width: 66%; }
+    .strength-fill.strong { background: var(--success); width: 100%; }
+
+    .strength-text {
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 480px) {
+      .auth-container {
+        margin: 10px;
+        border-radius: 15px;
+      }
+
+      .auth-forms {
+        padding: 30px 20px;
+      }
+
+      .auth-title {
+        font-size: 24px;
+      }
+
+      .brand-logo {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="auth-container">
+  <!-- Left Side - Branding -->
+  <div class="auth-branding">
+    <div class="brand-logo">
+      <i class="fas fa-crown"></i>
+      PREMIUM STEAK HOUSE
+    </div>
+    <div class="brand-tagline">
+      Искусство приготовления стейков премиум-класса
+    </div>
+    <ul class="brand-features">
+      <li><i class="fas fa-check-circle"></i> Только премиум говядина</li>
+      <li><i class="fas fa-check-circle"></i> Профессиональные шеф-повара</li>
+      <li><i class="fas fa-check-circle"></i> Быстрая доставка</li>
+      <li><i class="fas fa-check-circle"></i> Гарантия качества</li>
+    </ul>
+  </div>
+
+  <!-- Right Side - Forms -->
+  <div class="auth-forms">
+    <div class="auth-header">
+      <h1 class="auth-title">Добро пожаловать</h1>
+      <p class="auth-subtitle">Войдите в свой аккаунт или создайте новый</p>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="auth-tabs">
+      <button class="tab-btn active" onclick="switchTab('login')">Вход</button>
+      <button class="tab-btn" onclick="switchTab('register')">Регистрация</button>
+    </div>
+
+    <!-- Login Form -->
+    <form class="form-container active" id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" class="form-input" placeholder="your@email.com" required>
+        <i class="fas fa-envelope input-icon"></i>
+        <div class="error-message" id="loginEmailError">Введите корректный email</div>
+      </div>
+
+      <div class="form-group">
+        <label for="loginPassword">Пароль</label>
+        <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+        <i class="fas fa-lock input-icon"></i>
+        <div class="error-message" id="loginPasswordError">Пароль обязателен</div>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="rememberMe" class="checkbox-input">
+        <label for="rememberMe" class="checkbox-label">Запомнить меня</label>
+      </div>
+
+      <button type="submit" class="auth-submit" id="loginBtn">
+        <span>Войти</span>
+      </button>
+
+      <div class="auth-links">
+        <a href="#" class="auth-link">Забыли пароль?</a>
+      </div>
+    </form>
+
+    <!-- Register Form -->
+    <form class="form-container" id="registerForm" onsubmit="handleRegister(event)">
+      <div class="form-group">
+        <label for="registerName">Имя</label>
+        <input type="text" id="registerName" class="form-input" placeholder="Ваше имя" required>
+        <i class="fas fa-user input-icon"></i>
+        <div class="error-message" id="registerNameError">Имя обязательно</div>
+      </div>
+
+      <div class="form-group">
+        <label for="registerEmail">Email</label>
+        <input type="email" id="registerEmail" class="form-input" placeholder="your@email.com" required>
+        <i class="fas fa-envelope input-icon"></i>
+        <div class="error-message" id="registerEmailError">Введите корректный email</div>
+      </div>
+
+      <div class="form-group">
+        <label for="registerPhone">Телефон</label>
+        <input type="tel" id="registerPhone" class="form-input" placeholder="+7 (___) ___-__-__" required>
+        <i class="fas fa-phone input-icon"></i>
+        <div class="error-message" id="registerPhoneError">Введите корректный телефон</div>
+      </div>
+
+      <div class="form-group">
+        <label for="registerPassword">Пароль</label>
+        <input type="password" id="registerPassword" class="form-input" placeholder="••••••••" required oninput="checkPasswordStrength()">
+        <i class="fas fa-lock input-icon"></i>
+        <div class="error-message" id="registerPasswordError">Пароль должен содержать минимум 8 символов</div>
+        <div class="password-strength" id="passwordStrength">
+          <div class="strength-bar">
+            <div class="strength-fill" id="strengthFill"></div>
+          </div>
+          <div class="strength-text" id="strengthText">Слабый пароль</div>
+        </div>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="agreeTerms" class="checkbox-input" required>
+        <label for="agreeTerms" class="checkbox-label">Я согласен с <a href="#" class="auth-link">условиями использования</a></label>
+      </div>
+
+      <button type="submit" class="auth-submit" id="registerBtn">
+        <span>Создать аккаунт</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Success Message -->
+<div class="success-message" id="successMessage"></div>
+
+<script>
+  let currentTab = 'login';
+
+  function switchTab(tab) {
+    // Update tab buttons
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // Update forms
+    document.querySelectorAll('.form-container').forEach(form => form.classList.remove('active'));
+    document.getElementById(tab + 'Form').classList.add('active');
+
+    currentTab = tab;
+
+    // Clear errors
+    clearErrors();
+  }
+
+  function clearErrors() {
+    document.querySelectorAll('.form-input').forEach(input => {
+      input.classList.remove('error');
+    });
+    document.querySelectorAll('.error-message').forEach(error => {
+      error.classList.remove('show');
+    });
+  }
+
+  function showError(inputId, errorId, message) {
+    const input = document.getElementById(inputId);
+    const error = document.getElementById(errorId);
+
+    input.classList.add('error');
+    error.textContent = message;
+    error.classList.add('show');
+  }
+
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  function validatePhone(phone) {
+    const re = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+    return re.test(phone.replace(/\s/g, ''));
+  }
+
+  function checkPasswordStrength() {
+    const password = document.getElementById('registerPassword').value;
+    const strength = document.getElementById('passwordStrength');
+    const fill = document.getElementById('strengthFill');
+    const text = document.getElementById('strengthText');
+
+    if (password.length === 0) {
+      strength.style.display = 'none';
+      return;
+    }
+
+    strength.style.display = 'block';
+
+    let score = 0;
+    if (password.length >= 8) score++;
+    if (/[a-z]/.test(password)) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[0-9]/.test(password)) score++;
+    if (/[^A-Za-z0-9]/.test(password)) score++;
+
+    fill.className = 'strength-fill';
+
+    if (score <= 2) {
+      fill.classList.add('weak');
+      text.textContent = 'Слабый пароль';
+      text.style.color = '#f44336';
+    } else if (score <= 3) {
+      fill.classList.add('medium');
+      text.textContent = 'Средний пароль';
+      text.style.color = '#ff9800';
+    } else {
+      fill.classList.add('strong');
+      text.textContent = 'Надёжный пароль';
+      text.style.color = '#4caf50';
+    }
+  }
+
+  async function handleLogin(event) {
+    event.preventDefault();
+    clearErrors();
+
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    const rememberMe = document.getElementById('rememberMe').checked;
+
+    let hasErrors = false;
+
+    if (!validateEmail(email)) {
+      showError('loginEmail', 'loginEmailError', 'Введите корректный email');
+      hasErrors = true;
+    }
+
+    if (password.length < 6) {
+      showError('loginPassword', 'loginPasswordError', 'Пароль должен содержать минимум 6 символов');
+      hasErrors = true;
+    }
+
+    if (hasErrors) return;
+
+    // Show loading
+    const btn = document.getElementById('loginBtn');
+    btn.classList.add('loading');
+    btn.querySelector('span').textContent = 'Вход...';
+
+    try {
+      // Simulate API call (replace with real API)
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      // Save to localStorage
+      const userData = {
+        name: 'Пользователь',
+        email: email,
+        isLoggedIn: true,
+        loginTime: new Date().toISOString()
+      };
+
+      if (rememberMe) {
+        localStorage.setItem('userData', JSON.stringify(userData));
+      } else {
+        sessionStorage.setItem('userData', JSON.stringify(userData));
+      }
+
+      showSuccessMessage('Успешный вход! Перенаправление...');
+
+      setTimeout(() => {
+        window.location.href = 'account-new.html';
+      }, 1500);
+
+    } catch (error) {
+      showError('loginPassword', 'loginPasswordError', 'Неверный email или пароль');
+    } finally {
+      btn.classList.remove('loading');
+      btn.querySelector('span').textContent = 'Войти';
+    }
+  }
+
+  async function handleRegister(event) {
+    event.preventDefault();
+    clearErrors();
+
+    const name = document.getElementById('registerName').value;
+    const email = document.getElementById('registerEmail').value;
+    const phone = document.getElementById('registerPhone').value;
+    const password = document.getElementById('registerPassword').value;
+    const agreeTerms = document.getElementById('agreeTerms').checked;
+
+    let hasErrors = false;
+
+    if (name.length < 2) {
+      showError('registerName', 'registerNameError', 'Имя должно содержать минимум 2 символа');
+      hasErrors = true;
+    }
+
+    if (!validateEmail(email)) {
+      showError('registerEmail', 'registerEmailError', 'Введите корректный email');
+      hasErrors = true;
+    }
+
+    if (!validatePhone(phone)) {
+      showError('registerPhone', 'registerPhoneError', 'Введите корректный номер телефона');
+      hasErrors = true;
+    }
+
+    if (password.length < 8) {
+      showError('registerPassword', 'registerPasswordError', 'Пароль должен содержать минимум 8 символов');
+      hasErrors = true;
+    }
+
+    if (!agreeTerms) {
+      alert('Необходимо согласиться с условиями использования');
+      hasErrors = true;
+    }
+
+    if (hasErrors) return;
+
+    // Show loading
+    const btn = document.getElementById('registerBtn');
+    btn.classList.add('loading');
+    btn.querySelector('span').textContent = 'Регистрация...';
+
+    try {
+      // Simulate API call (replace with real API)
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      // Save to localStorage
+      const userData = {
+        name: name,
+        email: email,
+        phone: phone,
+        isLoggedIn: true,
+        registrationTime: new Date().toISOString()
+      };
+
+      localStorage.setItem('userData', JSON.stringify(userData));
+
+      showSuccessMessage('Регистрация успешна! Перенаправление...');
+
+      setTimeout(() => {
+        window.location.href = 'account-new.html';
+      }, 1500);
+
+    } catch (error) {
+      showError('registerEmail', 'registerEmailError', 'Этот email уже зарегистрирован');
+    } finally {
+      btn.classList.remove('loading');
+      btn.querySelector('span').textContent = 'Создать аккаунт';
+    }
+  }
+
+  function showSuccessMessage(message) {
+    const msg = document.getElementById('successMessage');
+    msg.textContent = message;
+    msg.style.display = 'block';
+
+    setTimeout(() => {
+      msg.style.display = 'none';
+    }, 3000);
+  }
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if already logged in
+    const userData = localStorage.getItem('userData') || sessionStorage.getItem('userData');
+    if (userData) {
+      const user = JSON.parse(userData);
+      if (user.isLoggedIn) {
+        window.location.href = 'account-new.html';
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
+        grid-template-columns: 1fr;
+      }
+      .auth-left {
+        display: none;
+      }
+    }
+
+    .auth-left {
+      background: linear-gradient(135deg, var(--primary) 0%, #c49a27 100%);
+      color: white;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .auth-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .auth-left p {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .auth-left-icon {
+      font-size: 80px;
+      opacity: 0.3;
+      margin-bottom: 30px;
+    }
+
+    .auth-right {
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .auth-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 40px;
+      border-bottom: 2px solid #eee;
+    }
+
+    .auth-tab {
+      padding: 12px 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      color: #999;
+      transition: all 0.3s;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+    }
+
+    .auth-tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .auth-form {
+      display: none;
+    }
+
+    .auth-form.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--dark);
+      font-size: 14px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+    }
+
+    .form-group input::placeholder {
+      color: #ccc;
+    }
+
+    .form-error {
+      color: var(--error);
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .form-group input.error ~ .form-error {
+      display: block;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+      background: #c49a27;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .auth-links {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .auth-links a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .auth-links a:hover {
+      text-decoration: underline;
+    }
+
+    .success-message {
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+      font-size: 14px;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .checkbox-group label {
+      margin: 0;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #666;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .back-link:hover {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+<div class="auth-container">
+  <!-- Left Side -->
+  <div class="auth-left">
+    <div class="auth-left-icon">
+      <i class="fas fa-crown"></i>
+    </div>
+    <h2>PREMIUM STEAK HOUSE</h2>
+    <p>Добро пожаловать на платформу премиального мяса</p>
+    <p style="font-size: 12px; opacity: 0.8;">Войдите в свой аккаунт или создайте новый для начала покупок</p>
+  </div>
+
+  <!-- Right Side -->
+  <div class="auth-right">
+    <!-- Tabs -->
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login')">
+        <i class="fas fa-sign-in-alt"></i> Вход
+      </button>
+      <button class="auth-tab" onclick="switchTab('register')">
+        <i class="fas fa-user-plus"></i> Регистрация
+      </button>
+    </div>
+
+    <!-- Login Form -->
+    <form class="auth-form active" id="loginForm" onsubmit="handleLogin(event)">
+      <div class="success-message" id="loginSuccess">
+        ✓ Успешный вход! Перенаправление...
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="your@email.com" required>
+        <div class="form-error">Некорректный email</div>
+      </div>
+
+      <div class="form-group">
+        <label>Пароль</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" required>
+        <div class="form-error">Пароль должен содержать минимум 6 символов</div>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="rememberMe" checked>
+        <label for="rememberMe">Запомнить меня</label>
+      </div>
+
+      <button type="submit" class="btn-submit">Войти в аккаунт</button>
+
+      <div class="auth-links">
+        <a href="#" onclick="resetPassword()">Забыли пароль?</a>
+      </div>
+    </form>
+
+    <!-- Register Form -->
+    <form class="auth-form" id="registerForm" onsubmit="handleRegister(event)">
+      <div class="success-message" id="registerSuccess">
+        ✓ Аккаунт создан! Перенаправление...
+      </div>
+
+      <div class="form-group">
+        <label>Ваше имя</label>
+        <input type="text" id="registerName" placeholder="Ваше полное имя" required>
+        <div class="form-error">Введите корректное имя</div>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="registerEmail" placeholder="your@email.com" required>
+        <div class="form-error">Некорректный email</div>
+      </div>
+
+      <div class="form-group">
+        <label>Телефон</label>
+        <input type="tel" id="registerPhone" placeholder="+7 (999) 123-45-67">
+        <div class="form-error">Некорректный номер телефона</div>
+      </div>
+
+      <div class="form-group">
+        <label>Пароль</label>
+        <input type="password" id="registerPassword" placeholder="Минимум 8 символов" required>
+        <div class="form-error">Пароль должен содержать минимум 8 символов</div>
+      </div>
+
+      <div class="form-group">
+        <label>Подтверждение пароля</label>
+        <input type="password" id="registerPasswordConfirm" placeholder="Повторите пароль" required>
+        <div class="form-error">Пароли не совпадают</div>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="agreeTerms" required>
+        <label for="agreeTerms">Я согласен с условиями использования</label>
+      </div>
+
+      <button type="submit" class="btn-submit">Создать аккаунт</button>
+    </form>
+
+    <a href="index.html" class="back-link">
+      <i class="fas fa-arrow-left"></i> Вернуться на главную
+    </a>
+  </div>
+</div>
+
+<script>
+  function switchTab(tab) {
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+    
+    event.target.closest('.auth-tab').classList.add('active');
+    document.getElementById(tab + 'Form').classList.add('active');
+  }
+
+  function handleLogin(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    const rememberMe = document.getElementById('rememberMe').checked;
+
+    if (!email || !password) {
+      alert('Заполните все поля');
+      return;
+    }
+
+    // Простая валидация
+    if (password.length < 6) {
+      alert('Пароль должен содержать минимум 6 символов');
+      return;
+    }
+
+    // Сохраняем данные
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('userName', email.split('@')[0]);
+    localStorage.setItem('isLoggedIn', 'true');
+    
+    if (rememberMe) {
+      localStorage.setItem('rememberMe', 'true');
+    }
+
+    // Показываем сообщение о успехе
+    document.getElementById('loginSuccess').classList.add('show');
+    
+    setTimeout(() => {
+      window.location.href = 'account.html';
+    }, 1500);
+  }
+
+  function handleRegister(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('registerName').value;
+    const email = document.getElementById('registerEmail').value;
+    const phone = document.getElementById('registerPhone').value;
+    const password = document.getElementById('registerPassword').value;
+    const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
+    const agreeTerms = document.getElementById('agreeTerms').checked;
+
+    if (!name || !email || !password || !passwordConfirm) {
+      alert('Заполните все обязательные поля');
+      return;
+    }
+
+    if (password.length < 8) {
+      alert('Пароль должен содержать минимум 8 символов');
+      return;
+    }
+
+    if (password !== passwordConfirm) {
+      alert('Пароли не совпадают');
+      return;
+    }
+
+    if (!agreeTerms) {
+      alert('Согласитесь с условиями использования');
+      return;
+    }
+
+    // Сохраняем данные пользователя
+    localStorage.setItem('userName', name);
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('userPhone', phone);
+    localStorage.setItem('isLoggedIn', 'true');
+
+    document.getElementById('registerSuccess').classList.add('show');
+    
+    setTimeout(() => {
+      window.location.href = 'account.html';
+    }, 1500);
+  }
+
+  function resetPassword() {
+    alert('Функция восстановления пароля будет добавлена позже');
+  }
+
+  // Проверка если уже залогинены
+  window.addEventListener('DOMContentLoaded', function() {
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      window.location.href = 'account.html';
+    }
+  });
+</script>
+
+</body>
+</html>

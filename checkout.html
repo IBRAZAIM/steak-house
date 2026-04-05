@@ -565,6 +565,50 @@
     updateTotals();
   }
 
+  function getCheckoutProfile() {
+    const raw = localStorage.getItem('userData') || sessionStorage.getItem('userData');
+    if (raw) {
+      try {
+        return JSON.parse(raw);
+      } catch (error) {
+        console.warn('Не удалось разобрать профиль пользователя для оформления заказа:', error);
+      }
+    }
+
+    const currentUserEmail = localStorage.getItem('currentUserEmail');
+    if (currentUserEmail) {
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const user = users.find(u => u.email === currentUserEmail);
+      if (user) return user;
+    }
+
+    return null;
+  }
+
+  function setCheckoutField(name, value) {
+    if (!value) return;
+    const field = document.querySelector(`input[name="${name}"], select[name="${name}"], textarea[name="${name}"]`);
+    if (field && !field.value) {
+      field.value = value;
+    }
+  }
+
+  function populateCheckoutFromProfile() {
+    const profile = getCheckoutProfile();
+    if (!profile) return;
+
+    const firstName = profile.firstName || (profile.name ? profile.name.split(' ')[0] : '');
+    const lastName = profile.lastName || (profile.name ? profile.name.split(' ').slice(1).join(' ') : '');
+
+    setCheckoutField('firstName', firstName);
+    setCheckoutField('lastName', lastName);
+    setCheckoutField('email', profile.email || '');
+    setCheckoutField('phone', profile.phone || '');
+    setCheckoutField('city', profile.city || '');
+    setCheckoutField('address', profile.address || '');
+    setCheckoutField('apartment', profile.apartment || '');
+  }
+
   function getSessionId() {
     let sessionId = localStorage.getItem('sessionId');
     if (!sessionId) {
@@ -622,6 +666,9 @@
 
     try {
       const createdOrder = await sendOrderToServer(orderPayload);
+      const storedOrders = JSON.parse(localStorage.getItem('userOrders') || '[]');
+      const updatedOrders = [createdOrder, ...storedOrders];
+      localStorage.setItem('userOrders', JSON.stringify(updatedOrders));
       localStorage.removeItem('cart');
       alert(`Заказ №${createdOrder.id} успешно оформлен!`);
       window.location.href = `order-tracking.html?order=${createdOrder.id}`;
@@ -690,19 +737,8 @@
     renderCartSummary();
     setupDeliveryListener();
     setupPaymentListener();
+    populateCheckoutFromProfile();
     updateUnifiedSummary();
-
-    const currentUserEmail = localStorage.getItem('currentUserEmail');
-    if (currentUserEmail) {
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const user = users.find(u => u.email === currentUserEmail);
-      if (user) {
-        document.querySelector('input[name="firstName"]').value = user.firstName || '';
-        document.querySelector('input[name="lastName"]').value = user.lastName || '';
-        document.querySelector('input[name="email"]').value = user.email || '';
-        document.querySelector('input[name="phone"]').value = user.phone || '';
-      }
-    }
   });
 </script>
 </body>

@@ -49,7 +49,7 @@
   <script>
     // Check if already logged in
     if (localStorage.getItem('adminLoggedIn') === 'true') {
-      window.location.href = 'admin.html';
+      window.location.href = 'admin-new.html';
     }
 
     document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -71,7 +71,7 @@
         localStorage.setItem('adminUsername', username);
         
         // Redirect to admin panel
-        window.location.href = 'admin.html';
+        window.location.href = 'admin-new.html';
       } else {
         // Show error
         document.getElementById('loginError').style.display = 'block';

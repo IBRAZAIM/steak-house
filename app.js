@@ -247,8 +247,8 @@ function handleImageError(img) {
   if (errorDiv) errorDiv.style.display = 'flex';
 }
 
-function addToCart(productId) {
-  db.addToCart(productId);
+async function addToCart(productId) {
+  await db.addToCart(productId);
   updateCartCount();
   showNotification('Товар добавлен в корзину');
 }

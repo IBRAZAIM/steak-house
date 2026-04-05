@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тест API - SteakHouse</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px; }
+    .success { background: #e8f5e9; border-color: #4caf50; }
+    .error { background: #ffebee; border-color: #f44336; }
+    pre { background: #f5f5f5; padding: 10px; border-radius: 4px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <h1>Тест API SteakHouse</h1>
+
+  <div class="test-section">
+    <h2>Проверка товаров</h2>
+    <button onclick="testProducts()">Загрузить товары</button>
+    <div id="productsResult"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>Проверка заказов</h2>
+    <button onclick="testOrders()">Загрузить заказы</button>
+    <div id="ordersResult"></div>
+  </div>
+
+  <script>
+    async function testProducts() {
+      try {
+        const response = await fetch('/api/products');
+        const products = await response.json();
+        document.getElementById('productsResult').innerHTML =
+          `<div class="success"><strong>✓ Успешно!</strong> Загружено ${products.length} товаров<pre>${JSON.stringify(products, null, 2)}</pre></div>`;
+      } catch (error) {
+        document.getElementById('productsResult').innerHTML =
+          `<div class="error"><strong>✗ Ошибка:</strong> ${error.message}</div>`;
+      }
+    }
+
+    async function testOrders() {
+      try {
+        const response = await fetch('/api/orders');
+        const orders = await response.json();
+        document.getElementById('ordersResult').innerHTML =
+          `<div class="success"><strong>✓ Успешно!</strong> Загружено ${orders.length} заказов<pre>${JSON.stringify(orders, null, 2)}</pre></div>`;
+      } catch (error) {
+        document.getElementById('ordersResult').innerHTML =
+          `<div class="error"><strong>✗ Ошибка:</strong> ${error.message}</div>`;
+      }
+    }
+  </script>
+</body>
+</html>
