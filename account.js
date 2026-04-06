@@ -4,7 +4,7 @@
 
 class AccountManager {
   constructor() {
-    this.db = new Database();
+    this.db = typeof Database !== 'undefined' ? new Database() : null;
     this.currentUser = this.getCurrentUser();
     this.init();
   }
@@ -12,26 +12,56 @@ class AccountManager {
   getCurrentUser() {
     const userEmail = localStorage.getItem('currentUserEmail');
     if (!userEmail) return null;
-    
     const users = JSON.parse(localStorage.getItem('users') || '[]');
-    return users.find(u => u.email === userEmail);
+    return users.find(u => u.email === userEmail) || null;
+  }
+
+  // ─── Собирает заказы пользователя из ВСЕХ возможных ключей localStorage ───
+  getUserOrders() {
+    const email = this.currentUser?.email;
+    if (!email) return [];
+
+    // Все ключи, под которыми разные части сайта могут хранить заказы
+    const candidates = [
+      ...JSON.parse(localStorage.getItem('orders')     || '[]'),
+      ...JSON.parse(localStorage.getItem('userOrders') || '[]'),
+      ...JSON.parse(localStorage.getItem('allOrders')  || '[]'),
+    ];
+
+    // Дедупликация по id
+    const seen = new Set();
+    const all  = candidates.filter(o => {
+      if (seen.has(o.id)) return false;
+      seen.add(o.id);
+      return true;
+    });
+
+    // Фильтруем по email — проверяем все поля, где он может быть записан
+    return all.filter(o => {
+      const oEmail =
+        o.userEmail        ||
+        o.customerEmail    ||
+        o.email            ||
+        o.customer?.email  ||
+        '';
+      return oEmail.toLowerCase() === email.toLowerCase();
+    });
   }
 
   init() {
     const container = document.getElementById('accountContainer');
-    
     if (!this.currentUser) {
-      // Show login/registration forms
       container.innerHTML = this.getLoginHTML();
       this.bindLoginEvents();
     } else {
-      // Show account profile
-      container.innerHTML = this.getProfileHTML();
+      const userOrders = this.getUserOrders();
+      container.innerHTML = this.getProfileHTML(userOrders);
       this.bindProfileEvents();
-      this.loadServerOrders();
+      this.loadServerOrders(); // попытка обновить с сервера поверх
     }
   }
 
+  // ─── LOGIN FORM ────────────────────────────────────────────────────────────
   getLoginHTML() {
     return `
       <div class="account-login">
@@ -52,9 +82,7 @@ class AccountManager {
               <input type="password" name="password" id="loginPassword" required />
             </div>
             <button type="submit" class="btn btn-full">Войти</button>
-            <p class="login-help">
-              <a href="#">Забыли пароль?</a>
-            </p>
+            <p class="login-help"><a href="#">Забыли пароль?</a></p>
           </form>
         </div>
 
@@ -94,18 +122,15 @@ class AccountManager {
     `;
   }
 
-  getProfileHTML() {
-    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
-    const userOrders = orders.filter(o => o.userEmail === this.currentUser.email);
+  // ─── PROFILE PAGE ──────────────────────────────────────────────────────────
+  getProfileHTML(userOrders) {
     const totalSpent = userOrders.reduce((sum, o) => sum + (o.total || 0), 0);
 
     return `
       <div class="profile-wrapper">
         <div class="profile-sidebar">
           <div class="profile-header">
-            <div class="profile-avatar">
-              <i class="fas fa-user-circle"></i>
-            </div>
+            <div class="profile-avatar"><i class="fas fa-user-circle"></i></div>
             <h2>${this.currentUser.firstName} ${this.currentUser.lastName}</h2>
             <p>${this.currentUser.email}</p>
             <button class="btn btn-small" id="logoutBtn">Выход</button>
@@ -128,7 +153,8 @@ class AccountManager {
         </div>
 
         <div class="profile-content">
-          <!-- Profile Section -->
+
+          <!-- Профиль -->
           <div class="profile-section active" id="profile">
             <h2>Информация профиля</h2>
             <div class="profile-stats">
@@ -177,69 +203,32 @@ class AccountManager {
             </div>
           </div>
 
-          <!-- Orders Section -->
+          <!-- Заказы — всегда рендерим контейнер #ordersList -->
           <div class="profile-section" id="orders">
             <h2>История заказов</h2>
-            ${userOrders.length > 0 ? `
-              <div class="orders-list" id="ordersList">
-                ${userOrders.map(order => `
-                  <div class="order-card">
-                    <div class="order-header">
-                      <div class="order-info">
-                        <h4>Заказ #${order.id}</h4>
-                        <p class="order-date">${new Date(order.date).toLocaleDateString('ru-RU')}</p>
-                      </div>
-                      <div class="order-status status-${order.status}">
-                        ${this.getStatusLabel(order.status)}
-                      </div>
-                    </div>
-                    <div class="order-items">
-                      ${order.items.map(item => `
-                        <div class="order-item">
-                          <span>${item.name}</span>
-                          <span>${item.quantity}x ${item.price.toLocaleString('ru-RU')} ₸</span>
-                        </div>
-                      `).join('')}
-                    </div>
-                    <div class="order-footer">
-                      <span class="order-total">Итого: ${order.total.toLocaleString('ru-RU')} ₸</span>
-                      <button class="btn btn-small" onclick="window.location.href='order-tracking.html?order=${order.id}'">
-                        <i class="fas fa-tracking"></i> Отследить
-                      </button>
-                    </div>
-                  </div>
-                `).join('')}
-              </div>
-            ` : `
-              <div class="empty-state">
-                <i class="fas fa-inbox"></i>
-                <h3>Нет заказов</h3>
-                <p>У вас еще нет заказов. <a href="catalog.html">Перейти в каталог</a></p>
-              </div>
-            `}
+            <div id="ordersList">
+              ${this.renderOrdersList(userOrders)}
+            </div>
           </div>
 
-          <!-- Addresses Section -->
+          <!-- Адреса -->
           <div class="profile-section" id="addresses">
             <h2>Адреса доставки</h2>
             <div class="addresses-list">
-              ${this.currentUser.addresses && this.currentUser.addresses.length > 0 ? `
-                ${this.currentUser.addresses.map((addr, idx) => `
-                  <div class="address-card">
-                    <h4>${addr.title}</h4>
-                    <p>${addr.city}, ${addr.street}</p>
-                    <p>${addr.building}, кв. ${addr.apartment}</p>
-                    ${addr.isDefault ? '<span class="badge">По умолчанию</span>' : ''}
-                  </div>
-                `).join('')}
-              ` : `
-                <p>Адреса не добавлены</p>
-              `}
+              ${this.currentUser.addresses && this.currentUser.addresses.length > 0
+                ? this.currentUser.addresses.map(addr => `
+                    <div class="address-card">
+                      <h4>${addr.title}</h4>
+                      <p>${addr.city}, ${addr.street}</p>
+                      <p>${addr.building}, кв. ${addr.apartment}</p>
+                      ${addr.isDefault ? '<span class="badge">По умолчанию</span>' : ''}
+                    </div>`).join('')
+                : '<p>Адреса не добавлены</p>'}
             </div>
             <button class="btn btn-outline" id="addAddressBtn">Добавить адрес</button>
           </div>
 
-          <!-- Preferences Section -->
+          <!-- Параметры -->
           <div class="profile-section" id="preferences">
             <h2>Параметры</h2>
             <div class="preferences-form">
@@ -263,128 +252,169 @@ class AccountManager {
               </div>
               <button class="btn" id="savePreferencesBtn">Сохранить параметры</button>
             </div>
-
             <div class="danger-zone">
               <h3>Опасная зона</h3>
               <button class="btn btn-danger" id="deleteAccountBtn">Удалить аккаунт</button>
             </div>
           </div>
+
         </div>
       </div>
     `;
   }
 
-  getStatusLabel(status) {
-    const labels = {
-      'pending': 'Ожидание',
-      'confirmed': 'Подтверждено',
-      'processing': 'В процессе',
-      'shipped': 'Отправлено',
-      'delivered': 'Доставлено',
-      'cancelled': 'Отменено'
-    };
-    return labels[status] || status;
+  // ─── Рендер списка заказов (используется и при первой отрисовке, и при обновлении) ───
+  renderOrdersList(orders) {
+    if (!orders || orders.length === 0) {
+      return `
+        <div class="empty-state">
+          <i class="fas fa-inbox"></i>
+          <h3>Нет заказов</h3>
+          <p>У вас ещё нет заказов. <a href="catalog.html">Перейти в каталог</a></p>
+        </div>`;
+    }
+
+    // Сортируем — свежие сверху
+    const sorted = [...orders].sort((a, b) => {
+      const da = new Date(a.date || a.createdAt || a.created_at || 0);
+      const db = new Date(b.date || b.createdAt || b.created_at || 0);
+      return db - da;
+    });
+
+    return sorted.map(order => {
+      const dateRaw = order.date || order.createdAt || order.created_at;
+      const dateStr = dateRaw
+        ? new Date(dateRaw).toLocaleDateString('ru-RU')
+        : '—';
+
+      const items = order.items || [];
+
+      return `
+        <div class="order-card">
+          <div class="order-header">
+            <div class="order-info">
+              <h4>Заказ #${order.id}</h4>
+              <p class="order-date">${dateStr}</p>
+            </div>
+            <div class="order-status status-${order.status || 'pending'}">
+              ${this.getStatusLabel(order.status)}
+            </div>
+          </div>
+          <div class="order-items">
+            ${items.length > 0
+              ? items.map(item => {
+                  const qty   = item.quantity || item.qty || 1;
+                  const price = item.price || 0;
+                  return `
+                    <div class="order-item">
+                      <span>${item.name || 'Товар'}</span>
+                      <span>${qty}x ${price.toLocaleString('ru-RU')} ₸</span>
+                    </div>`;
+                }).join('')
+              : '<div class="order-item"><span>—</span></div>'}
+          </div>
+          <div class="order-footer">
+            <span class="order-total">Итого: ${(order.total || 0).toLocaleString('ru-RU')} ₸</span>
+            <button class="btn btn-small"
+              onclick="window.location.href='order-tracking.html?order=${order.id}'">
+              <i class="fas fa-map-marker-alt"></i> Отследить
+            </button>
+          </div>
+        </div>`;
+    }).join('');
   }
 
+  getStatusLabel(status) {
+    const labels = {
+      'pending':    'Ожидание',
+      'confirmed':  'Подтверждено',
+      'processing': 'В процессе',
+      'shipped':    'Отправлено',
+      'delivered':  'Доставлено',
+      'cancelled':  'Отменено',
+      // Русские статусы из admin-панели
+      'Новый':        'Новый',
+      'В обработке':  'В обработке',
+      'Выполнен':     'Выполнен',
+      'Отменён':      'Отменён',
+    };
+    return labels[status] || status || 'Новый';
+  }
+
+  // ─── Попытка получить актуальные заказы с сервера ─────────────────────────
   async loadServerOrders() {
-    if (!this.currentUser || !this.currentUser.email) return;
+    if (!this.currentUser?.email) return;
     try {
-      const response = await fetch(`/api/orders?email=${encodeURIComponent(this.currentUser.email)}`);
-      if (!response.ok) return;
-      const orders = await response.json();
-      if (!Array.isArray(orders) || orders.length === 0) return;
-      this.updateOrderUI(orders);
-    } catch (error) {
-      console.warn('Server orders unavailable:', error.message);
+      const r = await fetch(`/api/orders?email=${encodeURIComponent(this.currentUser.email)}`);
+      if (!r.ok) return;
+      const serverOrders = await r.json();
+      if (!Array.isArray(serverOrders) || serverOrders.length === 0) return;
+
+      // Мержим серверные заказы с локальными (серверные имеют приоритет)
+      const local = this.getUserOrders();
+      const merged = [...serverOrders];
+      const serverIds = new Set(serverOrders.map(o => o.id));
+      local.forEach(o => { if (!serverIds.has(o.id)) merged.push(o); });
+
+      this.refreshOrdersUI(merged);
+    } catch (err) {
+      console.warn('Server orders unavailable:', err.message);
     }
   }
 
-  updateOrderUI(orders) {
-    const count = orders.length;
-    const totalSpent = orders.reduce((sum, order) => sum + (order.total || 0), 0);
+  // ─── Обновляет UI заказов без перезагрузки страницы ──────────────────────
+  refreshOrdersUI(orders) {
+    const count      = orders.length;
+    const totalSpent = orders.reduce((s, o) => s + (o.total || 0), 0);
 
-    const ordersCountElement = document.getElementById('ordersCount');
-    const statOrdersElement = document.getElementById('statOrders');
-    const statTotalSpentElement = document.getElementById('statTotalSpent');
-    if (ordersCountElement) ordersCountElement.textContent = count;
-    if (statOrdersElement) statOrdersElement.textContent = count;
-    if (statTotalSpentElement) statTotalSpentElement.textContent = totalSpent.toLocaleString('ru-RU') + ' ₸';
+    const el = id => document.getElementById(id);
+    if (el('ordersCount'))   el('ordersCount').textContent   = count;
+    if (el('statOrders'))    el('statOrders').textContent    = count;
+    if (el('statTotalSpent'))
+      el('statTotalSpent').textContent = totalSpent.toLocaleString('ru-RU') + ' ₸';
 
-    const ordersList = document.getElementById('ordersList');
-    if (!ordersList) return;
-
-    ordersList.innerHTML = orders.map(order => `
-      <div class="order-card">
-        <div class="order-header">
-          <div class="order-info">
-            <h4>Заказ #${order.id}</h4>
-            <p class="order-date">${new Date(order.createdAt).toLocaleDateString('ru-RU')}</p>
-          </div>
-          <div class="order-status status-${order.status}">
-            ${this.getStatusLabel(order.status)}
-          </div>
-        </div>
-        <div class="order-items">
-          ${(order.items || []).map(item => `
-            <div class="order-item">
-              <span>${item.name}</span>
-              <span>${item.quantity}x ${item.price.toLocaleString('ru-RU')} ₸</span>
-            </div>
-          `).join('')}
-        </div>
-        <div class="order-footer">
-          <span class="order-total">Итого: ${order.total.toLocaleString('ru-RU')} ₸</span>
-          <button class="btn btn-small" onclick="window.location.href='order-tracking.html?order=${order.id}'">
-            <i class="fas fa-tracking"></i> Отследить
-          </button>
-        </div>
-      </div>
-    `).join('');
+    const list = el('ordersList');
+    if (list) list.innerHTML = this.renderOrdersList(orders);
   }
 
+  // ─── EVENT BINDINGS ────────────────────────────────────────────────────────
   bindLoginEvents() {
-    // Tab switching
     document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const tabName = e.target.dataset.tab;
+      btn.addEventListener('click', e => {
+        const tab = e.target.dataset.tab;
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         e.target.classList.add('active');
-        document.getElementById(`${tabName}-tab`).classList.add('active');
+        document.getElementById(`${tab}-tab`).classList.add('active');
       });
     });
 
-    // Login
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
+    document.getElementById('loginForm').addEventListener('submit', e => {
       e.preventDefault();
-      const email = document.getElementById('loginEmail').value;
-      const password = document.getElementById('loginPassword').value;
-      
-      this.loginUser(email, password);
+      this.loginUser(
+        document.getElementById('loginEmail').value,
+        document.getElementById('loginPassword').value
+      );
     });
 
-    // Register
-    document.getElementById('registerForm').addEventListener('submit', (e) => {
+    document.getElementById('registerForm').addEventListener('submit', e => {
       e.preventDefault();
-      const firstName = document.getElementById('registerFirstName').value;
-      const lastName = document.getElementById('registerLastName').value;
-      const email = document.getElementById('registerEmail').value;
-      const password = document.getElementById('registerPassword').value;
-      const confirmPassword = document.getElementById('registerConfirmPassword').value;
-
-      if (password !== confirmPassword) {
-        alert('Пароли не совпадают!');
-        return;
-      }
-
-      this.registerUser(firstName, lastName, email, password);
+      const pw  = document.getElementById('registerPassword').value;
+      const pw2 = document.getElementById('registerConfirmPassword').value;
+      if (pw !== pw2) { this.showNotification('Пароли не совпадают!', 'error'); return; }
+      this.registerUser(
+        document.getElementById('registerFirstName').value,
+        document.getElementById('registerLastName').value,
+        document.getElementById('registerEmail').value,
+        pw
+      );
     });
   }
 
   bindProfileEvents() {
-    // Menu navigation
+    // Меню навигации
     document.querySelectorAll('.profile-menu .menu-item').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', e => {
         const section = e.currentTarget.dataset.section;
         document.querySelectorAll('.profile-menu .menu-item').forEach(b => b.classList.remove('active'));
         document.querySelectorAll('.profile-section').forEach(s => s.classList.remove('active'));
@@ -393,40 +423,33 @@ class AccountManager {
       });
     });
 
-    // Logout
     document.getElementById('logoutBtn').addEventListener('click', () => {
-      if (confirm('Вы уверены, что хотите выйти?')) {
-        this.logoutUser();
-      }
+      if (confirm('Вы уверены, что хотите выйти?')) this.logoutUser();
     });
 
-    // Profile form
-    document.getElementById('profileForm')?.addEventListener('submit', (e) => {
+    document.getElementById('profileForm')?.addEventListener('submit', e => {
       e.preventDefault();
-      const firstName = document.querySelector('[name="firstName"]').value;
-      const lastName = document.querySelector('[name="lastName"]').value;
-      const phone = document.querySelector('[name="phone"]').value;
-
-      this.updateUserProfile(firstName, lastName, phone);
+      this.updateUserProfile(
+        document.querySelector('[name="firstName"]').value,
+        document.querySelector('[name="lastName"]').value,
+        document.querySelector('[name="phone"]').value
+      );
     });
 
-    // Save preferences
     document.getElementById('savePreferencesBtn')?.addEventListener('click', () => {
       this.savePreferences();
     });
 
-    // Delete account
     document.getElementById('deleteAccountBtn')?.addEventListener('click', () => {
-      if (confirm('Вы точно хотите удалить аккаунт? Это действие необратимо.')) {
+      if (confirm('Вы точно хотите удалить аккаунт? Это действие необратимо.'))
         this.deleteAccount();
-      }
     });
   }
 
+  // ─── AUTH ──────────────────────────────────────────────────────────────────
   loginUser(email, password) {
     const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find(u => u.email === email && u.password === password);
-
+    const user  = users.find(u => u.email === email && u.password === password);
     if (user) {
       localStorage.setItem('currentUserEmail', email);
       this.showNotification('Вы успешно вошли!', 'success');
@@ -438,65 +461,20 @@ class AccountManager {
 
   registerUser(firstName, lastName, email, password) {
     const users = JSON.parse(localStorage.getItem('users') || '[]');
-    
     if (users.find(u => u.email === email)) {
       this.showNotification('Пользователь с таким email уже существует', 'error');
       return;
     }
-
     const newUser = {
-      id: Date.now(),
-      firstName,
-      lastName,
-      email,
-      password,
+      id: Date.now(), firstName, lastName, email, password,
       createdAt: new Date().toISOString(),
-      addresses: [],
-      newsletter: true,
-      notifications: true
+      addresses: [], newsletter: true, notifications: true
     };
-
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
     localStorage.setItem('currentUserEmail', email);
-
     this.showNotification('Аккаунт создан! Вы авторизованы.', 'success');
     setTimeout(() => location.reload(), 1000);
-  }
-
-  updateUserProfile(firstName, lastName, phone) {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const index = users.findIndex(u => u.email === this.currentUser.email);
-
-    if (index !== -1) {
-      users[index].firstName = firstName;
-      users[index].lastName = lastName;
-      users[index].phone = phone;
-      localStorage.setItem('users', JSON.stringify(users));
-      this.showNotification('Профиль обновлен!', 'success');
-    }
-  }
-
-  savePreferences() {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const index = users.findIndex(u => u.email === this.currentUser.email);
-
-    if (index !== -1) {
-      users[index].newsletter = document.querySelector('[name="newsletter"]').checked;
-      users[index].notifications = document.querySelector('[name="notifications"]').checked;
-      users[index].sms = document.querySelector('[name="sms"]').checked;
-      localStorage.setItem('users', JSON.stringify(users));
-      this.showNotification('Параметры сохранены!', 'success');
-    }
-  }
-
-  deleteAccount() {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const filteredUsers = users.filter(u => u.email !== this.currentUser.email);
-    localStorage.setItem('users', JSON.stringify(filteredUsers));
-    localStorage.removeItem('currentUserEmail');
-    this.showNotification('Аккаунт удален. До встречи!', 'success');
-    setTimeout(() => location.href = 'index.html', 1000);
   }
 
   logoutUser() {
@@ -505,31 +483,52 @@ class AccountManager {
     setTimeout(() => location.reload(), 1000);
   }
 
+  updateUserProfile(firstName, lastName, phone) {
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const idx   = users.findIndex(u => u.email === this.currentUser.email);
+    if (idx !== -1) {
+      users[idx] = { ...users[idx], firstName, lastName, phone };
+      localStorage.setItem('users', JSON.stringify(users));
+      this.showNotification('Профиль обновлён!', 'success');
+    }
+  }
+
+  savePreferences() {
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const idx   = users.findIndex(u => u.email === this.currentUser.email);
+    if (idx !== -1) {
+      users[idx].newsletter    = document.querySelector('[name="newsletter"]').checked;
+      users[idx].notifications = document.querySelector('[name="notifications"]').checked;
+      users[idx].sms           = document.querySelector('[name="sms"]').checked;
+      localStorage.setItem('users', JSON.stringify(users));
+      this.showNotification('Параметры сохранены!', 'success');
+    }
+  }
+
+  deleteAccount() {
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    localStorage.setItem('users', JSON.stringify(users.filter(u => u.email !== this.currentUser.email)));
+    localStorage.removeItem('currentUserEmail');
+    this.showNotification('Аккаунт удалён. До встречи!', 'success');
+    setTimeout(() => location.href = 'index.html', 1000);
+  }
+
+  // ─── NOTIFICATION ──────────────────────────────────────────────────────────
   showNotification(message, type = 'info') {
     const container = document.getElementById('notification-container');
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-      <div class="notification-content">
-        <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-        <span>${message}</span>
-      </div>
-    `;
-    container.appendChild(notification);
-
-    setTimeout(() => {
-      notification.classList.add('show');
-    }, 10);
-
-    setTimeout(() => {
-      notification.classList.remove('show');
-      setTimeout(() => notification.remove(), 300);
-    }, 3000);
+    if (!container) return;
+    const n = document.createElement('div');
+    n.className = `notification notification-${type}`;
+    const icon = type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle';
+    n.innerHTML = `<div class="notification-content"><i class="fas fa-${icon}"></i><span>${message}</span></div>`;
+    container.appendChild(n);
+    setTimeout(() => n.classList.add('show'), 10);
+    setTimeout(() => { n.classList.remove('show'); setTimeout(() => n.remove(), 300); }, 3000);
   }
 }
 
-// Initialize on page load
+// ─── INIT ──────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   new AccountManager();
-  updateCartCount();
+  if (typeof updateCartCount === 'function') updateCartCount();
 });
